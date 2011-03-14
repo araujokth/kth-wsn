@@ -1,0 +1,7 @@
+COMPONENT=BlinkToRadioAppC
+
+PFLAGS += -DCC2420_DEF_CHANNEL=0x16
+
+
+include $(MAKERULES)
+
