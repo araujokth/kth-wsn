@@ -1,0 +1,571 @@
+<html>
+<title>FAQ: Using Matlab with TinyOS</title>
+</head>
+
+<body bgcolor="#f8f8ff" link="#005BB7" vlink="#005BB7">
+
+<table border=0 hspace=4 cellspacing=2 width="100%" cellpadding=3>
+<tr bgcolor="#e0e0ff">
+<td width="100%">
+<font face="tahoma,arial,helvetica"><b><big><big>
+FAQ: Using Matlab with TinyOS</big></big></b>
+<p>
+Last updated 28 April 2005
+</font>
+</td></tr>
+</table>
+
+<p> This FAQ answers many common questions about using TinyOS through Matlab.
+To find more general info about this topic, see the <a
+href=../../../doc/tutorial/matlab.html>Tutorial</a></p>
+
+<p><font size="5"><b>Table of Contents</b></font></p>
+<ul>
+  <li>
+  <a href="#whatIsMatlab">What is Matlab, where do I get it, how do I install it, etc?</a></li>
+  <li>
+  <a href="#commands">What are the Matlab commands, syntax, 
+  programming model, environment, etc?</a></li>  
+  <li>
+  <a href="#setup">How do I set up my Matlab environment to use with TinyOS?</a></li>
+  <li>
+  <a href="#java">How do I use the TinyOS Java tool chain from within a Matlab session?</a></li>
+  <li>
+  <a href="#fileStructure">Where should I keep my Matlab files?</a></li>
+  <li>
+  <a href="#shellVsMatlab">Making Java 
+  classes Matlab Friendly </a></li>
+  <li>
+<a href="#debugging">How about debugging?</a></li>
+  <li>
+<a href="#speedingItUp">How can I make it run faster?</a>
+  </li>
+</ul>
+
+
+
+<table border=0 hspace=4 cellspacing=2 width="100%" cellpadding=3>
+<tr bgcolor="#e0e0ff">
+<td width="100%"><b><font face="arial,helvetica"><a name="whatIsMatlab">What is Matlab, where do I get it, how do I install it, etc?
+</a></font></b></td>
+</tr></table>
+
+<p>Matlab is one name that refers to many things (like Java).&nbsp; It is a
+programming language as well as an interpreter as well as a set of
+libraries.&nbsp; The language is vector-based, making it very easy to write
+mathematical or data-manipulating applications quickly and easily.&nbsp; There
+are also "toolboxes" for things like visualizing data, designing digital
+filters, machine learning, statistical analysis, etc.&nbsp; However, it is an
+interpreted language, making it slower than a language like C or Java.&nbsp; It
+is also a scripting language, and large applications may be better written in an
+object-oriented language.  Being an interpreted scripting language, however, is
+also part of what makes Matlab an appealing way to interact with a sensor
+network: the user can interact with the network by calling commands on the
+Matlab command line.  In contrast, once a java application is started in can
+only be controlled through a GUI.</p>
+
+<p>Matlab is commercial software that can be bought from <a
+href="http://www.mathworks.com">www.mathworks.com</a>.&nbsp; However, students
+can obtain fully functional versions that have one restriction:&nbsp; matrices
+cannot be larger than 100 X 100.</p>
+
+
+<table border=0 hspace=4 cellspacing=2 width="100%" cellpadding=3>
+<tr bgcolor="#e0e0ff">
+<td width="100%"><b><font face="arial,helvetica"><a name="commands">What are the Matlab commands, syntax, 
+  programming model, environment, etc?
+</a></font></b></td>
+</tr></table>
+
+<p>This answer is meant to demonstrate the key concepts in Matlab so that you know 
+what to look for in the help files.&nbsp; It is not intended to be a substitute 
+for the help files.&nbsp;&nbsp; The Matlab help documents are extremely useful, 
+as is this <a href="matlabprimer.ps">Matlab primer</a>.</p>
+<p><b>Part I: A few examples</b></p>
+<p>create a variable</p>
+<p><b><font face="Courier">a=3 </font></b></p>
+<p>You should see it show up in your workspace window.&nbsp; It is a 1*1 matrix 
+and if you click on it it should have the value 3 in the first element of the 
+matrix.</p>
+<p>Create an array</p>
+<p><b><font face="Courier">b=[1 2 3]</font></b></p>
+<p>create an array using a series</p>
+<p><b><font face="Courier">b=1:2:5</font></b></p>
+<p>Multiply</p>
+<p><b><font face="Courier">c=a*b</font></b></p>
+<p>Create a matrix</p>
+<p><b><font face="Courier">d=[1 2 3;4 5 6;7 8 9]</font></b></p>
+<p>index the matrix</p>
+<p><b>d(2,1)</b></p>
+<p>Notice that the first element is indexed by '1'and not '0'.&nbsp; Index a whole column or row using the colon operator</p>
+<p><b>d(:,1)</b></p>
+<p><b>d(1,:)</b></p>
+<p>index using logical indices</p>
+<p><b>d(logical([1 1 0]),1)</b></p>
+<p><b>d(1,([0 1 1]))</b></p>
+<p>Notice that logical([1 1 0]) = [1 2], so d(logical([1 1 0]),1) really indexes 
+the 1st column of the 1st and 2nd row.&nbsp; index a matrix using array indices</p>
+<p><b>d(3)</b></p>
+<p><b>d(4)</b></p>
+<p>index using the 'end' operator</p>
+<p><b>d(1,end)</b></p>
+<p><b>d(end,1)</b></p>
+<p>index using array indices and the end operator</p>
+<p><b>d(end)</b></p>
+<p>index using a function, and logical array indices</p>
+<p><b>d(logical(mod(d,2)==0))</b></p>
+<p>make an assignment using the colon operator</p>
+<p><b>d(1,:) = [11 22 33]</b></p>
+<p>make an assignment to a column using the ' operator (transpose operator)</p>
+<p><b>d(:,1) = [11 44 77]'</b></p>
+<p>use a compare operator</p>
+<p><b>d&gt;10</b></p>
+<p>make an assignment using a compare operator as logical indices</p>
+<p><b>d(logical(d&gt;5))=10</b></p>
+<p>matrix multiply</p>
+<p><b>a*d</b></p>
+<p><b>c*d</b></p>
+<p><b>d*c</b></p>
+<p><b>a*c*d</b></p>
+<p><b>d*d</b></p>
+<p>multiply element-by-element (use the .* operator)</p>
+<p><b>d.*d</b></p>
+<p>delete an element</p>
+<p><b>b(2)=[]</b></p>
+<p>delete a row</p>
+<p><b>d(:,2)=[]</b></p>
+<p>Create a string</p>
+<p><b>a='hey'</b></p>
+<p>index the string</p>
+<p><b>a(2)</b></p>
+<p>create a string array</p>
+<p><b>a(2,:)='you'</b></p>
+<p>index the string array</p>
+<p><b>a(2,1)</b></p>
+<p>As you can see, strings are really just matrices. This can be a problem 
+because matrices must be rectangular whereas strings are frequently different 
+different size.&nbsp; For example, the following won't work because the 
+resulting matrix would not be rectangular:</p>
+<p><b>a(3,:)='get me a drink'</b></p>
+<p>Instead, we can use cell arrays.&nbsp; Cell arrays are identical to arrays 
+except that they use curly brackets.&nbsp; Also, each element can be of any size 
+and different elements can be of different data types:</p>
+<p><b>a{1}='hey'</b></p>
+<p><b>a{2}='you'</b></p>
+<p><b>a{3}='get me a drink'</b></p>
+<p><b>a{1,4}=d</b></p>
+<p>Index a cell array</p>
+<p><b>a{2,1}</b></p>
+<p>plot your data on the y axis</p>
+<p>data=[1 2 3 7 8 9]</p>
+<p><b>plot(data)</b></p>
+<p>now, put your data on the x axis, with the array 1 2 3 4 5 6 on the y axis</p>
+<p><b>plot(data,1:length(data))</b></p>
+<p>The most important thing you need to learn is how to use Matlab help.&nbsp;&nbsp; 
+It is extremely valuable.&nbsp; The windows based help index has a searchable 
+and indexable interface.&nbsp; The command-prompt help is also useful, e.g. </p>
+<blockquote>
+  <blockquote>
+<p><font face="Courier New" size="4">help plot</font></p>
+  </blockquote>
+</blockquote>
+<p>A script in matlab is any file with a .m file extension.&nbsp; It is similar 
+to a shell script in that all Matlab commands in the script are run when you run 
+the script.&nbsp; You can run a script by typing its name in the Matlab shell 
+whenever the file is in the Matlab path.</p>
+<p>A function in matlab is any file with a .m file extension where the first 
+non-commented line is of the form:</p>
+<p><b>function [result1, result2...] = functionName(param1, param2,...)</b></p>
+<p>The file name must be functionName.m and be in the Matlab path.&nbsp; 
+params1, param2,etc are parameters of the funciton and result1, result2, etc are 
+the return values.&nbsp; (Yes, matlab functions can have more than one return 
+value.)&nbsp; You can call the function above with:</p>
+<p><b>[a b] = functionName(c, d)</b></p>
+<p>The difference between a script and a function is that a function has it's 
+own workspace whereas a script uses the workspace of it's calling function 
+(perhaps the command line).</p>
+<p>Note that all function parameters and return values are passed by value 
+(except for java objects, which are passed by reference).</p>
+<p>Matlab has <b>global </b>variables: any two functions that 
+have a variable defined as global <i>share </i>that variable.&nbsp; I.e., if 
+your main workspace has a variable declared global and you want to effect it in 
+a function, declare it global in the function also and you have, in a sense, 
+imported it to your local workspace.</p>
+<p>Global variables are not the only way to have a variable <i>persist </i>
+between function calls.&nbsp; A matlab <b>object </b>is basically a directory 
+that ends with a &quot;@&quot; symbol.&nbsp; Matlab objects are not a very nice
+abstraction.  See the help files for more info. If you want to use matlab
+objects with a java-like syntax, use the "genericClass" package (found on the internet)</p>
+
+<table border=0 hspace=4 cellspacing=2 width="100%" cellpadding=3>
+<tr bgcolor="#e0e0ff">
+<td width="100%"><b><font face="arial,helvetica"><a name="setup">How do I set up my Matlab environment to use with TinyOS?</a></font></b></td>
+</tr></table>
+
+<h3>Step 1:&nbsp; call "defineTOSEnvironment.m"</h3>
+<p>This matlab script, found in tinyos-1.x/tools/matlab, sets up your matlab
+path, initializes the Matlab comm stack, etc.  This must be called each time
+you start a new Matlab session if you want to use TinyOS.  It is often convenient to call
+this from your startup.m script, which is called by matlab everytime you start a
+new matlab session (see help files).  Usually, this file can be found in
+~/matlab in Unix or /MATLABPATH/toolbox/work on windows.  
+
+<h3>Step 2:&nbsp; Compile the TinyOS Matlab tools (written in Java)</h3>
+<p>The <font face="Courier New">net.tinyos.matlab.MatlabControl</font> class is 
+needed to call matlab commands from Java, and is required to use TinyOS with
+Matlab.&nbsp; To compile this, type <font face="Courier
+New">make matlab</font> in the
+tinyos-1.x/tools/java/net/tinyos/matlab directory.  You must 
+have the .jar file <font face="Courier New">C:\MATLAB\java\jar\jmi.jar</font> in 
+your CLASSPATH environment variable.
+
+<h3>Step 3:&nbsp; Add the TinyOS Java tool chain to your Matlab classpath</h3>
+<p>You need to tell Matlab where your TinyOS Java tools are 
+located.&nbsp; In Matlab 7 or greater, you can simply add a command like the following 
+to the defineTOSenvironment.m file
+<blockquote>
+  <blockquote>
+    <p><b><font face="Courier New">javaclasspath('/path/to/tinyos-1.x/tools/java');</font></b></p>
+  </blockquote>
+</blockquote>
+
+If you are running Matlab 6.5 or earlier, you must edit Matlab's classpath.txt
+file and restart matlab.  Open Matlab and type the following command:</p>
+<blockquote>
+  <blockquote>
+    <p><b><font face="Courier New">edit classpath.txt</font></b></p>
+  </blockquote>
+</blockquote>
+<p>The Matlab editor will open with the classath.txt file.&nbsp; 
+You need to add the directory of both your TinyOS Java tools and of your 
+comm.jar file.&nbsp; The resulting file 
+should look something like this:
+<center>
+<table hspace="4" width="80%" cellpadding="3" cellspacing="2" border="0">
+  <tbody>
+    <tr bgcolor="#e0e0e0">
+      <td width="100%"><b>classpath.txt</b>
+      <pre>
+    ## FILE: classpath.txt
+    ##
+    ## Entries:
+    ## o path_to_jarfile
+    ## o [alpha,glnx86,sol2,unix,win32,mac]=path_to_jarfile
+    ## o $matlabroot/path_to_jarfile
+    ## o $jre_home/path_to_jarfile
+    ##
+    .
+    <b>c:\tinyos\cygwin\opt\tinyos-1.x\tools\java\</b>
+    <b>c:\tinyos\jdk1.4.1_02\j2sdk1.4.1_02\jre\lib\ext\comm.jar</b>
+    $jre_home/lib/rt.jar
+    $jre_home/lib/i18n.jar
+    $jre_home/lib/swingall.jar
+    $matlabroot/java/patch
+    $matlabroot/java/jar/util.jar
+    ...
+      </pre>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+</center>
+
+<p>where the <b>bold </b>lines are the ones you just added.&nbsp;&nbsp;</p>
+
+
+<table border=0 hspace=4 cellspacing=2 width="100%" cellpadding=3>
+<tr bgcolor="#e0e0ff">
+<td width="100%"><b><font face="arial,helvetica"><a name="java">How do I use the TinyOS Java tool chain from within a Matlab session?</a></font></b></td>
+</tr></table>
+
+
+<p>It is often easier to use an existing Java tool with TinyOS than to rewrite
+it in Matlab.  For example, one would like to use tools for Deluge, trickle, etc
+to inject packets reliably.  As an example, we could start the Java Oscilloscope
+tool directly from Matlab instead of using the matlab version that we examined
+in the tutorial:
+<blockquote>
+  <blockquote>
+<p><font face="Courier New"><b>net.tinyos.oscope.oscilloscope.main({'125'})</b></font></p>
+  </blockquote>
+</blockquote>
+<p>This starts the oscilloscope application, and you should see the java gui
+open and connect to your serial forwarder.
+
+<p>The following table provides an overview of the Matlab syntax for using Java.&nbsp; 
+It is essentially the same as Java syntax except that there is no &quot;new&quot; operator 
+and functions with no arguments do not terminate with empty parenthesis&nbsp; &quot;( 
+)&quot;.&nbsp; Type these commands into your Matlab command window to see what they 
+do.</p>
+  <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="80%" id="AutoNumber1">
+    <tr>
+      <td width="100%" align="center" colspan="2" bgcolor="#E0E0FF">Overview of 
+      Matlab syntax for using Java objects</td>
+    </tr>
+    <tr>
+      <td width="39%" align="left">
+      <blockquote>
+        <p>Instantiate an Object</p>
+      </blockquote>
+      </td>
+      <td width="61%">
+      <blockquote>
+        <blockquote>
+          <p align="left"><font face="Courier New">f = java.awt.Frame<br>
+          f = java.awt.Frame(&quot;My Frame&quot;)</font></p>
+        </blockquote>
+      </blockquote>
+      </td>
+    </tr>
+    <tr>
+      <td width="39%" align="left">
+      <blockquote>
+        <p>Call a function</p>
+      </blockquote>
+      </td>
+      <td width="61%">
+      <blockquote>
+        <blockquote>
+          <p align="left"><font face="Courier New">f.show<br>
+          f.resize(500,500)<br>
+          f.hide</font></p>
+        </blockquote>
+      </blockquote>
+      </td>
+    </tr>
+    <tr>
+      <td width="39%" align="left">
+      <blockquote>
+        <p>Call a static function</p>
+      </blockquote>
+      </td>
+      <td width="61%">
+      <blockquote>
+        <blockquote>
+<p align="left"><font face="Courier New">java.awt.Frame.getFrames</font></p>
+        </blockquote>
+      </blockquote>
+      </td>
+    </tr>
+    <tr>
+      <td width="39%" align="left">
+      <blockquote>
+        <p>Access public member variable</p>
+      </blockquote>
+      </td>
+      <td width="61%">
+      <blockquote>
+        <blockquote>
+          <p><font face="Courier New">f.WIDTH</font></p>
+        </blockquote>
+      </blockquote>
+      </td>
+    </tr>
+    <tr>
+      <td width="39%" align="left">
+      <blockquote>
+        <p>Introsection: class name</p>
+      </blockquote>
+      </td>
+      <td width="61%">
+      <blockquote>
+        <blockquote>
+          <p><font face="Courier New">classname = class(f)</font></p>
+        </blockquote>
+      </blockquote>
+      </td>
+    </tr>
+    <tr>
+      <td width="39%" align="left">
+      <blockquote>
+        <p>Introspection: methods</p>
+      </blockquote>
+      </td>
+      <td width="61%">
+      <blockquote>
+        <blockquote>
+          <p><font face="Courier New">methods java.awt.Frame<br>
+          methods java.awt.Frame -full<br>
+          methodsview java.awt.Frame</font></p>
+        </blockquote>
+      </blockquote>
+      </td>
+    </tr>
+    <tr>
+      <td width="39%" align="left">
+      <blockquote>
+        <p>Introspection: variables</p>
+      </blockquote>
+      </td>
+      <td width="61%">
+      <blockquote>
+        <blockquote>
+          <p><font face="Courier New">fields(f)</font></p>
+        </blockquote>
+      </blockquote>
+      </td>
+    </tr>
+    <tr>
+      <td width="39%" align="left">
+      <blockquote>
+        <p>Import </p>
+      </blockquote>
+      </td>
+      <td width="61%">
+      <blockquote>
+        <blockquote>
+          <p><font face="Courier New">import java.awt.*</font></p>
+        </blockquote>
+      </blockquote>
+      </td>
+    </tr>
+  </table>
+<p>Conversion of function parameters and return values are taken care of 
+automatically.&nbsp; Essentially, all primitive types, including strings and 
+arrays, are automatically converted and are passed by value.&nbsp; Java objects 
+are left as Java objects and are passed by reference.&nbsp; Using Java from 
+Matlab is completely supported by Mathworks and is well documented in the the 
+&quot;Matlab/Java interface&quot; section of the Matlab help files.&nbsp; </p>
+
+
+<p>While the syntax above allows one to manipulate Java objects from Matlab,
+they do not allow matlab functions to be called from Java.  To do that, you must
+use the <font face="Courier New"><b> <a
+href="../../java/net/tinyos/matlab/MatlabControl.java">net.tinyos.matlab.MatlabControl.java</a></b>
+</font>class.  See the <a
+href=http://www.cs.berkeley.edu/~kamin/matlab/JavaMatlab.html>MatlabControl</a>
+webpage for more details.
+
+
+<table border=0 hspace=4 cellspacing=2 width="100%" cellpadding=3>
+<tr bgcolor="#e0e0ff">
+<td width="100%"><b><font face="arial,helvetica"><a name="fileStructure">Where should I keep my Matlab files?
+</a></font></b></td>
+</tr></table>
+
+<p>The Matlab directory structure was meant to mirror that of the tinyos-1.x 
+directory.&nbsp; Each of the directories is meant to serve the following 
+purposes:</p>
+<ul>
+  <li>APPS -- holds Matlab functions that were built for a certain tinyOS <i>applications</i>, e.g. 
+  oscilloscopeRF</li>
+  <li>CONTRIB -- contains subdirectories to mirror tinyos-x.x/contrib for matlab applications that were built for contrib tinyos apps.
+  </li>
+  <li>LIB -- tools that correspond to tinyOS <i>components </i>in tos/lib</li>
+  <li>TOOLS -- Matlab functions or apps that are generally useful but 
+  do not relate specifically to one app (e.g. 'listen.m')</li>
+  <li>UTIL -- functions (not apps) that may be shared among several other Matlab apps, eg. message processing utilities</li>
+</ul>
+
+<table border=0 hspace=4 cellspacing=2 width="100%" cellpadding=3>
+<tr bgcolor="#e0e0ff">
+<td width="100%"><b><font face="arial,helvetica"><a name="shellVsMatlab">Making Java 
+  classes Matlab Friendly 
+</a></font></b></td>
+</tr></table>
+
+<p>Using Java classes from Matlab reveals two common bugs that should be fixed 
+before using your Java classes from Matlab.&nbsp; While both of these bugs are really due to slopy programming, they never cause errors in the default Java environment (i.e. 
+starting a java app from the command line) so you will find them in a lot of 
+Java classes, including those in the TinyOS Java toolset.</p>
+<b>A. Command Line Arguments</b>
+<p>Let's say that you're using a shell and you want SerialForwarder to connect 
+to COM2 instead of COM1 and you want oscilloscope to listen for Group ID 122 
+instead of 125.&nbsp; From your shell, you would pass command line 
+arguments as follows:</p>
+<blockquote>
+  <blockquote>
+<p><font face="Courier New"><b>java net/tinyos/sf/SerialForward -comm COM2<br>
+java net/tinyos/oscope/oscilliscope </b></font><b><font face="Courier New">122</font></b></p>
+  </blockquote>
+</blockquote>
+<p>If you want to do the 
+same thing from the Matlab command prompt, you would use the following syntax</p>
+<blockquote>
+  <blockquote>
+<p><font face="Courier New"><b>net.tinyos.sf.SerialForward.main({'-port','COM2'})<br>
+net.tinyos.oscope.oscilloscope.main({'122'})</b></font></p>
+  </blockquote>
+</blockquote>
+<p>This is because the command line arguments from your shell are automatically packaged up 
+into string arrays and passed to the static main function of your class.&nbsp; In Matlab you need to pass string arrays directly.&nbsp; In 
+Matlab syntax,&nbsp; <font face="Courier New"> '...'</font> is a string and
+<font face="Courier New">{'...', '...', ..., '...'}</font> is an array of 
+strings.</p>
+<p>Now, what if we don't want to pass any command line arguments?&nbsp; We 
+should send a null array, which in matlab would be '{ }'.&nbsp; Let's try it:</p>
+<blockquote>
+  <blockquote>
+<p><font face="Courier New"><b>net.tinyos.sf.SerialForward.main({})</b></font></p>
+  </blockquote>
+</blockquote>
+<p>We get a null pointer exception!&nbsp; This is because the main function in 
+SerialForwarder uses the string before checking if it is null.&nbsp; Since 
+sending no command-line arguments from the shell doesn't result in a null string 
+being passed, this normally doesn't cause an error.&nbsp; However, this should 
+be fixed if this class were to be used from Matlab.</p>
+<b>B. Virtual Machines</b>
+<p>If you had used the shell commands above, notice that you would have called 
+the &quot;<font face="Courier New">java</font>&quot; command twice.&nbsp; This means that 
+you have started two JVMs (Java Virtual Machines), one that is running SerialForwarder 
+and one that is running Oscilloscope.</p>
+<p>In Matlab, on the other hand, you  instantiated both objects within the 
+same JVM.&nbsp; Furthermore, Matlab itself is also running in this same JVM.&nbsp; 
+This is only important for the <font face="Courier New">java.lang.System</font> 
+class, which directly refers to the JVM you are running in;&nbsp; <font face="Courier New">java.lang.System.exit() </font>will kill 
+your JVM, and therefore <i>both classes and your Matlab session!</i>&nbsp; You 
+will see this if you close the oscilloscope window, because this causes 
+oscilloscope to call System.exit().&nbsp; If this class were to be used from 
+Matlab, it should be changed to first close the socket, then 
+deregister itself from everything and release all resources (i.e. <i>dispose</i> 
+the window).&nbsp; The java garbage collector would then take care of the rest.
+System.exit( ) should never be called.</p>
+
+<table border=0 hspace=4 cellspacing=2 width="100%" cellpadding=3>
+<tr bgcolor="#e0e0ff">
+<td width="100%"><b><font face="arial,helvetica"><a name="debugging">How about debugging?</a></li>
+</a></font></b></td>
+</tr></table>
+
+<p>Debugging Matlab is extremely simple:</p>
+<ol>
+  <li>open the function you want to debug in your Matlab editor</li>
+  <li>click to the left of the line to set a breakpoint</li>
+  <li>use the commands from the Matlab editor to control flow of execution</li>
+</ol>
+<p>Since Matlab is an interpreted language, debugging when execution is stopped 
+is simple.&nbsp; See the Matlab help files for more information on 
+the matlab debugger.</p>
+<p>Debugging Java objects in Matlab is easy in some sense since you can 
+instantiate arbitrary objects and call arbitrary functions.&nbsp; However, it is 
+in some sense difficult because the Matlab debugger does not step into Java 
+objects. You can, however, start your Java object using a Java debugger which is 
+written in Java from Matlab, allowing you to debug your Java object by using 
+Matlab as a Java interpreter.</p>
+
+
+<table border=0 hspace=4 cellspacing=2 width="100%" cellpadding=3>
+<tr bgcolor="#e0e0ff">
+<td width="100%"><b><font face="arial,helvetica"><a name="speedingItUp">How can I make it run faster?</a></a></font></b></td>
+</tr></table>
+
+<p>There are a couple of reasons why your app might be running slowly.&nbsp; 
+Here are a few tips to make it run faster:</p>
+<p>1.&nbsp; Vectorize your code.&nbsp; See the mathworks help and documentation 
+in both the help files and online.&nbsp; Vectorizing your code (using matrix or 
+array commands instead of for loops) is at least 15 times faster than for loops.</p>
+<p>2.&nbsp; In general, use matlab commands whenever possible instead of your 
+own code, especially when you are about to introduce a for loop. </p>
+<p>3.&nbsp; Minimize screen printing and graphing.&nbsp; </p>
+<p>4.&nbsp; Use the <i>profile </i>command to find out which of your functions 
+are taking all the time.&nbsp; Read about it in the help files.&nbsp; It tells 
+you which functions are taking what percentage of CPU time and gives you 
+plots, etc. allowing you to streamline your code.</p>
+
+
+----------------<br>
+Kamin Whitehouse
+
+</body>
+</html>

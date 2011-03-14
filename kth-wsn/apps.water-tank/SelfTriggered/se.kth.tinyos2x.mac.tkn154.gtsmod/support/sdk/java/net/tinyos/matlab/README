@@ -1,0 +1,6 @@
+These are the classes needed to use Matlab with your TinyOS-programmed motes.  See the tutorial in tinyos-1.x/doc/tutorial/matlab.html
+
+You need to install Matlab to use this package.  Please include MATLAB_DIR/java/jar/jmi.jar in your classpath, then run "make matlab".
+
+If you are running MATLAB 7 (R14), you need to first apply the MatlabControl-r13-R14.patch patchfile to the MatlabControl.java file in order to compile correctly.  Unfortunately, Matlab changed the signature of the Matlab.java class between releases 13 and 14.
+

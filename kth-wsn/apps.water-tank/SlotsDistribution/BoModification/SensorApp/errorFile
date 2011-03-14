@@ -1,0 +1,27 @@
+mkdir -p build/telosb
+    compiling EncLS7366RAppC to a telosb binary
+ncc -o build/telosb/main.exe  -Os -O -DIEEE154_BEACON_TX_DISABLED -DPRINTF_BUFFER_SIZE=1000 -DIEEE154_GTS_DISABLED -DIEEE154_ASSOCIATION_DISABLED -DIEEE154_DISASSOCIATION_DISABLED -DIEEE154_PROMISCUOUS_MODE_DISABLED -DIEEE154_COORD_REALIGNMENT_DISABLED -DIEEE154_COORD_BROADCAST_DISABLED -mdisable-hwmul -fnesc-separator=__ -Wall -Wshadow -Wnesc-all -target=telosb -fnesc-cfile=build/telosb/app.c -board= -DDEFINED_TOS_AM_GROUP=0x22 -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf -I/home/kthwsn/workspace/apps.water-tank/SlotsDistribution/BoModification/SensorApp/.. -I/home/kthwsn/workspace/apps.water-tank/SlotsDistribution/BoModification/SensorApp/../.. -I/home/kthwsn/workspace/apps.water-tank/SlotsDistribution/BoModification/SensorApp/../../.. -I/home/kthwsn/workspace/apps.water-tank/tos/chips/msp430/adc12 -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/mac/tkn154 -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/mac/tkn154/dummies -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/mac/tkn154/interfaces/MCPS -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/mac/tkn154/interfaces/MLME -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/mac/tkn154/interfaces/private -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/mac/tkn154/interfaces/public -DIDENT_APPNAME=\"EncLS7366RAppC\" -DIDENT_USERNAME=\"kthwsn\" -DIDENT_HOSTNAME=\"kthwsn-laptop\" -DIDENT_USERHASH=0x168d80e1L -DIDENT_TIMESTAMP=0x4d79f512L -DIDENT_UIDHASH=0x7ea9a82aL -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/platforms/telosb/mac/tkn154 -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/platforms/telosb/mac/tkn154/timer -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/chips/cc2420_tkn154 -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/ls7366r/tos/platforms/telosb/chips/ls7366r -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/ls7366r/tos/chips/ls7366r -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/ls7366r/tos/chips/ls7366r/interfaces -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/ls7366r/tos/chips/ls7366r/control -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/ls7366r/tos/chips/ls7366r/spi  EncLS7366RAppC.nc -lm 
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc:53:2: warning: #warning "Warning: MAC timing is not standard compliant!"
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/chips/msp430/adc12/Msp430Adc12ImplP.nc:68:4: warning: #warning Accessing TimerA for ADC12
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:149: warning: `AMSend.send' called asynchronously from `sendNext'
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:145: warning: `Queue.size' called asynchronously from `sendNext'
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:145: warning: `Queue.size' called asynchronously from `sendNext'
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:144: warning: `Packet.getPayload' called asynchronously from `sendNext'
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:144: warning: `Packet.getPayload' called asynchronously from `sendNext'
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:148: warning: `Queue.dequeue' called asynchronously from `sendNext'
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:157: warning: `Queue.empty' called asynchronously from `printfflush'
+EncLS7366RC.nc:113: warning: non-atomic accesses to shared variable `numberSf':
+EncLS7366RC.nc:283: warning:   non-atomic write
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:117: warning: non-atomic accesses to shared variable `state':
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:124: warning:   non-atomic read
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:169: warning:   non-atomic write
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:187: warning:   non-atomic read
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:188: warning:   non-atomic write
+EncLS7366RC.nc:83: warning: non-atomic accesses to shared variable `sensorValues':
+EncLS7366RC.nc:138: warning:   non-atomic write
+EncLS7366RC.nc:139: warning:   non-atomic write
+    compiled EncLS7366RAppC to build/telosb/main.exe
+           40916 bytes in ROM
+            4901 bytes in RAM
+msp430-objcopy --output-target=ihex build/telosb/main.exe build/telosb/main.ihex
+    writing TOS image
