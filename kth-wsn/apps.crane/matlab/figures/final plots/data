@@ -1,0 +1,132 @@
+%% loss_n0_8interf_xxxxxxx.fig
+>> Plots_TT_ET( {'outputs/data_201102102334'; 'sf_output/tt_n0_8_201102102334'}, {'outputs/data_201102102341';'sf_output/et_n0_8_201102102341'})
+Errors SF TT: 661
+Nevagite Inter event times for TT 0
+Nevagite Inter event times ET 0
+...........
+ET t(end): 80.72
+TT t(end): 84.52
+SF TT t(end): 80.42
+SF ET t(end): 80.30
+...........
+Periodic control
+	Total Packets: 2712
+	Success Packets: 1305
+	Loss Packets: 1407
+	Reliability: 48.12 %
+	Mean Delay \Delta_t = 5.14 ms
+	Control cost all states: 7.242
+	Control cost u: 0.102
+	Control cost [x, theta]: 7.227
+	Control cost [alpha beta]: 0.016
+	Control cost RMS: 0.381
+...........
+Event triggered control
+	Total Packets: 944
+	Success Packets: 441
+	Loss Packets: 503
+	Reliability: 46.72 %
+	Mean Delay \Delta_t = 5.20 ms
+	Control cost all states: 6.787
+	Control cost u: 0.105
+	Control cost [x, theta]: 6.760
+	Control cost [alpha beta]: 0.027
+	Control cost RMS: 0.368
+...........
+Event triggered control vs Periodic
+	Rate packets: 65.19 %
+	Rate packets: 2.87
+	Rate cost all states: 1.067
+	Rate cost RMS: 1.035
+...........
+----------------------------------------
+
+
+%% no_loss_n2_0interf_xxxxxxx.fig
+>> Plots_TT_ET({'outputs/data_201102102230';'sf_output/tt_201102102230'}, {'outputs/data_201102102226'; 'sf_output/et_201102102226'})
+Nevagite Inter event times for TT 0
+Nevagite Inter event times ET 0
+...........
+ET t(end): 80.41
+TT t(end): 80.00
+SF TT t(end): 80.19
+SF ET t(end): 80.20
+...........
+Periodic control
+	Total Packets: 2020
+	Success Packets: 2020
+	Loss Packets: 0
+	Reliability: 100.00 %
+	Mean Delay \Delta_t = 5.92 ms
+	Control cost all states: 7.385
+	Control cost u: 0.098
+	Control cost [x, theta]: 7.375
+	Control cost [alpha beta]: 0.010
+	Control cost RMS: 0.384
+...........
+Event triggered control
+	Total Packets: 763
+	Success Packets: 763
+	Loss Packets: 0
+	Reliability: 100.00 %
+	Mean Delay \Delta_t = 5.74 ms
+	Control cost all states: 7.276
+	Control cost u: 0.088
+	Control cost [x, theta]: 7.269
+	Control cost [alpha beta]: 0.007
+	Control cost RMS: 0.382
+...........
+Event triggered control vs Periodic
+	Rate packets: 62.24 %
+	Rate packets: 2.65
+	Rate cost all states: 1.015
+	Rate cost RMS: 1.006
+...........
+----------------------------------------
+
+%% loss_n2_10interf_xxxxxxx.fig
+>> Plots_TT_ET({'outputs/data_201102142209';'sf_output/tt_n1_10_201102142209'}, {'outputs/data_201102141950'; 'sf_output/et_n2_10_201102141950'})
+
+Errors SF TT: 157
+Nevagite Inter event times for TT 0
+Nevagite Inter event times ET 0
+...........
+ET t(end): 83.95
+TT t(end): 80.27
+SF TT t(end): 78.20
+SF ET t(end): 64.17
+...........
+Periodic control
+	Total Packets: 1986
+	Success Packets: 1908
+	Loss Packets: 78
+	Reliability: 96.07 %
+	Mean Delay \Delta_t = 9.32 ms
+	Control cost all states: 7.282
+	Control cost u: 0.106
+	Control cost [x, theta]: 7.277
+	Control cost [alpha beta]: 0.005
+	Control cost RMS: 0.381
+...........
+Event triggered control
+	Total Packets: 736
+	Success Packets: 721
+	Loss Packets: 15
+	Reliability: 97.96 %
+	Mean Delay \Delta_t = 9.14 ms
+	Control cost all states: 7.034
+	Control cost u: 0.090
+	Control cost [x, theta]: 7.028
+	Control cost [alpha beta]: 0.005
+	Control cost RMS: 0.375
+...........
+Event triggered control vs Periodic
+	Rate packets: 62.94 %
+	Rate packets: 2.70
+	Rate cost all states: 1.035
+	Rate cost RMS: 1.016
+...........
+----------------------------------------
+
+
+
