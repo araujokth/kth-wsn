@@ -1,0 +1,48 @@
+%implements "chartSource" "C"
+%function ChartConfig(block, system) void
+  %createrecord chartConfiguration { ...
+          executeAtInitialization  0 ...
+  }
+  %return chartConfiguration
+%endfunction
+%function ChartDataMap(block, system) void
+  %createrecord ChartDataElements {\
+    NumChartData   6 \
+    ChartDataDefaults {\
+      RecordType   "ChartData"\
+      Dimensions   []\
+      IsTestPoint  0\
+    }\
+    ChartData {\
+      Name         "xc_value_p"\
+      SFName       ""\
+      Path         ""\
+    }\
+    ChartData {\
+      Name         "xc_delay_p"\
+      SFName       ""\
+      Path         ""\
+    }\
+    ChartData {\
+      Name         "theta_value_p"\
+      SFName       ""\
+      Path         ""\
+    }\
+    ChartData {\
+      Name         "theta_delay_p"\
+      SFName       ""\
+      Path         ""\
+    }\
+    ChartData {\
+      Name         "actuator_value_p"\
+      SFName       ""\
+      Path         ""\
+    }\
+    ChartData {\
+      Name         "actuator_delay_p"\
+      SFName       ""\
+      Path         ""\
+    }\
+  }
+  %return ChartDataElements
+%endfunction
