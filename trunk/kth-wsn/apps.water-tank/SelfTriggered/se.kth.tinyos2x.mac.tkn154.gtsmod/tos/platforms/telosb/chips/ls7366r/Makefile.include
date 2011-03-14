@@ -1,0 +1,5 @@
+CFLAGS += -I$(TOSDIR)/platforms/telosb/chips/ls7366r \
+		  -I$(TOSDIR)/chips/ls7366r
+		  
+CFLAGS += -I$(TOSDIR)/chips/ls7366r/interfaces
+

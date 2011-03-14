@@ -1,0 +1,21 @@
+@author Aitor Hernandez <aitorhh@kth.se>
+@author Joao Faria <jfff@kth.se>
+@title README file for the Water Tanks with 1 coordinator
+
+Options - Precompiler directives
+--------------------------------------------------
+WT_CALIBRATION ->
+	In order to calibrate the water tanks use this precompiler directive:
+		CFLAGS += -DWT_CALIBRATION
+	This directive will give you some instruction in the terminal output, as we 
+	see below.
+	
+	STEPS:
+		0. Turn on, the Serial debug to see the printf's
+		1. Disconnect the motor (unplugged "From Load" cable)
+		2. Set both tanks to level ~0cm by adjusting the OFFSET resistor
+		3. Fill the tank 1 (upper tank) to 25cm
+		4. Set tank 1 to level ~25cm by adjusting the GAIN resistor
+		5. Transfer the water to tank2
+		6. Set tank 1 to level ~25cm by adjusting the GAIN resistor
+		

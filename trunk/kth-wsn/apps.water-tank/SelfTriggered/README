@@ -1,0 +1,26 @@
+- Under MATLABSimulink you will find all the models, sources and some .mat and .png files with results from our runs.
+When running the experiment, the data is recorded to out.mat. 
+
+- Mex the C S-Functions using:
+
+mex sfun_fetch.c sfsource.o
+mex sfun_send.c sfsource.o
+
+- Remember to set up serial forwarder on port 9002 before running the simulation.
+
+- The directory se.kth.tinyos2x.mac.tkn154.gtsmod is a complete TinyOS 2.x tree with the TKN154 implementation of IEEE 802.15.4 as modified by Aitor Hernandez (aitorhh@kth.se) to make support for GTS.
+
+- The apps are located in se.kth.tinyos2x.mac.tkn154.gtsmod/apps/tests/tkn154/WaterTanks/. To compile and program the motes,  go to each app directory and run:
+
+make telsob install,NODE_ID bsl,DEV_PORT
+
+where DEV_PORT is the serial port to which the mote is connected and NODE_ID is the desired node id for that mote. Note that the applications assume the following node ids:
+
+0 -> coordinator node (TestBaseStation)
+1 -> sensor node, tank 1 (ADCAppSampleEveryTime)
+2 -> actuator node, tank 1 (DACApp)
+3 -> sensor node, tank 2 (ADCAppSampleEveryTime)
+4 -> actuator node, tank 2 (DACApp)
+5 -> soft sensor node (TempApp)
+6 -> soft sensor node (HumApp)
+7 -> soft sensor node (LightApp)

@@ -1,0 +1,23 @@
+mkdir -p build/telosb
+    compiling ControllerAppC to a telosb binary
+ncc -o build/telosb/main.exe  -Os -O -DPRINTF_BUFFER_SIZE=1000 -DIEEE154_GTS_DISABLED -DIEEE154_ASSOCIATION_DISABLED -DIEEE154_DISASSOCIATION_DISABLED -DIEEE154_PROMISCUOUS_MODE_DISABLED -DIEEE154_COORD_REALIGNMENT_DISABLED -DIEEE154_COORD_BROADCAST_DISABLED -mdisable-hwmul -fnesc-separator=__ -Wall -Wshadow -Wnesc-all -target=telosb -fnesc-cfile=build/telosb/app.c -board= -DDEFINED_TOS_AM_GROUP=0x22 -DWT_USERBUTTON -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf -I/home/kthwsn/workspace/apps.water-tank/SlotsDistribution/BaseStation/.. -I/home/kthwsn/workspace/apps.water-tank/SlotsDistribution/BaseStation/../.. -I/home/kthwsn/workspace/apps.water-tank/tos/chips/msp430/adc12 -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/mac/tkn154 -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/mac/tkn154/dummies -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/mac/tkn154/interfaces/MCPS -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/mac/tkn154/interfaces/MLME -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/mac/tkn154/interfaces/private -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/mac/tkn154/interfaces/public -DIDENT_APPNAME=\"ControllerAppC\" -DIDENT_USERNAME=\"kthwsn\" -DIDENT_HOSTNAME=\"kthwsn-laptop\" -DIDENT_USERHASH=0x168d80e1L -DIDENT_TIMESTAMP=0x4d764969L -DIDENT_UIDHASH=0xb745ac22L -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/platforms/telosb/mac/tkn154 -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/platforms/telosb/mac/tkn154/timer -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/chips/cc2420_tkn154 -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/ls7366r/tos/platforms/telosb/chips/ls7366r -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/ls7366r/tos/chips/ls7366r -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/ls7366r/tos/chips/ls7366r/interfaces -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/ls7366r/tos/chips/ls7366r/control -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/ls7366r/tos/chips/ls7366r/spi  ControllerAppC.nc -lm 
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc:53:2: warning: #warning "Warning: MAC timing is not standard compliant!"
+ControllerC.nc:209: warning: `Frame.setAddressingFields' called asynchronously from `setAddressingFields'
+ControllerC.nc:302: warning: `MCPS_DATA.request' called asynchronously from `SlotAlarm.fired'
+ControllerC.nc:102: warning: non-atomic accesses to shared variable `m_state':
+ControllerC.nc:120: warning:   non-atomic write
+ControllerC.nc:255: warning:   non-atomic write
+ControllerC.nc:81: warning: non-atomic accesses to shared variable `m_sensor':
+ControllerC.nc:141: warning:   non-atomic write
+ControllerC.nc:94: warning: non-atomic accesses to shared variable `actuationMatrix':
+ControllerC.nc:154: warning:   non-atomic write
+ControllerC.nc:100: warning: non-atomic accesses to shared variable `m_slotDuration':
+ControllerC.nc:150: warning:   non-atomic write
+ControllerC.nc:98: warning: non-atomic accesses to shared variable `m_sfStartRef':
+ControllerC.nc:151: warning:   non-atomic write
+ControllerC.nc:268: warning:   non-atomic write
+    compiled ControllerAppC to build/telosb/main.exe
+           37774 bytes in ROM
+            3471 bytes in RAM
+msp430-objcopy --output-target=ihex build/telosb/main.exe build/telosb/main.ihex
+    writing TOS image
