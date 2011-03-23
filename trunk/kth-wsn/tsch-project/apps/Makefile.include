@@ -1,0 +1,29 @@
+
+PLATFORMS = tmote telosb micaz z1
+
+EXTRA_TOS = /home/kthwsn/workspace/tsch-project/tos
+
+#DEBUG COMPONENTS OPTIONS
+ifeq ($(TSCHDEBUG_ENABLED),)
+#PFLAGS += -DTSCHDEBUG_CC2420_ACTIVE_ENABLED 
+#PFLAGS += -DTSCHDEBUG_CC2420_CONTROL_ENABLED
+PFLAGS += -DTSCHDEBUG_SIMPLE_MAC_ENABLED
+PFLAGS += -DTSCHDEBUG_CC2420_TRANSMIT_ENABLED
+endif
+
+CFLAGS += -I$(EXTRA_TOS)/chips/cc2420 \
+		  -I$(EXTRA_TOS)/chips/cc2420/control \
+		  -I$(EXTRA_TOS)/chips/cc2420/interfaces \
+		  -I$(EXTRA_TOS)/chips/cc2420/receive \
+		  -I$(EXTRA_TOS)/chips/cc2420/transmit
+		  
+		  
+CFLAGS += -I$(EXTRA_TOS)/lib/mac/tsch/interfaces \
+		  -I$(EXTRA_TOS)/lib/mac/tsch
+
+CFLAGS += -I$(EXTRA_TOS)/interfaces \
+		  -I$(EXTRA_TOS)/lib/debug \
+		  -I$(EXTRA_TOS)/lib/timer \
+
+# parses the PLATFORM variable
+include $(MAKERULES)
