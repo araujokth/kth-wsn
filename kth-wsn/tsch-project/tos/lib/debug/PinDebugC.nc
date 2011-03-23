@@ -48,11 +48,11 @@ implementation {
 	components HplMsp430GeneralIOC;
 
 	components new Msp430GpioC() as PinADC0;
-	PinADC0 -> HplMsp430GeneralIOC.Port61;
+	PinADC0 -> HplMsp430GeneralIOC.Port60;
 	PinDebugP.PinADC0 -> PinADC0;
 
 	components new Msp430GpioC() as PinADC1;
-	PinADC1 -> HplMsp430GeneralIOC.Port60;
+	PinADC1 -> HplMsp430GeneralIOC.Port61;
 	PinDebugP.PinADC1 -> PinADC1;
 
 }
