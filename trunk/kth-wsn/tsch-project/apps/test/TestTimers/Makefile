@@ -1,3 +1,3 @@
 COMPONENT=TestTimersAppC
 
-include $(MAKERULES)
+include ../../Makefile.include

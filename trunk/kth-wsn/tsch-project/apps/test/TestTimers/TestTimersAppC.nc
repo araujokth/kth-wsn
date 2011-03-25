@@ -34,29 +34,32 @@
  * @version  $Revision: 1.0 Date: 2011/03/14 $ 
  */
 
-
 configuration TestTimersAppC
 {
 }
 implementation
 {
-  components MainC, TestTimersC, LedsC;
-  
-  components new TimerMilliC() as Timer0;
-  components new AlarmMilli32C() as  Alarm0; 
+	components MainC, TestTimersC, LedsC;
 
- // components new Timer32687C() as Timer0;
- // components new Alarm32khz32C() as  Alarm0; 
+	components new TimerMilliC() as Timer0;
+	components new AlarmMilli32C() as Alarm0;
 
-  TestTimersC -> MainC.Boot;
-  TestTimersC.Timer -> Timer0;
-  TestTimersC.Alarm -> Alarm0;
+	// components new Timer32687C() as Timer0;
+	// components new Alarm32khz32C() as  Alarm0; 
 
-  TestTimersC.Leds -> LedsC;
-  
-	components HplMsp430GeneralIOC;
-	components new Msp430GpioC() as PinADC0;
-	PinADC0 -> HplMsp430GeneralIOC.Port61;
-	TestTimersC.PinADC0 -> PinADC0;  
+	TestTimersC -> MainC.Boot;
+	TestTimersC.Timer -> Timer0;
+	TestTimersC.Alarm -> Alarm0;
+
+	TestTimersC.Leds -> LedsC;
+
+	// D E B U G
+#ifdef TSCHDEBUG_ENABLED
+	components PinDebugC as PinDebug;
+#warning *** PinDebug Enabled ***
+#else
+	components NoPinDebugC as PinDebug;
+#endif 
+	TestTimersC.PinDebug -> PinDebug;
 }
 
