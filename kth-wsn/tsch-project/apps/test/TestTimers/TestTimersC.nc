@@ -40,7 +40,7 @@ module TestTimersC {
 	uses {
 		interface Leds;
 		interface Boot;
-		interface GeneralIO as PinADC0;
+		interface PinDebug;
 
 		interface Timer<TMilli> as Timer;
 		interface Alarm<TMilli,uint32_t> as Alarm;
@@ -63,15 +63,14 @@ implementation
 
 
 	async event void Alarm.fired() {
-		call PinADC0.toggle();
+		call PinDebug.ADC0toggle();
 
 		call Alarm.start( 10 );
 	}
 
 	event void Timer.fired()
 	{
-		call PinADC0.toggle();
-
+		call PinDebug.ADC0toggle();
 	}
 }
 
