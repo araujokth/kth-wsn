@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, KTH Royal Institute of Technology
+ * Copyright (c) 2011, KTH Royal Institute of Technology
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  */
 /**
  * @author Aitor Hernandez <aitorhh@kth.se>
- * @version $Revision: 1.0 $ $Date: 2010/01/25 $
+ * @version $Revision: 1.0 $ $Date: 2011/01/25 $
  */
 
 configuration SerialReceiverC {
