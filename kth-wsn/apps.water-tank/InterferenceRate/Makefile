@@ -1,4 +1,4 @@
-COMPONENT=BlinkToRadioAppC
+COMPONENT=InterferenceRateAppC
 
 PFLAGS += -DCC2420_DEF_CHANNEL=0x16
 
