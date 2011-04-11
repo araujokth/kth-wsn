@@ -1,0 +1,37 @@
+@author Aitor Hernandez <aitorhh@kth.se>
+@author Joao Faria <jfff@kth.se>
+@title README file for Simulink model
+
+DESCRIPTION
+--------------------------------------------------
+For showing result in this example, we run a simulink model.
+This model listens the TCP/IP port 9002 from the localhost where we should have 
+the SerialForwarder running. 
+Once we finish the experiments, we shall have the result in the workspace as two 
+variables {wt, pck}.
+
+1. Run the SerialForwarder
+	$ sf 9002 /dev/ttyUSBXX tmote &
+	
+2. Run Simulink model and wait until the experiments has finished
+	
+
+
+TROUBLESHOOTING
+--------------------------------------------------
+Refer to http://www2.ee.kth.se/web_page/netcon/?page_id=216&page=Wireless_Process_Control#Implementation_2:_MATLAB.2FSimulink.2C_M_S-Functions.2C_pnet
+
+
+OPTIONS
+--------------------------------------------------
+
+	
+RESULTS
+--------------------------------------------------
+To plot the results you could run 
+> plotResults
+
+or
+> plotResultsAll
+
+By selecting the different .mat files stored.

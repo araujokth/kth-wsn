@@ -1,0 +1,17 @@
+@author Aitor Hernandez <aitorhh@kth.se>
+@author Joao Faria <jfff@kth.se>
+@title README Controller app
+
+DESCRIPTION
+--------------------------------------------------
+This application shall be the sensor mote. The node sends the packets
+to the coordinator every DEFAULT_RATE ms. If a packet has successfully sent the GREEN LED
+blinks..
+
+The sensor node has to have an ID = 2 * WT_NUMBER - 1, otherwise he
+will not receive the packets of his process.
+
+In the PCB board the sensor node corresponds to the upper one.
+
+Different options has been shown in the general README file
+(CentralizedControllerGeneral/README)

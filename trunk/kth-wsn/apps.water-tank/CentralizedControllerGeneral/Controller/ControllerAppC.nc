@@ -78,5 +78,7 @@ implementation {
 	components new TimerMilliC() as TimerChange;
 	ControllerC.TimerChange -> TimerChange;
 
+	components PrintfC;
+	components SerialStartC;
 }
 
