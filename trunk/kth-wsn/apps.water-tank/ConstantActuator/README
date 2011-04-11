@@ -1,0 +1,11 @@
+@author Aitor Hernandez <aitorhh@kth.se>
+@author Joao Faria <jfff@kth.se>
+@title README ConstantActuator
+
+DESCRIPTION
+--------------------------------------------------
+This application will output a constant voltage to the pump.
+The output is set to zero by default (reset), and when we press
+the "User button", the voltage increases 1 V. 
+
+273 DAC units -> ~1V

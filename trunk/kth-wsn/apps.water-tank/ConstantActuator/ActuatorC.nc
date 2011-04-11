@@ -78,7 +78,8 @@ implementation {
 	event void UserButton.notify( button_state_t state ) {
 		if ( state == BUTTON_PRESSED ) {
 		} else if ( state == BUTTON_RELEASED ) {
-			prevDac = prevDac + 512;
+			// Increment by Vmotor = 1V (Vmote = 0.166666667 V) every time we release the button
+			prevDac = prevDac + 273;
 			DAC12_0DAT = prevDac;
 		}
 
