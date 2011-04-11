@@ -1,0 +1,22 @@
+@author Aitor Hernandez <aitorhh@kth.se>
+@author Joao Faria <jfff@kth.se>
+@title README Controller app
+
+DESCRIPTION
+--------------------------------------------------
+This application implements a centralized controller who manage
+all the water tanks in the network.
+
+Different options has been shown in the general README file
+(CentralizedControllerGeneral/README)
+
+The controller computes the voltage for the pump motor in V. But 
+the value that we send to the actuator in the conversion to DAC units, 
+following the next equation:
+
+DAC = 273 * V
+
+The control law tries to stabilize the upper tank level to the given
+reference by following the next formula:
+
+Vmotor = upperTank * (-0.6002) + lowerTank * (-0.0021) + integral*(0.1)

@@ -1,0 +1,99 @@
+@author Aitor Hernandez <aitorhh@kth.se>
+@author Joao Faria <jfff@kth.se>
+@title README file for the Water Tanks with 1 coordinator
+
+DESCRIPTION
+--------------------------------------------------
+This application consists on having a Centralized Controller for the water tanks using the IEEE 802.15.4
+implementation from TU Berlin (TKN15.4). It is configured to use the nonbeacon-enabled mode.
+
+The controller shall manage all the N water tanks configured in the network, and set the upper tanks levels
+given a certain sequence (See Configuration section).
+
+To run this example is needed:
+
+1. N Coupled Water Tanks from Quanser
+2. Board or circuit to attach the motes and read the sensor from the water tanks (see apps.water-tank/Documents/schematic.pdf)
+3. 2N + 1 node for N water tanks. For each tank two motes, one sensor (SensorApp) and one actuator (ActuatorApp),
+ and the controller (Controller).
+
+
+CONFIGURATION
+--------------------------------------------------
+I. Number of water tanks
+
+The maximun number of water tanks is given by the app_sensors_nbe.h (NUMBER_WT).
+This variable allocates memory to allocate the integrals of each node.
+
+The controller assumes that each water tank is defined with the following IDs:
+Sensor = 2 * WT_NUMBER - 1
+Acutator = 2 * WT_NUMBER
+
+An example for three water tanks would be:
+*Controller: ID = 0; 
+* WT 1: 	Sensor 	 -> 	ID = 1
+	    	Actuator -> 	ID = 2 
+* WT 2: 	Sensor 	 -> 	ID = 3
+	    	Actuator -> 	ID = 4 
+* WT 3: 	Sensor 	 -> 	ID = 5
+	    	Actuator -> 	ID = 6 
+	  
+II. Sampling time
+
+The sampling time is given by the app_sensors_nbe.h (DEFAULT_RATE).  	
+
+III. References levels
+
+The references are given by an array (x_ref_vector)in the ControllerC.nc file. By default is:
+{5, 10, 15, 20, 15, 10, 2}.
+
+IV. Update interval
+
+The references are change every certain number of samples. This is given by the product of
+DEFAULT_RATE*UPDATE_INTERVAL.
+
+Other configuration parameters could be found in app_sensor_nbe.h.	
+
+OPTIONS
+--------------------------------------------------
+I. Calibration mode
+
+	In order to calibrate the water tanks use this precompiler directive:
+		CFLAGS += -DWT_CALIBRATION
+	This directive will give you some instruction in the terminal output, as we 
+	see below.
+	
+	You need the PrinfClient to read the printf messages from the serial port:
+	$ java net.tinyos.tools.PrintfClient -comm serial@/dev/ttyUSBXX:tmote
+
+	STEPS:
+		0. Turn on, the Serial debug to see the printf's
+		1. Disconnect the motor (unplugged "From Load" cable)
+		2. Set both tanks to level ~0cm by adjusting the OFFSET resistor
+		3. Fill the tank 1 (upper tank) to 25cm
+		4. Set tank 1 to level ~25cm by adjusting the GAIN resistor
+		5. Transfer the water to tank2
+		6. Set tank 1 to level ~25cm by adjusting the GAIN resistor
+		
+		
+II. User button
+
+	In order to calibrate the water tanks use this precompiler directive:
+		CFLAGS += -DWT_USERBUTTON
+	In some scenarios, it is useful to be able to control when to run the application,
+	for this reason we have created this option. The Controller waits until the user
+	has pressed the "User button" of the mote, to start sending the sensor values.
+	
+	
+RESULTS
+--------------------------------------------------
+For this example there are two options to show the results.
+
+I. From Controller
+	The controller flush the data from all the sensor every time he receives a packet.
+	This information is only for debug purpouses. But with few modifications is possible
+	have a column based output which easily could be imported in Matlab.
+	
+II. From Sensor
+	There is a simulink model to read the values from one of the sensors. More information 
+	could be found in the README file, placed in the MatlabSimulink/ folder.
