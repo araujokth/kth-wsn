@@ -1,0 +1,9 @@
+@author Aitor Hernandez <aitorhh@kth.se>
+@author Joao Faria <jfff@kth.se>
+@title README ConstantActuator
+
+DESCRIPTION
+--------------------------------------------------
+This application will send packet periodically ẃith a variable
+sampling time. This time is modificable through the "User Button".
+Every time the "User button" is released, the rate is divided by 5. 
