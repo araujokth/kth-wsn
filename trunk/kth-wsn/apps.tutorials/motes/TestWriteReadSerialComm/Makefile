@@ -1,4 +1,0 @@
-COMPONENT=TestSerialCommAppC
-
-include $(MAKERULES)
-
