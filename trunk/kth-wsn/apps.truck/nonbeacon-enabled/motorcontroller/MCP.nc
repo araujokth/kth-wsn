@@ -79,6 +79,7 @@ implementation {
 	uint8_t msgType;
 	uint8_t leng;
 	uint8_t motor_val;
+	uint8_t busy = 0;
 #ifndef TKN154_BEACON_DISABLED
 	bool m_wasScanSuccessful;
 	void setAddressingFields(uint16_t address);
@@ -224,8 +225,9 @@ event void TimerSamples.fired() {
 	 * S E R I A L   T R A N S M I T T E R
 	 *********************************************************************/
 	event void UartResource.granted() {
-		if(call UartResource.isOwner()==TRUE) call Leds.led2Toggle();
-		atomic{			
+		if(call UartResource.isOwner()==TRUE) call Leds.led2Toggle();		
+		atomic{	
+		if(busy < 2){		
 			switch(msgType){
 			case 7:				
 				call UartStream.send((uint8_t *)&servoMsg7, 6);				
@@ -234,12 +236,28 @@ event void TimerSamples.fired() {
 				call UartStream.send((uint8_t *)&servoMsg8, 7);				
 			}
 		}	
-	
+		}
 	}
 	async event void UartStream.sendDone( uint8_t* buf, uint16_t len, error_t error ) {
-		call Leds.led0Toggle();
-		call UartResource.release();
-		call MLME_SET.macRxOnWhenIdle(TRUE);
+		atomic{if (busy < 2){
+			busy++;
+			setPosition7(motor_val, MOTOR_NUMBER);
+			atomic{			
+			switch(msgType){
+			case 7:				
+				call UartStream.send((uint8_t *)&servoMsg7, 6);				
+				break;
+			case 8:				
+				call UartStream.send((uint8_t *)&servoMsg8, 7);				
+			}
+			}
+			call Leds.led0Toggle();
+			busy++;
+		}else{
+			call Leds.led0Toggle();
+			call UartResource.release();
+			call MLME_SET.macRxOnWhenIdle(TRUE);
+		}}
 	}
 	async event void UartStream.receiveDone( uint8_t* buf, uint16_t len, error_t error ) {}
 
@@ -420,7 +438,9 @@ event void TimerSamples.fired() {
 	event message_t* MCPS_DATA.indication (message_t* frame) {		
 		SFMsg* mesg;
    		mesg = (SFMsg *) call Packet.getPayload(frame, leng);
-   		setPosition7(mesg->motor_val, mesg->motor_num);
+   		setPosition7(mesg->steering_val, STEERING_NUMBER);
+   		atomic{motor_val = mesg->motor_val;
+   		busy = 0;}
 		call Leds.led1Toggle();
 		call MLME_SET.macRxOnWhenIdle(FALSE);
 		call UartResource.request();
