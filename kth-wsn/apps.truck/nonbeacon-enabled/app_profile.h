@@ -58,14 +58,17 @@ enum {
 	PM_SERVO_SLOWEST_SPEED = 1,
 	PM_SERVO_FASTEST_SPEED = 0x7f,
 	PM_SERVO_NEUTRAL_DEF = 0x0BB8,
+	
+	
 	SLIDING_WINDOW = 65000,
 	M_0 = 3, // macMinBE
 	M_B = 8, // macMaxBE
 	M = 4, //macMaxCSMABackoffs
 	N = 2, //macMaxFrameRetries
-	MOTOR_CONTROLLER = 3,
-
-
+	MOTOR_NUMBER = 1,
+	STEERING_NUMBER = 0,
+	UART_QUEUE_LEN = 12,
+	AM_SENSORVALUES = 10, 
 	
 
 	// serial comm	
@@ -76,6 +79,8 @@ enum {
   BEACON_ORDER = 15,
   SUPERFRAME_ORDER = 15,
   CLIENT_ADDRESS = 0x10,
+  SENSOR_ADDRESS = 0x11,
+  COORDINATOR_ADDRESS = 0x0, 
   ED_ADDRESS = 0x10,
   TX_POWER = -20, // in dBm
   DEFAULT_RATE = 500  
@@ -96,7 +101,13 @@ typedef nx_struct servo_serial_msg8 {
   nx_uint8_t data2;
 } servo_serial_msg8_t;
 typedef nx_struct SFMsg {
-	nx_uint8_t motor_num;
+	nx_uint8_t steering_val;
 	nx_uint8_t motor_val;
 } SFMsg;
+typedef nx_struct SensorValues {
+	nx_uint8_t IRVal1;
+	nx_uint8_t IRVal2;
+	nx_uint8_t IRVal3;
+	nx_uint8_t IRVal4;
+} SensorValues;
 #endif
