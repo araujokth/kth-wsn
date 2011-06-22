@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, KTH Royal Institute of Technology
+ * Copyright (c) 2011, KTH Royal Institute of Technology
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -29,62 +29,60 @@
  *
  */
 /**
- * @author Aziz Khakulov <khakulov@kth.se> 
- *  
+ * @author Aziz Khakulov <khakulov@kth.se>
  * 
- * @version  $Revision: 1.0 Date: 2011/06/07 $ 
- * @modified 2011/06/07 
+ * 
+ * @version $Revision: 1.0 Date: 2010/11/03 $ 
+ * @modified 2011/02/01 
  */
-#include "TKN154.h"
 
-configuration MCC {
+#include "Msp430Adc12.h"
+#include <Timer.h>
+
+configuration SensorAppC {
 }
-implementation {
-	components MainC;
+implementation {	
 	components new TimerMilliC() as Timer;
-	components MCP as Enc;
-	Enc.Boot -> MainC.Boot;
-	Enc.TimerSamples -> Timer;
-	components LedsC;
-	Enc.Leds -> LedsC;
-
-	components LocalTime62500hzC;
-	Enc.LocalTime -> LocalTime62500hzC;
-
-	components new Msp430Uart0C() as UartC;
-	Enc.UartStream -> UartC.UartStream;
-	Enc.UartResource -> UartC.Resource;
-	Enc.Msp430UartConfigure <- UartC.Msp430UartConfigure;
-	
-#ifdef PIN_DEBUG
-	
-	components HplMsp430GeneralIOC;
-	components new Msp430GpioC() as PinA;
-	PinA -> HplMsp430GeneralIOC.Port60;
-	Enc.PinA -> PinA;
-	
-#endif
+	components SerialActiveMessageC as Serial;
+	components MainC, SensorC, LedsC;
+	SensorC.Boot -> MainC;
+	SensorC.Leds -> LedsC;
+	SensorC.TimerSamples -> Timer;
 	/****************************************
 	 * 802.15.4
 	 *****************************************/
-#ifdef TKN154_BEACON_DISABLED
-	components Ieee802154NonBeaconEnabledC as MAC;
-#else
+
 	components Ieee802154BeaconEnabledC as MAC;
-	Enc.MLME_SCAN -> MAC;
-	Enc.MLME_SYNC -> MAC;
-	Enc.MLME_BEACON_NOTIFY -> MAC;
-	Enc.MLME_SYNC_LOSS -> MAC;
-	Enc.BeaconFrame -> MAC;
-#endif
+	SensorC.MLME_SCAN -> MAC;
+	SensorC.MLME_SYNC -> MAC;
+	SensorC.MLME_BEACON_NOTIFY -> MAC;
+	SensorC.MLME_SYNC_LOSS -> MAC;
+	SensorC.BeaconFrame -> MAC;
 
-	Enc.MLME_RESET -> MAC;
-	Enc.MLME_SET -> MAC;
-	Enc.MLME_GET -> MAC;
+	SensorC.MLME_RESET -> MAC;
+	SensorC.MLME_SET -> MAC;
+	SensorC.MLME_GET -> MAC;
 
-	Enc.MLME_START -> MAC;
-	Enc.MCPS_DATA -> MAC;
-	Enc.Frame -> MAC;
-	Enc.Packet -> MAC;
-	
+	SensorC.MLME_START -> MAC;
+	SensorC.MCPS_DATA -> MAC;
+	SensorC.Frame -> MAC;
+	SensorC.Packet -> MAC;
+
+	/****************************************
+	 * MultiChannel
+	 *****************************************/
+
+	components new Msp430Adc12ClientAutoRVGC() as AutoAdc;
+	SensorC.Resource -> AutoAdc;
+	AutoAdc.AdcConfigure -> SensorC;
+	SensorC.MultiChannel -> AutoAdc.Msp430Adc12MultiChannel;
+
+	/****************************************
+	 * Serial
+	 *****************************************/
+	SensorC.SerialControl -> Serial;
+	SensorC.UartSend -> Serial.AMSend[AM_SENSORVALUES];
+	SensorC.UartReceive -> Serial.Receive[AM_SENSORVALUES];
+	SensorC.UartAMPacket -> Serial;	
 }
+
