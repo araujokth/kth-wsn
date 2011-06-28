@@ -105,9 +105,9 @@ typedef nx_struct SFMsg {
 	nx_uint8_t motor_val;
 } SFMsg;
 typedef nx_struct SensorValues {
-	nx_uint8_t IRVal1;
-	nx_uint8_t IRVal2;
-	nx_uint8_t IRVal3;
-	nx_uint8_t IRVal4;
+	nx_uint16_t IRVal1;
+	nx_uint16_t IRVal2;
+	nx_uint16_t IRVal3;
+	nx_uint16_t IRVal4;
 } SensorValues;
 #endif

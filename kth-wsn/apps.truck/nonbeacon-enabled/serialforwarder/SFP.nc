@@ -59,7 +59,7 @@ module SFP
     interface AMPacket as UartAMPacket;
   }
 } implementation {	
-
+  am_addr_t dest;
   message_t m_frame;
   uint8_t m_payloadLen;
   uint8_t *payloadRegion; 
@@ -97,7 +97,7 @@ module SFP
 						   void *payload,
 						   uint8_t len) {
 	 message_t *ret = msg;
-	 		  
+	 dest = call UartAMPacket.destination(msg);
     if (len == sizeof(SFMsg)) {
       memcpy(payloadRegion, payload, m_payloadLen);
       post packetSendTask();
@@ -153,7 +153,16 @@ module SFP
   task void packetSendTask()
   {
 //    call Leds.led1Toggle();
-
+ 	ieee154_address_t deviceShortAddress;
+    deviceShortAddress.shortAddress = (uint8_t) dest;
+	call Frame.setAddressingFields(
+        &m_frame,                
+        ADDR_MODE_SHORT_ADDRESS,        // SrcAddrMode,
+        ADDR_MODE_SHORT_ADDRESS,        // DstAddrMode,
+        PAN_ID,						    // DstPANId,
+        &deviceShortAddress, 			// DstAddr,
+        NULL                            // security
+        ); 
    if (call MCPS_DATA.request  (
           &m_frame,                         // frame,
           m_payloadLen,                     // payloadLength,
