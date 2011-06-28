@@ -295,7 +295,7 @@ event void TimerSamples.fired() {
 //		call Leds.led2Off();
 
 		call MLME_SET.phyTransmitPower(TX_POWER);
-		call MLME_SET.macShortAddress(ED_ADDRESS);
+		call MLME_SET.macShortAddress(TOS_NODE_ID);
 		call MLME_SET.macRxOnWhenIdle(TRUE);
 		call MLME_SET.macMaxCSMABackoffs(M);
 		call MLME_SET.macMinBE(M_0);
