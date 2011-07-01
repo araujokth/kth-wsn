@@ -1,0 +1,5 @@
+main DSTACK_USAGE:0 DSTACK_LEVEL:0 FILE:"EventDetector_v6.c" LINE:1246
+HCTL2032_Total_Setup DSTACK_USAGE:7 DSTACK_LEVEL:7 FILE:"C:\cvavr2\lib\hctl2032_driver.lib" LINE:62
+HCTL2032_Set_Count_Mode DSTACK_USAGE:3 DSTACK_LEVEL:10 FILE:"C:\cvavr2\lib\hctl2032_driver.lib" LINE:141
+tcd0_overflow_isr DSTACK_USAGE:16 DSTACK_LEVEL:26 FILE:"EventDetector_v6.c" LINE:602
+HCTL2032_Read_Count_Data DSTACK_USAGE:21 DSTACK_LEVEL:47 FILE:"C:\cvavr2\lib\hctl2032_driver.lib" LINE:175
