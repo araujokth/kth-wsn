@@ -33,7 +33,7 @@ end
 % wrong name!!!!
 pck_total = pck_success_v(1:20:end);
 pck_success = pck_total_v(1:20:end);
-p_error = 1- sum(sp_pck_success)/sum(sp_pck_total);
+p_error = 1- sum(pck_success)/sum(pck_total);
 disp(p_error*100)
 
 % % Build xref

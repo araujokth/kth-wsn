@@ -77,11 +77,6 @@ typedef nx_struct ActuationMatrixMsg {
 	nx_int16_t u[UPDATE_INTERVAL][NUMBER_WT]; //actuation
 }ActuationMatrixMsg;
 
-//typedef nx_struct SensorMatrixMsg {
-//	nx_int16_t y[UPDATE_INTERVAL][NUMBER_WT]; //actuation
-//
-//}SensorMatrixMsg;
-
 typedef nx_struct EncMsg2SensorsAct {
 	nx_int16_t u; //actuation
 	nx_uint8_t wtId;

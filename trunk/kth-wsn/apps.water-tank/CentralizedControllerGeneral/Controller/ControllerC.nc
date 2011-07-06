@@ -118,14 +118,14 @@ implementation {
 	event void Boot.booted() {
 		uint8_t i = 0;
 
-#if defined(WT_CALIBRATION) || defined(WT_USERBUTTON)
+#if defined(WT_CALIBRATION_PROCESS) || defined(WT_USERBUTTON)
 		m_state = INITIALIZATION;
 		call UserButton.enable();
 #else
 		m_state = RUNNING;
 #endif
 
-#ifdef WT_CALIBRATION
+#ifdef WT_CALIBRATION_PROCESS
 		printf("\nC A L I B R A T I O N   M O D E:\n\n");
 		printf("1. Disconnect the motor (unplugged From Load cable) \n");
 		printf("2. Set both tanks to level ~0cm by adjusting the OFFSET resistor\n");
@@ -285,7 +285,7 @@ implementation {
 
 				m_sensor->u = (uint16_t) outf;
 
-#if defined(WT_CALIBRATION) || defined(WT_DEBUG)
+#if defined(WT_CALIBRATION_PROCESS) || defined(WT_DEBUG)
 				printf("[WT %u - %u] ", m_sensor->wtId, (m_device->performValues).pckTotal);
 				printf("x_ref= ");
 				printfFloat(*x_ref);

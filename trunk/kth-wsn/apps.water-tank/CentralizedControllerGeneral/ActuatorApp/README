@@ -4,11 +4,14 @@
 
 DESCRIPTION
 --------------------------------------------------
-This application shall be the actuator mote. Once in the controller,
-we press the "User button" and the Sensor in connected, the controller
-shall close the Wireless loop by sending the voltage value back to
-the Actuator node. If a packet has successfully received the GREEN LED
-blinks, otherwise, if there is an error the RED LED blinks.
+This application is for the actuator mote. This mote will give the 
+voltage to the board, and it will be driven to the pump motor.
+
+When we prees the press the "User button" in the Controller and the
+Sensor in connected, the controller shall close the Wireless loop
+by sending the voltage value back to the Actuator node.
+If a packet has successfully received the GREEN LED blinks, otherwise,
+if there is an error the RED LED blinks.
 
 The actuator node has to have an ID = 2 * WT_NUMBER, otherwise he
 will not receive the packets of his process.
@@ -18,7 +21,7 @@ In the PCB board the actuator node corresponds to the bottom one.
 Different options has been shown in the general README file
 (CentralizedControllerGeneral/README)
 
-The output of the mote follows the next equation:
+The output of the mote follows the next equation: we use
 Vmote = 0.0006151*DAC + 0.0009710 [V]
 
 To simplify we will use 

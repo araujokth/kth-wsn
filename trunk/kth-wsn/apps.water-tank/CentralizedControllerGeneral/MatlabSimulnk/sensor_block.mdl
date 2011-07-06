@@ -1,12 +1,12 @@
 Model {
   Name			  "sensor_block"
-  Version		  7.4
+  Version		  7.5
   MdlSubVersion		  0
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.440"
+    ComputedModelVersion    "1.444"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -23,11 +23,11 @@ Model {
   Creator		  "kthwsnt"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "aitorhh"
+  LastModifiedBy	  "kthwsn"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Jan 21 09:44:21 2011"
-  RTWModifiedTimeStamp	  217503860
-  ModelVersionFormat	  "1.%<AutoIncrement:440>"
+  LastModifiedDate	  "Wed Apr 13 11:36:26 2011"
+  RTWModifiedTimeStamp	  224592329
+  ModelVersionFormat	  "1.%<AutoIncrement:444>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -102,13 +102,13 @@ Model {
     Dimension		    1
     Simulink.ConfigSet {
       $ObjectID		      1
-      Version		      "1.6.0"
+      Version		      "1.10.0"
       Array {
 	Type			"Handle"
 	Dimension		9
 	Simulink.SolverCC {
 	  $ObjectID		  2
-	  Version		  "1.6.0"
+	  Version		  "1.10.0"
 	  StartTime		  "0"
 	  StopTime		  "inf"
 	  AbsTol		  "auto"
@@ -128,6 +128,7 @@ Model {
 	  SolverMode		  "Auto"
 	  Solver		  "FixedStepDiscrete"
 	  SolverName		  "FixedStepDiscrete"
+	  SolverJacobianMethodControl "auto"
 	  ShapePreserveControl	  "DisableAll"
 	  ZeroCrossControl	  "UseLocalSettings"
 	  ZeroCrossAlgorithm	  "Nonadaptive"
@@ -140,7 +141,7 @@ Model {
 	}
 	Simulink.DataIOCC {
 	  $ObjectID		  3
-	  Version		  "1.6.0"
+	  Version		  "1.10.0"
 	  Decimation		  "1"
 	  ExternalInput		  "[t, u]"
 	  FinalStateName	  "xFinal"
@@ -155,6 +156,7 @@ Model {
 	  SaveOutput		  off
 	  SaveState		  off
 	  SignalLogging		  off
+	  DSMLogging		  on
 	  InspectSignalLogs	  off
 	  SaveTime		  off
 	  ReturnWorkspaceOutputs  off
@@ -162,6 +164,7 @@ Model {
 	  TimeSaveName		  "tout"
 	  OutputSaveName	  "yout"
 	  SignalLoggingName	  "logsout"
+	  DSMLoggingName	  "dsmout"
 	  OutputOption		  "RefineOutputTimes"
 	  OutputTimes		  "[]"
 	  ReturnWorkspaceOutputsName "out"
@@ -169,7 +172,7 @@ Model {
 	}
 	Simulink.OptimizationCC {
 	  $ObjectID		  4
-	  Version		  "1.6.0"
+	  Version		  "1.10.0"
 	  Array {
 	    Type		    "Cell"
 	    Dimension		    7
@@ -195,6 +198,7 @@ Model {
 	  EnforceIntegerDowncast  on
 	  ExpressionFolding	  on
 	  BooleansAsBitfields	  off
+	  BitfieldContainerType	  "uint_T"
 	  EnableMemcpy		  on
 	  MemcpyThreshold	  64
 	  PassReuseOutputArgsAs	  "Structure reference"
@@ -214,13 +218,14 @@ Model {
 	  EfficientMapNaN2IntZero on
 	  OptimizeModelRefInitCode off
 	  LifeSpan		  "inf"
+	  MaxStackSize		  "Inherit from target"
 	  BufferReusableBoundary  on
 	  SimCompilerOptimization "Off"
 	  AccelVerboseBuild	  off
 	}
 	Simulink.DebuggingCC {
 	  $ObjectID		  5
-	  Version		  "1.6.0"
+	  Version		  "1.10.0"
 	  RTPrefix		  "error"
 	  ConsistencyChecking	  "none"
 	  ArrayBoundsChecking	  "none"
@@ -289,12 +294,14 @@ Model {
 	  StateNameClashWarn	  "warning"
 	  SimStateInterfaceChecksumMismatchMsg "warning"
 	  StrictBusMsg		  "Warning"
+	  BusNameAdapt		  "WarnAndRepair"
+	  NonBusSignalsTreatedAsBus "none"
 	  LoggingUnavailableSignals "error"
 	  BlockIODiagnostic	  "none"
 	}
 	Simulink.HardwareCC {
 	  $ObjectID		  6
-	  Version		  "1.6.0"
+	  Version		  "1.10.0"
 	  ProdBitPerChar	  8
 	  ProdBitPerShort	  16
 	  ProdBitPerInt		  32
@@ -321,16 +328,21 @@ Model {
 	}
 	Simulink.ModelReferenceCC {
 	  $ObjectID		  7
-	  Version		  "1.6.0"
+	  Version		  "1.10.0"
 	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
 	  CheckModelReferenceTargetMessage "error"
+	  EnableParallelModelReferenceBuilds off
+	  ParallelModelReferenceMATLABWorkerInit "None"
 	  ModelReferenceNumInstancesAllowed "Multi"
+	  PropagateVarSize	  "Infer from blocks in model"
 	  ModelReferencePassRootInputsByReference on
 	  ModelReferenceMinAlgLoopOccurrences off
+	  PropagateSignalLabelsOutOfModel off
+	  SupportModelReferenceSimTargetCustomCode off
 	}
 	Simulink.SFSimCC {
 	  $ObjectID		  8
-	  Version		  "1.6.0"
+	  Version		  "1.10.0"
 	  SFSimEnableDebug	  on
 	  SFSimOverflowDetection  on
 	  SFSimEcho		  on
@@ -344,7 +356,7 @@ Model {
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
 	  $ObjectID		  9
-	  Version		  "1.6.0"
+	  Version		  "1.10.0"
 	  Array {
 	    Type		    "Cell"
 	    Dimension		    6
@@ -387,12 +399,13 @@ Model {
 	  GenerateCodeInfo	  off
 	  RTWCompilerOptimization "Off"
 	  CheckMdlBeforeBuild	  "Off"
+	  CustomRebuildMode	  "OnUpdate"
 	  Array {
 	    Type		    "Handle"
 	    Dimension		    2
 	    Simulink.CodeAppCC {
 	      $ObjectID		      10
-	      Version		      "1.6.0"
+	      Version		      "1.10.0"
 	      Array {
 		Type			"Cell"
 		Dimension		19
@@ -452,7 +465,7 @@ Model {
 	    Simulink.GRTTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
 	      $ObjectID		      11
-	      Version		      "1.6.0"
+	      Version		      "1.10.0"
 	      Array {
 		Type			"Cell"
 		Dimension		17
@@ -481,6 +494,7 @@ Model {
 	      TargetFunctionLibrary   "ANSI_C"
 	      UtilityFuncGeneration   "Auto"
 	      ERTMultiwordTypeDef     "System defined"
+	      ERTCodeCoverageTool     "None"
 	      ERTMultiwordLength      256
 	      MultiwordLength	      2048
 	      GenerateFullHeader      on
@@ -531,7 +545,7 @@ Model {
 	}
 	DES.SimEventsCC {
 	  $ObjectID		  12
-	  Version		  "1.6.0"
+	  Version		  "1.10.0"
 	  Name			  "SimEvents"
 	  SimEventsActiveTab	  "0"
 	  propIdentEvents	  "0"
@@ -605,6 +619,7 @@ Model {
       LockScale		      off
       SampleTime	      "inf"
       FramePeriod	      "inf"
+      PreserveConstantTs      off
     }
     Block {
       BlockType		      Demux
@@ -637,7 +652,7 @@ Model {
       SignalType	      "auto"
       SamplingMode	      "auto"
       LatchByDelayingOutsideSignal off
-      LatchByCopyingInsideSignal off
+      LatchInputForFeedbackSignals off
       Interpolate	      on
     }
     Block {
@@ -759,11 +774,17 @@ Model {
       SampleTimeType	      "triggered"
       SampleTime	      "1"
       ZeroCross		      on
+      PortDimensions	      "-1"
+      TriggerSignalSampleTime "-1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      Interpolate	      on
     }
   }
   System {
     Name		    "sensor_block"
-    Location		    [433, 115, 1524, 746]
+    Location		    [109, 119, 1200, 750]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -777,7 +798,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    91
+    SIDHighWatermark	    92
     Block {
       BlockType		      Mux
       Name		      "Mux"
@@ -810,6 +831,27 @@ Model {
       PulseWidth	      "5"
       PhaseDelay	      "0"
       SampleTime	      "1"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Scope1"
+      SID		      92
+      Ports		      [1]
+      Position		      [550, 44, 580, 76]
+      Floating		      off
+      Location		      [1, 80, 1441, 869]
+      Open		      on
+      NumInputPorts	      "1"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+      }
+      YMin		      "0"
+      YMax		      "800"
+      SaveName		      "ScopeData1"
+      DataFormat	      "StructureWithTime"
+      MaxDataPoints	      "50000"
+      SampleTime	      "0"
     }
     Block {
       BlockType		      ToWorkspace
@@ -849,8 +891,8 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"Triggered\nSubsystem"
-	Location		[1, 75, 1365, 746]
-	Open			on
+	Location		[1, 79, 1365, 750]
+	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -886,6 +928,7 @@ Model {
 	  Position		  [485, 108, 625, 432]
 	  LibraryVersion	  "1.30"
 	  PermitHierarchicalResolution "ExplicitOnly"
+	  TreatAsAtomicUnit	  on
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
 	  RTWSystemCode		  "Auto"
@@ -917,7 +960,7 @@ Model {
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "100"
-	    SIDHighWatermark	    24
+	    SIDHighWatermark	    28
 	    SIDPrevWatermark	    18
 	    Block {
 	      BlockType		      Inport
@@ -931,18 +974,18 @@ Model {
 	    Block {
 	      BlockType		      Demux
 	      Name		      " Demux "
-	      SID		      20
+	      SID		      26
 	      Ports		      [1, 1]
-	      Position		      [270, 280, 320, 320]
+	      Position		      [270, 245, 320, 285]
 	      Outputs		      "1"
 	    }
 	    Block {
 	      BlockType		      "S-Function"
 	      Name		      " SFunction "
-	      SID		      19
+	      SID		      25
 	      Tag		      "Stateflow S-Function sensor_block 2"
 	      Ports		      [1, 6]
-	      Position		      [180, 114, 230, 281]
+	      Position		      [180, 102, 230, 243]
 	      FunctionName	      "sf_sfun"
 	      PortCounts	      "[1 6]"
 	      EnableBusSupport	      on
@@ -980,8 +1023,8 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      " Terminator "
-	      SID		      22
-	      Position		      [460, 291, 480, 309]
+	      SID		      28
+	      Position		      [460, 256, 480, 274]
 	    }
 	    Block {
 	      BlockType		      Outport
@@ -1259,9 +1302,17 @@ Model {
     Line {
       SrcBlock		      "Mux"
       SrcPort		      1
-      Points		      [55, 0; 0, 10]
-      DstBlock		      "To Workspace"
-      DstPort		      1
+      Points		      [45, 0]
+      Branch {
+	Points			[10, 0; 0, 10]
+	DstBlock		"To Workspace"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, -125]
+	DstBlock		"Scope1"
+	DstPort			1
+      }
     }
     Line {
       SrcBlock		      "Triggered\nSubsystem"
@@ -1288,7 +1339,7 @@ Model {
 }
 # Finite State Machines
 #
-#    Stateflow Version 7.1 (R2009a) dated Jul 17 2009, 00:39:27
+#    Stateflow Version 7.5 (R2010a) dated Jan 19 2010, 11:01:51
 #
 #
 
@@ -1300,7 +1351,7 @@ Stateflow {
     created		    "03-Aug-2010 05:02:28"
     isLibrary		    0
     firstTarget		    13
-    sfVersion		    71014000.00001
+    sfVersion		    75014000
   }
   chart {
     id			    2
