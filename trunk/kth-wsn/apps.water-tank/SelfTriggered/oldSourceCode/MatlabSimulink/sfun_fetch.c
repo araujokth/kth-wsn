@@ -56,6 +56,7 @@ João Felipe Faria
 /*====================*
  * S-function methods *
  *====================*/
+static int fd;
 
 /* Function: mdlInitializeSizes ===============================================
  * Abstract:
@@ -65,7 +66,9 @@ João Felipe Faria
 static void mdlInitializeSizes(SimStruct *S)
 {
     /* See sfuntmpl_doc.c for more details on the macros below */
-
+             char host[] = "localhost";
+    int port = 9002;
+    
     ssSetNumSFcnParams(S, 0);  /* Number of expected parameters */
     if (ssGetNumSFcnParams(S) != ssGetSFcnParamsCount(S)) {
         /* Return if number of expected != number of actual parameters */
@@ -117,6 +120,13 @@ static void mdlInitializeSizes(SimStruct *S)
     ssSetNumNonsampledZCs(S, 0);
 
     ssSetOptions(S, SS_OPTION_EXCEPTION_FREE_CODE);
+    
+
+
+printf("Open Connection to the SF\n");
+    
+    fd = open_sf_source(host, port);
+
 }
 
 
@@ -156,8 +166,6 @@ static void mdlInitializeSampleTimes(SimStruct *S)
 
 
 
-#undef MDL_START  /* Change to #undef to remove function */
-#if defined(MDL_START) 
   /* Function: mdlStart =======================================================
    * Abstract:
    *    This function is called once at start of model execution. If you
@@ -167,7 +175,6 @@ static void mdlInitializeSampleTimes(SimStruct *S)
   static void mdlStart(SimStruct *S)
   {
   }
-#endif /*  MDL_START */
 
 
 
@@ -178,9 +185,7 @@ static void mdlInitializeSampleTimes(SimStruct *S)
  */
 static void mdlOutputs(SimStruct *S, int_T tid)
 {
-    char host[] = "localhost";
-	int port = 9002;
-    int len, i, fd, payloadLen;
+ int len, i, payloadLen;
     
     real_T       *Y11 = ssGetOutputPortSignal(S,0);
     real_T       *Y12 = ssGetOutputPortSignal(S,1);
@@ -204,7 +209,6 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     real_T       *i1_init = ssGetOutputPortSignal(S,19);
     real_T       *i2_init = ssGetOutputPortSignal(S,20);
     
-    fd = open_sf_source(host, port);
     const unsigned char *packet = read_sf_packet(fd, &len);
     float i1, i2;
     float *p1, *p2;
@@ -258,9 +262,9 @@ static void mdlOutputs(SimStruct *S, int_T tid)
         TIME[0] = 0;
         ERR[0] = 0;
         
-    }
+    }    
+  
     
-    close(fd);
 }
 
 
@@ -303,6 +307,8 @@ static void mdlOutputs(SimStruct *S, int_T tid)
  */
 static void mdlTerminate(SimStruct *S)
 {
+        close(fd);
+
 }
 
 
