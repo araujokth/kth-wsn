@@ -8,7 +8,7 @@ export TOSROOT=
 export TOSDIR=
 export MAKERULES=
 
-TOSROOT=/home/kthwsnt/workspace/se.kth.tinyos2x.mac.tkn154.gtsmod
+TOSROOT=/home/kthwsn/workspace/apps.water-tank/SelfTriggered/se.kth.tinyos2x.mac.tkn154.gtsmod
 TOSDIR=$TOSROOT/tos
 CLASSPATH=$CLASSPATH:$TOSROOT/support/sdk/java/tinyos.jar:.
 MAKERULES=$TOSROOT/support/make/Makerules

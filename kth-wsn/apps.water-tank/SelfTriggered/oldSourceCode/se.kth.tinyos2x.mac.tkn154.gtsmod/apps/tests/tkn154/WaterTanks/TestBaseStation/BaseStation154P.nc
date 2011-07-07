@@ -41,7 +41,6 @@ module BaseStation154P {
 		interface Receive as UartReceive[am_id_t id];
 		interface AMPacket as UartAMPacket;
 
-
 		interface GetSet<ieee154_GTSdb_t*> as GtsCoordinatorDb;
 		interface GtsUtility;
 
@@ -71,10 +70,10 @@ implementation {
 	uint8_t uartIn, uartOut;
 	uint8_t bo;
 	bool uartBusy, uartFull;
-	
+
 	bool ACTIVE = FALSE;
 	bool INITIALIZED = FALSE;
-	
+
 	nx_float initial_value_integrator[2];
 	uint16_t initial_value_sensors[2][2], initial_value_actuation[2];
 
@@ -94,14 +93,14 @@ implementation {
 		call SerialControl.start();
 
 		call MLME_RESET.request(TRUE);
-		
+
 		setAddressingFields(BROADCAST_DESTINATION, &m_frameToMote);
 
 		m_toMote = (MyMsg*)(call Packet.getPayload(&m_frameToMote,m_payloadLenToMote ));
 		m_toPC = (EncMsgWT*)(call Packet.getPayload(&m_frameToPC,m_payloadLenToPC ));
 
 		memset(m_toPC, 0, sizeof(m_toPC));
-		
+
 	}
 
 	event void MLME_RESET.confirm(ieee154_status_t status)
@@ -150,13 +149,13 @@ implementation {
 	 *  DEVICE -----15.4----- BASE STATION -------EncMsg------- PC
 	 ************************************************************************************/
 	task void sendPacket2PC() {
-			if (call MCPS_DATA.request ( &m_frameToMote, // frame,
-							m_payloadLenToMote, // payloadLength,
-							0, // msduHandle,
-							TX_OPTIONS_ACK | TX_OPTIONS_GTS // TxOptions,
-					) != IEEE154_SUCCESS) {
-				call Leds.led0On(); //fail!
-			}
+		if (call MCPS_DATA.request ( &m_frameToMote, // frame,
+						m_payloadLenToMote, // payloadLength,
+						0, // msduHandle,
+						TX_OPTIONS_ACK | TX_OPTIONS_GTS // TxOptions,
+				) != IEEE154_SUCCESS) {
+			call Leds.led0On(); //fail!
+		}
 	}
 	//Store the new message in the UART input buffer
 	event message_t* MCPS_DATA.indication (message_t* frame)
@@ -164,145 +163,148 @@ implementation {
 		message_t* ret = frame;
 		MyMsg *m_device;
 		nx_float K[3], outf;
-		
+
 		if( ACTIVE ) {
 
 			K[0] = -0.1160; //
 			K[1] = -0.1400; //-0.1160   -0.1400   -0.0190
 			K[2] = -0.0190; //
-	
+
 			// We assume that the packets with length equal to MyMsg
 			// are a MyMsg
 			if (call Frame.getPayloadLength(frame) == m_payloadLenToMote &&
 					call Frame.getFrameType(frame) == FRAMETYPE_DATA) {
-	
+
 				m_device = (MyMsg*)(call Packet.getPayload(frame,m_payloadLenToMote));
-	
+
 				if( m_device->srcId == 1 ) {
-	
+
 					m_toPC->y11 = m_device->data[0] - initial_value_sensors[0][0];
 					m_toPC->y12 = m_device->data[1] - initial_value_sensors[0][1];
-					
+
 					m_device->integrator = m_device->integrator - initial_value_integrator[0];
-	
+
 					setAddressingFields((uint16_t) 0x02, &m_frameToMote);
-	
+
 					m_toMote->other = 0x05; // Write to DAC
 					m_toMote->srcId = COORDINATOR_ADDRESS;
 					m_toMote->trgtId = 0x02; // DAC mote on tank system 1
-	
+
 					// 1cm in the tube is approx. 95.733 units in the ADC 
 					// 1v in the pump is approx. 273 units in the DAC
 					//outf = 5.4204 * 273.0 + (273.0 * (((((nx_float) m_toPC->y11)/87.36) - 10.0) * K[0] + ((((nx_float) m_toPC->y12)/87.36) - 10.0) * K[1] + (m_device->integrator + 62.0755) * K[2]));
 					//outf = (273.0 * (((((nx_float) m_toPC->y11)/87.36) - 10.0) * K[0] + ((((nx_float) m_toPC->y12)/87.36) - 10.0) * K[1] + (m_device->integrator + 62.0755) * K[2]));
-					
-					outf = initial_value_actuation[0] + (273.0 * (((((nx_float) m_toPC->y11)/87.36)) * K[0] + ((((nx_float) m_toPC->y12)/87.36)) * K[1] + (m_device->integrator) * K[2]));
-					
+
+					outf = initial_value_actuation[0]
+					+ (273.0 * (((((nx_float) m_toPC->y11)/87.36)) * K[0] +
+							((((nx_float) m_toPC->y12)/87.36)) * K[1] +
+							(m_device->integrator) * K[2]));
+
 					if(outf < 0) outf = 0;
 					m_toMote->data[0] = (uint16_t) outf;
 					if(m_toMote->data[0] > 4095) m_toMote->data[0] = 4095;
-					m_toPC->u1 = m_toMote->data[0];	
+					m_toPC->u1 = m_toMote->data[0];
 					m_toPC->i1 = m_device->integrator;
-					
-										post sendPacket2PC();
-	
+
+					post sendPacket2PC();
+
 				} else if( m_device->srcId == 3 ) {
-	
+
 					m_toPC->y21 = m_device->data[0] - initial_value_sensors[1][0];
 					m_toPC->y22 = m_device->data[1] - initial_value_sensors[1][1];
-					
+
 					m_device->integrator = m_device->integrator - initial_value_integrator[1];
-	
+
 					setAddressingFields((uint16_t) 0x04, &m_frameToMote);
-	
+
 					m_toMote->other = 0x05; // Write to DAC
 					m_toMote->srcId = COORDINATOR_ADDRESS;
 					m_toMote->trgtId = 0x04; // DAC mote on tank system 2
-	
+
 					// 1cm in the tube is approx. 87.36 units in the ADC 
 					// 1v in the pump is approx. 273 units in the DAC
 					//outf = 5.4204 * 273.0 + (273.0 * (((((nx_float) m_toPC->y21)/87.36) - 10.0) * K[0] + ((((nx_float) m_toPC->y22)/87.36) - 10.0) * K[1] + (m_device->integrator + 62.0755) * K[2]));
 					//outf = (273.0 * (((((nx_float) m_toPC->y21)/87.36) - 10.0) * K[0] + ((((nx_float) m_toPC->y22)/87.36) - 10.0) * K[1] + (m_device->integrator + 62.0755) * K[2]));
-					
+
 					outf = initial_value_actuation[1] + (273.0 * (((((nx_float) m_toPC->y21)/87.36)) * K[0] + ((((nx_float) m_toPC->y22)/87.36)) * K[1] + (m_device->integrator) * K[2]));
-					
+
 					if(outf < 0) outf = 0;
 					m_toMote->data[0] = (uint16_t) outf;
 					if(m_toMote->data[0] > 4095) m_toMote->data[0] = 4095;
-					m_toPC->u2 = m_toMote->data[0];	
-					m_toPC->i2 = m_device->integrator;	
-					
-										post sendPacket2PC();
-	
+					m_toPC->u2 = m_toMote->data[0];
+					m_toPC->i2 = m_device->integrator;
+
+					post sendPacket2PC();
+
 				} else if( m_device->srcId == 5 ) {
-	
+
 					m_toPC->s1 = m_device->data[0];
-	
+
 				} else if( m_device->srcId == 6 ) {
-	
+
 					m_toPC->s2 = m_device->data[0];
-	
+
 				} else if( m_device->srcId == 7 ) {
-	
+
 					m_toPC->s3 = m_device->data[0];
-	
+
 				}
-	
+
 			}
-		
+
 		} else {
-		
+
 			if (call Frame.getPayloadLength(frame) == m_payloadLenToMote &&
 					call Frame.getFrameType(frame) == FRAMETYPE_DATA) {
-	
+
 				m_device = (MyMsg*)(call Packet.getPayload(frame,m_payloadLenToMote));
-	
+
 				if( m_device->srcId == 1 ) {
-	
+
 					setAddressingFields((uint16_t) 0x02, &m_frameToMote);
-	
+
 					m_toMote->other = 0x05; // Write to DAC
 					m_toMote->srcId = COORDINATOR_ADDRESS;
 					m_toMote->trgtId = 0x02; // DAC mote on tank system 1
-	
+
 					// 1cm in the tube is approx. 95.733 units in the ADC 
 					// 1v in the pump is approx. 273 units in the DAC
 					outf = (273.0 * 4.8); //4.38
 					if(outf < 0) outf = 0;
 					m_toMote->data[0] = (uint16_t) outf;
 					if(m_toMote->data[0] > 4095) m_toMote->data[0] = 4095;
-					
-		initial_value_actuation[0] = m_toMote->data[0];
-		
+
+					initial_value_actuation[0] = m_toMote->data[0];
+
 					initial_value_integrator[0] = m_device->integrator;
 					initial_value_sensors[0][0] = m_device->data[0];
 					initial_value_sensors[0][1] = m_device->data[1];
-					
-										post sendPacket2PC();
-	
+
+					post sendPacket2PC();
+
 				} else if( m_device->srcId == 3 ) {
-	
+
 					setAddressingFields((uint16_t) 0x04, &m_frameToMote);
-	
+
 					m_toMote->other = 0x05; // Write to DAC
 					m_toMote->srcId = COORDINATOR_ADDRESS;
 					m_toMote->trgtId = 0x04; // DAC mote on tank system 2
-	
+
 					// 1cm in the tube is approx. 87.36 units in the ADC 
 					// 1v in the pump is approx. 273 units in the DAC
 					outf = (273.0 * 4.8);
 					if(outf < 0) outf = 0;
 					m_toMote->data[0] = (uint16_t) outf;
 					if(m_toMote->data[0] > 4095) m_toMote->data[0] = 4095;
-					
-		initial_value_actuation[1] = m_toMote->data[0];
-					
+
+					initial_value_actuation[1] = m_toMote->data[0];
+
 					initial_value_integrator[1] = m_device->integrator;
 					initial_value_sensors[1][0] = m_device->data[0];
 					initial_value_sensors[1][1] = m_device->data[1];
-					
-										post sendPacket2PC();
-	
+
+					post sendPacket2PC();
+
 				}
 			}
 		}
@@ -331,14 +333,13 @@ implementation {
 	}
 
 	event void MLME_START.confirm(ieee154_status_t status) {
-	ieee154_GTSdb_t* GTSdb;
+		ieee154_GTSdb_t* GTSdb;
 		uint8_t i = 0;
 		if( ! INITIALIZED ) {
-		
-			INITIALIZED  = TRUE;
-		/***  INITIALIZE GTS SETTINGS  ***/
-		
-	
+
+			INITIALIZED = TRUE;
+			/***  INITIALIZE GTS SETTINGS  ***/
+
 			/* It is important to keep this order because the MLME_SET.macSuperframeOrder
 			 * is the function that set the signal to write the new configuration
 			 * 
@@ -346,12 +347,12 @@ implementation {
 			 * 2. Beacon order
 			 * 3. Superfame order
 			 */
-	
+
 			GTSdb = call GtsCoordinatorDb.get();
-			
+
 			for (i=0; i < CFP_NUMBER_SLOTS; i++)
-				call GtsUtility.setNullGtsEntry(&(GTSdb->db[i]));
-	
+			call GtsUtility.setNullGtsEntry(&(GTSdb->db[i]));
+
 			call GtsUtility.addGtsEntry(GTSdb, 1, 9, 1, GTS_TX_ONLY_REQUEST);
 			call GtsUtility.addGtsEntry(GTSdb, 2, 10, 1, GTS_RX_ONLY_REQUEST);
 			call GtsUtility.addGtsEntry(GTSdb, 3, 11, 1, GTS_TX_ONLY_REQUEST);
@@ -359,13 +360,13 @@ implementation {
 			call GtsUtility.addGtsEntry(GTSdb, 5, 13, 1, GTS_TX_ONLY_REQUEST);
 			call GtsUtility.addGtsEntry(GTSdb, 6, 14, 1, GTS_TX_ONLY_REQUEST);
 			call GtsUtility.addGtsEntry(GTSdb, 7, 15, 1, GTS_TX_ONLY_REQUEST);
-	
+
 			GTSdb->numGtsSlots = 7; //delete all the frames
-	
+
 			call MLME_SET.macBeaconOrder(BEACON_ORDER);
 			call MLME_SET.macSuperframeOrder(SUPERFRAME_ORDER);
 		}
-	
+
 	}
 
 	event void SerialControl.startDone(error_t error) {
@@ -411,14 +412,13 @@ implementation {
 		bool used[7];
 		nx_int8_t *pSlots;
 		m_fromPC = call Packet.getPayload(msg, m_payloadLenFromPC);
-		
+
 		if( m_fromPC->BI == 0xff ) {
-			
+
 			ACTIVE = TRUE;
-			
+
 			/***  INITIALIZE GTS SETTINGS  ***/
-		
-	
+
 			/* It is important to keep this order because the MLME_SET.macSuperframeOrder
 			 * is the function that set the signal to write the new configuration
 			 * 
@@ -426,12 +426,12 @@ implementation {
 			 * 2. Beacon order
 			 * 3. Superfame order
 			 */
-	
+
 			GTSdb = call GtsCoordinatorDb.get();
-			
+
 			for (i=0; i < CFP_NUMBER_SLOTS; i++)
-				call GtsUtility.setNullGtsEntry(&(GTSdb->db[i]));
-	
+			call GtsUtility.setNullGtsEntry(&(GTSdb->db[i]));
+
 			call GtsUtility.addGtsEntry(GTSdb, 1, 9, 1, GTS_TX_ONLY_REQUEST);
 			call GtsUtility.addGtsEntry(GTSdb, 2, 10, 1, GTS_RX_ONLY_REQUEST);
 			call GtsUtility.addGtsEntry(GTSdb, 3, 11, 1, GTS_TX_ONLY_REQUEST);
@@ -439,18 +439,18 @@ implementation {
 			call GtsUtility.addGtsEntry(GTSdb, 5, 13, 1, GTS_TX_ONLY_REQUEST);
 			call GtsUtility.addGtsEntry(GTSdb, 6, 14, 1, GTS_TX_ONLY_REQUEST);
 			call GtsUtility.addGtsEntry(GTSdb, 7, 15, 1, GTS_TX_ONLY_REQUEST);
-	
+
 			GTSdb->numGtsSlots = 7; //delete all the frames
-	
+
 			call MLME_SET.macBeaconOrder(BEACON_ORDER);
 			call MLME_SET.macSuperframeOrder(SUPERFRAME_ORDER);
-			
+
 		} else {
-		
+
 			pSlots = (nx_int8_t *) m_fromPC;
-			
+
 			memset(used, FALSE, 7*sizeof(bool));
-			
+
 			nodes[0]=1;
 			nodes[1]=2;
 			nodes[2]=3;
@@ -458,9 +458,9 @@ implementation {
 			nodes[4]=5;
 			nodes[5]=6;
 			nodes[6]=7;
-			
+
 			nUnused = 0;
-	
+
 			/* It is important to keep this order because the MLME_SET.macSuperframeOrder
 			 * is the function that set the signal to write the new configuration
 			 * 
@@ -468,31 +468,29 @@ implementation {
 			 * 2. Beacon order
 			 * 3. Superfame order
 			 */
-	
+
 			GTSdb = call GtsCoordinatorDb.get();
-			
+
 			for (i=0; i < CFP_NUMBER_SLOTS; i++)
-				call GtsUtility.setNullGtsEntry(&(GTSdb->db[i]));
-			
+			call GtsUtility.setNullGtsEntry(&(GTSdb->db[i]));
+
 			//GTSdb->numGtsSlots = 0; //delete all the frames
-			
-			
+
+
 			/***                                                                        ***
-			          The solution  implemented  on the  protocol layer  of assigning
-			        slot 16 (non-existent  slot) to a node if we don't  want the node 
-			        to  have a slot  during the  next beacon interval  is not working
-			        correctly, so the following workaround is made:
-			          - Set up a vector to contain the node numbers
-			          - Check if the corresponding slot number is 16
-			          - If it is, change the node number to 8 (non-existent node)
-			          - Replace the slot numbers assigned to node 8 with unused slots 
+			 The solution  implemented  on the  protocol layer  of assigning
+			 slot 16 (non-existent  slot) to a node if we don't  want the node 
+			 to  have a slot  during the  next beacon interval  is not working
+			 correctly, so the following workaround is made:
+			 - Set up a vector to contain the node numbers
+			 - Check if the corresponding slot number is 16
+			 - If it is, change the node number to 8 (non-existent node)
+			 - Replace the slot numbers assigned to node 8 with unused slots 
 			 ***                                                                        ***/
-	
-			
-			
+
 			for(i=0;i<7;i++) {
-				if( pSlots[i+1] == 16 ) { nodes[i] = 8; dummyNodes[nUnused++] = i+1; }
-				else { used[pSlots[i+1]-9] = TRUE; }
+				if( pSlots[i+1] == 16 ) {nodes[i] = 8; dummyNodes[nUnused++] = i+1;}
+				else {used[pSlots[i+1]-9] = TRUE;}
 			}
 			for(i=0;i<7;i++) {
 				if(nUnused == 0) break;
@@ -501,15 +499,15 @@ implementation {
 					pSlots[dummyNodes[nUnused]] = i+9;
 				}
 			}
-			
+
 			/*call GtsUtility.addGtsEntry(GTSdb, 1, m_fromPC->T1, 1, GTS_TX_ONLY_REQUEST);
-			call GtsUtility.addGtsEntry(GTSdb, 2, m_fromPC->T2, 1, GTS_RX_ONLY_REQUEST);
-			call GtsUtility.addGtsEntry(GTSdb, 3, m_fromPC->T3, 1, GTS_TX_ONLY_REQUEST);
-			call GtsUtility.addGtsEntry(GTSdb, 4, m_fromPC->T4, 1, GTS_RX_ONLY_REQUEST);
-			call GtsUtility.addGtsEntry(GTSdb, 5, m_fromPC->T5, 1, GTS_TX_ONLY_REQUEST);
-			call GtsUtility.addGtsEntry(GTSdb, 6, m_fromPC->T6, 1, GTS_TX_ONLY_REQUEST);
-			call GtsUtility.addGtsEntry(GTSdb, 7, m_fromPC->T7, 1, GTS_TX_ONLY_REQUEST);*/
-			
+			 call GtsUtility.addGtsEntry(GTSdb, 2, m_fromPC->T2, 1, GTS_RX_ONLY_REQUEST);
+			 call GtsUtility.addGtsEntry(GTSdb, 3, m_fromPC->T3, 1, GTS_TX_ONLY_REQUEST);
+			 call GtsUtility.addGtsEntry(GTSdb, 4, m_fromPC->T4, 1, GTS_RX_ONLY_REQUEST);
+			 call GtsUtility.addGtsEntry(GTSdb, 5, m_fromPC->T5, 1, GTS_TX_ONLY_REQUEST);
+			 call GtsUtility.addGtsEntry(GTSdb, 6, m_fromPC->T6, 1, GTS_TX_ONLY_REQUEST);
+			 call GtsUtility.addGtsEntry(GTSdb, 7, m_fromPC->T7, 1, GTS_TX_ONLY_REQUEST);*/
+
 			call GtsUtility.addGtsEntry(GTSdb, nodes[0], m_fromPC->T1, 1, GTS_TX_ONLY_REQUEST);
 			call GtsUtility.addGtsEntry(GTSdb, nodes[1], m_fromPC->T2, 1, GTS_RX_ONLY_REQUEST);
 			call GtsUtility.addGtsEntry(GTSdb, nodes[2], m_fromPC->T3, 1, GTS_TX_ONLY_REQUEST);
@@ -517,15 +515,15 @@ implementation {
 			call GtsUtility.addGtsEntry(GTSdb, nodes[4], m_fromPC->T5, 1, GTS_TX_ONLY_REQUEST);
 			call GtsUtility.addGtsEntry(GTSdb, nodes[5], m_fromPC->T6, 1, GTS_TX_ONLY_REQUEST);
 			call GtsUtility.addGtsEntry(GTSdb, nodes[6], m_fromPC->T7, 1, GTS_TX_ONLY_REQUEST);
-	
+
 			GTSdb->numGtsSlots = 7; //delete all the frames
-	
-	
+
+
 			call MLME_SET.macBeaconOrder(m_fromPC->BI);
 			call MLME_SET.macSuperframeOrder(SUPERFRAME_ORDER);
-		
+
 		}
-	//printf("ch\n");
+		//printf("ch\n");
 
 		return msg;
 
@@ -541,49 +539,48 @@ implementation {
 	 *  CFP EVENTS/NOTIFIES FUNCTIONS
 	 ************************************************************************************/
 	event void IsEndSuperframe.notify( bool val ) {
-		
-		
-			//send packet with the time to the computer
-			m_toPC->time = call BeaconSuperframe.sfStartTime();
-			
-			m_toPC->y11_initial = initial_value_sensors[0][0];
-			m_toPC->y12_initial = initial_value_sensors[0][1];
-			m_toPC->y21_initial = initial_value_sensors[1][0];
-			m_toPC->y22_initial = initial_value_sensors[1][1];
-			m_toPC->i1_initial = initial_value_integrator[0];
-			m_toPC->i2_initial = initial_value_integrator[1];
-			m_toPC->u1_initial = initial_value_actuation[0];
-			m_toPC->u2_initial = initial_value_actuation[1];
-			
-			if ( (m_toPC->time * 0.000015259) > 80 ) {
-		
-				atomic {
-					if (!uartFull)
+
+		//send packet with the time to the computer
+		m_toPC->time = call BeaconSuperframe.sfStartTime();
+
+		m_toPC->y11_initial = initial_value_sensors[0][0];
+		m_toPC->y12_initial = initial_value_sensors[0][1];
+		m_toPC->y21_initial = initial_value_sensors[1][0];
+		m_toPC->y22_initial = initial_value_sensors[1][1];
+		m_toPC->i1_initial = initial_value_integrator[0];
+		m_toPC->i2_initial = initial_value_integrator[1];
+		m_toPC->u1_initial = initial_value_actuation[0];
+		m_toPC->u2_initial = initial_value_actuation[1];
+
+		if ( (m_toPC->time * 0.000015259) > 80 ) {
+
+			atomic {
+				if (!uartFull)
+				{
+					memcpy(uartQueue[uartIn], &m_frameToPC, sizeof(message_t));
+					uartIn = (uartIn + 1) % UART_QUEUE_LEN;
+
+					if (!uartBusy)
 					{
-						memcpy(uartQueue[uartIn], &m_frameToPC, sizeof(message_t));
-						uartIn = (uartIn + 1) % UART_QUEUE_LEN;
-		
-						if (!uartBusy)
-						{
-							post uartSendTask();
-							uartBusy = TRUE;
-						}
-					}
-					else {
-						call Leds.led0Toggle();
+						post uartSendTask();
+						uartBusy = TRUE;
 					}
 				}
-			
+				else {
+					call Leds.led0Toggle();
+				}
 			}
-		
+
+		}
+
 		//if (beaconCounts % 1) {
 		//code below for debug purposes
 		/*if (1) {
-			call MLME_SET.macBeaconOrder(SUPERFRAME_ORDER + call Random.rand16() % 3);
-			call MLME_SET.macSuperframeOrder(SUPERFRAME_ORDER);
-		}*/
-			//printf("end sf\n");
-		
+		 call MLME_SET.macBeaconOrder(SUPERFRAME_ORDER + call Random.rand16() % 3);
+		 call MLME_SET.macSuperframeOrder(SUPERFRAME_ORDER);
+		 }*/
+		//printf("end sf\n");
+
 		return;
 	}
 	/************************************************************************************
@@ -601,7 +598,6 @@ implementation {
 	event void IEEE154TxBeaconPayload.beaconTransmitted()
 	{
 		ieee154_macBSN_t beaconSequenceNumber = call MLME_GET.macBSN();
-		
 
 		//call TimerTimeout.startOneShot(482); // Send packet through the serial port when CFP is ended,
 		// so that all packets from motes are received.
@@ -616,11 +612,9 @@ implementation {
 		}
 		bo=call MLME_GET.macBeaconOrder();
 		if(bo != m_fromPC->BI);
-	//printf("fudeo\n");
+		//printf("fudeo\n");
 
 	}
 #endif
 
-
-	
 }

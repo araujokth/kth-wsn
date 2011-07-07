@@ -305,10 +305,19 @@ h=gca;
 set(h, 'FontSize', 30);
 h=gcf;
 set(h, 'Position', [0 0 1400 800]);
-tank1 = dataST([12 21 22 28 30 32],find(dataST(12,2:last_indexST)<10000)+1);
-tank1 = [tank1; dataST(assignedSlotM1,find(dataST(12,2:last_indexST)<10000))];
-tank2 = dataST([13 23 24 29 31 32],find(dataST(13,2:last_indexST)<10000)+1);
-tank2 = [tank2; dataST(assignedSlotM2,find(dataST(13,2:last_indexST)<10000))];
+
+tank1 = dataST([TAU_K1 levelUTank1 levelLTank1 ...
+    integrator1 actuation1 ttStart], ...
+    find(dataST(TAU_K1,2:last_indexST)<10000)+1);
+
+tank1 = [tank1; dataST(assignedSlotM1, ...
+    find(dataST(TAU_K1,2:last_indexST)<10000))];
+
+tank2 = dataST([TAU_K2 levelUTank2 levelLTank2 ...
+    integrator2 actuation2 ttStart],...
+    find(dataST(TAU_K2,2:last_indexST)<10000)+1);
+
+tank2 = [tank2; dataST(assignedSlotM2,find(dataST(TAU_K2,2:last_indexST)<10000))];
 
 symbol_time=0.000015259 % time in seconds
 deltaCAP=0.2637 % time in seconds
@@ -321,7 +330,8 @@ for i=1:size(tank1,2)-1
         i
         tank1(7,i)=9;
     end
-    tank1(8,i) = (tank1(6,i+1)+deltaCAP+(tank1(7,i+1)-9)*1920*symbol_time)-(tank1(6,i)+deltaCAP+(tank1(7,i)-9)*1920*symbol_time);
+    tank1(8,i) = (tank1(6,i+1)+deltaCAP+(tank1(7,i+1)-9)*1920*symbol_time)
+    - (tank1(6,i)+deltaCAP+(tank1(7,i)-9)*1920*symbol_time);
 end
 for i=1:size(tank2,2)-1
     if tank2(7,i)==0
