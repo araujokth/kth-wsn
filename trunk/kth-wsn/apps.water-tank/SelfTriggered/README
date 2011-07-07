@@ -1,26 +1,25 @@
-- Under MATLABSimulink you will find all the models, sources and some .mat and .png files with results from our runs.
-When running the experiment, the data is recorded to out.mat. 
+@author Aitor Hernandez <aitorhh@kth.se>
+@author Joao Faria <jfff@kth.se>
+@title README file for the "SelfTriggered controller" scenario
 
-- Mex the C S-Functions using:
+Description
+--------------------------------------------------
+In this folder we find the code available to run the experiment with the
+Self-Triggered Controller. 
 
-mex sfun_fetch.c sfsource.o
-mex sfun_send.c sfsource.o
-
-- Remember to set up serial forwarder on port 9002 before running the simulation.
-
-- The directory se.kth.tinyos2x.mac.tkn154.gtsmod is a complete TinyOS 2.x tree with the TKN154 implementation of IEEE 802.15.4 as modified by Aitor Hernandez (aitorhh@kth.se) to make support for GTS.
-
-- The apps are located in se.kth.tinyos2x.mac.tkn154.gtsmod/apps/tests/tkn154/WaterTanks/. To compile and program the motes,  go to each app directory and run:
-
-make telsob install,NODE_ID bsl,DEV_PORT
-
-where DEV_PORT is the serial port to which the mote is connected and NODE_ID is the desired node id for that mote. Note that the applications assume the following node ids:
-
-0 -> coordinator node (TestBaseStation)
-1 -> sensor node, tank 1 (ADCAppSampleEveryTime)
-2 -> actuator node, tank 1 (DACApp)
-3 -> sensor node, tank 2 (ADCAppSampleEveryTime)
-4 -> actuator node, tank 2 (DACApp)
-5 -> soft sensor node (TempApp)
-6 -> soft sensor node (HumApp)
-7 -> soft sensor node (LightApp)
+Folders
+--------------------------------------------------
+apps/
+	The code to compile the motes is placed in this folder. We have the code
+	for the BaseStation, the actuator and sensor for the water tanks, a packet sniffer
+	which analyse the communication performance of the network and links quality, and
+	some dummy sensors.
+	
+matlab/
+	This folder contains all the matlab code that we need. To start using the code, 
+	execute the startup.m first.
+	
+oldSourceCode/
+	The initial version of the "Self-triggered Controller" scenario was implemented to 
+	work with only two water tanks by using Simulink. In our new implementation we
+	could use N water tanks (with some restricctions) and it is done in Matlab.
