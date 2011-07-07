@@ -1,0 +1,13 @@
+@author Aitor Hernandez <aitorhh@kth.se>
+@title README file 
+@version  $Revision: 1.0 Date: 2011/07/01 $ 
+
+Description
+--------------------------------------------------
+This application shall be the sensor mote. The node sends the packets
+to the coordinator when he detect the there is a GTS slots available.
+
+The sensor node has to have an ID = 2 * WT_NUMBER - 1, otherwise he
+will not receive the packets of his process.
+
+In the PCB board the sensor node corresponds to the upper one.
