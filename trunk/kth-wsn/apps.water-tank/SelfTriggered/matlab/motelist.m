@@ -1,0 +1,12 @@
+motes.nMotes=2;
+motes.moteList=cell(2,1);
+motes.moteList{1}.reference='M49W90FU';
+motes.moteList{1}.port=1;
+motes.moteList{1}.id=0;
+motes.moteList{1}.description='Moteiv tmote sky';
+motes.moteList{2}.reference='MFTFIYP0';
+motes.moteList{2}.port=2;
+motes.moteList{2}.id=1;
+motes.moteList{2}.description='FTDI MTM-CM5000MSP';
+motes.baseStation='MFTFIYP0';
+motes.sniffer='M49W90FU';
