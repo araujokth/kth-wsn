@@ -74,16 +74,12 @@ enum {
 	// serial comm	
 	BAUD_RATE_UBR = 0x006D, // maximum for 12 floats 115200
 	BAUD_RATE_UMCTL = 0x44, // maximum for 12 floats 115200
-  RADIO_CHANNEL = 0x1A,
-  PAN_ID = 0x1234,
-  BEACON_ORDER = 15,
-  SUPERFRAME_ORDER = 15,
-  CLIENT_ADDRESS = 0x10,
-  SENSOR_ADDRESS = 0x11,
-  COORDINATOR_ADDRESS = 0x0, 
-  ED_ADDRESS = 0x10,
-  TX_POWER = -20, // in dBm
-  DEFAULT_RATE = 500  
+	RADIO_CHANNEL = 0x1A,
+	PAN_ID = 0x1234,
+	BEACON_ORDER = 15,
+	SUPERFRAME_ORDER = 15,  
+	COORDINATOR_ADDRESS = 0x01,  
+	TX_POWER = 0 // in dBm  
 };
 typedef nx_struct servo_serial_msg7 {
   nx_uint8_t startByte;
@@ -109,5 +105,6 @@ typedef nx_struct SensorValues {
 	nx_uint16_t IRVal2;
 	nx_uint16_t IRVal3;
 	nx_uint16_t IRVal4;
+	nx_uint8_t src;
 } SensorValues;
 #endif
