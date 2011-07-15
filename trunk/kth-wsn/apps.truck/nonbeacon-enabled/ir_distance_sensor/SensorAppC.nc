@@ -42,8 +42,7 @@
 configuration SensorAppC {
 }
 implementation {	
-	components new TimerMilliC() as Timer;
-	components SerialActiveMessageC as Serial;
+	components new TimerMilliC() as Timer;	
 	components MainC, SensorC, LedsC;
 	SensorC.Boot -> MainC;
 	SensorC.Leds -> LedsC;
@@ -52,21 +51,15 @@ implementation {
 	 * 802.15.4
 	 *****************************************/
 
-	components Ieee802154BeaconEnabledC as MAC;
-	SensorC.MLME_SCAN -> MAC;
-	SensorC.MLME_SYNC -> MAC;
-	SensorC.MLME_BEACON_NOTIFY -> MAC;
-	SensorC.MLME_SYNC_LOSS -> MAC;
-	SensorC.BeaconFrame -> MAC;
-
-	SensorC.MLME_RESET -> MAC;
-	SensorC.MLME_SET -> MAC;
-	SensorC.MLME_GET -> MAC;
-
+	components Ieee802154NonBeaconEnabledC as MAC;	
 	SensorC.MLME_START -> MAC;
 	SensorC.MCPS_DATA -> MAC;
 	SensorC.Frame -> MAC;
+	SensorC.BeaconFrame -> MAC;
 	SensorC.Packet -> MAC;
+	SensorC.MLME_RESET -> MAC;
+  	SensorC.MLME_SET -> MAC;
+  	SensorC.MLME_GET -> MAC;
 
 	/****************************************
 	 * MultiChannel
@@ -75,14 +68,6 @@ implementation {
 	components new Msp430Adc12ClientAutoRVGC() as AutoAdc;
 	SensorC.Resource -> AutoAdc;
 	AutoAdc.AdcConfigure -> SensorC;
-	SensorC.MultiChannel -> AutoAdc.Msp430Adc12MultiChannel;
-
-	/****************************************
-	 * Serial
-	 *****************************************/
-	SensorC.SerialControl -> Serial;
-	SensorC.UartSend -> Serial.AMSend[AM_SENSORVALUES];
-	SensorC.UartReceive -> Serial.Receive[AM_SENSORVALUES];
-	SensorC.UartAMPacket -> Serial;	
+	SensorC.MultiChannel -> AutoAdc.Msp430Adc12MultiChannel;	
 }
 

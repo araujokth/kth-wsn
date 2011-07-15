@@ -38,7 +38,7 @@
 configuration SFC
 {
 } implementation {
-  components MainC, LedsC, Ieee802154NonBeaconEnabledC as MAC,
+  components MainC, LedsC, Ieee802154NonBeaconEnabledC as MAC,  			
 			  SerialActiveMessageC as Serial;
 
   components SFP as App;
@@ -46,7 +46,7 @@ configuration SFC
   App.MCPS_DATA -> MAC;
   App.Frame -> MAC;
   App.BeaconFrame -> MAC;
-  App.Packet -> MAC;
+  App.Packet -> MAC;  
   
   App.SerialControl -> Serial;
   

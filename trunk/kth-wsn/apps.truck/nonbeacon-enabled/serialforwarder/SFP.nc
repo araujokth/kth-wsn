@@ -51,14 +51,15 @@ module SFP
     interface IEEE154Frame as Frame;
     interface IEEE154BeaconFrame as BeaconFrame;
     interface Leds;
-    interface Packet;
+    interface Packet;    
     interface SplitControl as SerialControl;    
 	interface AMSend as UartSend[am_id_t id];
     interface Receive as UartReceive[am_id_t id];
     interface Packet as UartPacket;
     interface AMPacket as UartAMPacket;
   }
-} implementation {	
+} implementation {
+  uint8_t leng;
   am_addr_t dest;
   message_t m_frame;
   uint8_t m_payloadLen;
@@ -81,7 +82,8 @@ module SFP
 		call Leds.led1Toggle();
 	}
 //----------------------------------------	
-  event void Boot.booted() {    
+  event void Boot.booted() {
+  	leng = sizeof(SensorValues); 
   	m_payloadLen = sizeof(SFMsg);
     payloadRegion = call Packet.getPayload(&m_frame, m_payloadLen);
     call MLME_RESET.request(TRUE);
@@ -136,8 +138,8 @@ module SFP
   void startApp()
   {
     ieee154_address_t deviceShortAddress;
-    deviceShortAddress.shortAddress = CLIENT_ADDRESS; // destination
-    //deviceShortAddress.shortAddress = 0xFFFF; // destination
+    //deviceShortAddress.shortAddress = CLIENT_ADDRESS; // destination
+    deviceShortAddress.shortAddress = 0xFFFF; // destination
 
     call Frame.setAddressingFields(
         &m_frame,                
@@ -187,7 +189,14 @@ module SFP
 
   event message_t* MCPS_DATA.indication (message_t* frame)
    {
-     return frame;
+   	//SensorValues* mesg;
+   	//mesg = (SensorValues *) call Packet.getPayload(frame, leng);
+   	//am_addr_t s = call Frame.getSrcAddrMode(frame);
+   	//call UartAMPacket.setSource(frame, s);
+   	if (call UartSend.send[AM_SENSORVALUES](AM_BROADCAST_ADDR, frame, leng) == SUCCESS) {
+			//call Leds.led1Toggle();
+	}
+    return frame;
    }
 	event void MLME_START.confirm(ieee154_status_t status) {}
 	event void UartSend.sendDone[am_id_t id](message_t* msg, error_t error) {}

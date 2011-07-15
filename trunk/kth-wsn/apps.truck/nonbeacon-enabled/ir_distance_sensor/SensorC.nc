@@ -59,11 +59,7 @@ module SensorC {
 		interface MLME_SET;
 		interface MLME_GET;
 		interface IEEE154Frame as Frame;
-		interface Timer<TMilli> as TimerSamples;
-		interface SplitControl as SerialControl;
-		interface AMSend as UartSend;
-		interface Receive as UartReceive;
-		interface AMPacket as UartAMPacket;
+		interface Timer<TMilli> as TimerSamples;	
 
 		interface MLME_SCAN;
 		interface MLME_SYNC;
@@ -79,23 +75,14 @@ implementation {
 	SensorValues sensorValues;		
 	uint8_t m_payloadLenSerial = sizeof(SensorValues);
 	uint8_t m_payloadLen;
-  	uint8_t *payloadRegion; 	
+  	uint8_t *payloadRegion;
+  		ieee154_address_t deviceShortAddress;
 
 	const msp430adc12_channel_config_t config = {
 		INPUT_CHANNEL_A0, REFERENCE_VREFplus_AVss, REFVOLT_LEVEL_1_5,
 		SHT_SOURCE_SMCLK, SHT_CLOCK_DIV_1, SAMPLE_HOLD_64_CYCLES,
 		SAMPCON_SOURCE_SMCLK, SAMPCON_CLOCK_DIV_1
-	};
-
-	uint16_t buffer[4];	
-
-	// S E R I A L
-	message_t uartQueueBufs[UART_QUEUE_LEN];
-	message_t * ONE_NOK uartQueue[UART_QUEUE_LEN];
-	uint8_t uartIn, uartOut;
-	bool uartBusy, uartFull;
-	task void uartSendTask();	
-	
+	};	
 
 	ieee154_PANDescriptor_t m_PANDescriptor;
 	bool m_ledCount;
@@ -104,25 +91,24 @@ implementation {
 	task void getData();
 	task void sendPacket();
 	void startApp();
-	
+	uint16_t buffer[4];
 
 	/**----------------------------------------------*/
-	event void Boot.booted() {		
-		uint8_t i = 0;
-		for (i = 0; i < UART_QUEUE_LEN; i++){
-		uartQueue[i] = &uartQueueBufs[i];}
+	event void Boot.booted() {
 		m_payloadLen = sizeof(sensorValues);
     	payloadRegion = call Packet.getPayload(&m_frame, m_payloadLen);
-		uartIn = uartOut = 0;
-		uartBusy = FALSE;
-		uartFull = FALSE;			
-		call SerialControl.start();
+    	sensorValues.src = TOS_NODE_ID;		
 		call MLME_RESET.request(TRUE);
 	}
-event void TimerSamples.fired() {	
-	
-	post getData();
-}
+	/**----------------------------------------------*/	
+	event void TimerSamples.fired() {	
+		post getData();
+	}
+	/**----------------------------------------------*/
+	async command const msp430adc12_channel_config_t* AdcConfigure.getConfiguration()
+	{
+		return &config;
+	}
 	/*********************************************************************
 	 * 802.15.4 functions
 	 *********************************************************************/
@@ -158,15 +144,24 @@ event void TimerSamples.fired() {
 		uint8_t scanDuration = BEACON_ORDER;
 #endif
 		call MLME_SET.phyTransmitPower(TX_POWER);
-		call MLME_SET.macShortAddress(ED_ADDRESS);
-		call MLME_SET.macRxOnWhenIdle(TRUE);
+		call MLME_SET.macShortAddress(TOS_NODE_ID);
+		call MLME_SET.macRxOnWhenIdle(FALSE);
 		call MLME_SET.macMaxCSMABackoffs(M);
 		call MLME_SET.macMinBE(M_0);
 		call MLME_SET.macMaxBE(M_B);
 		call MLME_SET.macMaxFrameRetries(N);
 		call Resource.request();
 		call TimerSamples.startPeriodic(200);
-
+		
+    	deviceShortAddress.shortAddress = COORDINATOR_ADDRESS;
+    	call Frame.setAddressingFields(
+        &m_frame,                
+        ADDR_MODE_SHORT_ADDRESS,        // SrcAddrMode,
+        ADDR_MODE_SHORT_ADDRESS,        // DstAddrMode,
+        PAN_ID,						    // DstPANId,
+        &deviceShortAddress, 			// DstAddr,
+        NULL                            // security
+        ); 
 #ifndef TKN154_BEACON_DISABLED
 		// scan only the channel where we expect the coordinator
 		channelMask = ((uint32_t) 1) << RADIO_CHANNEL;
@@ -255,7 +250,7 @@ event void TimerSamples.fired() {
 			uint32_t timestamp
 	)
 	{
-		
+		call Leds.led0Toggle();
 	}
 	/*************************** Receive functions *************************/
 	event message_t* MCPS_DATA.indication (message_t* frame) {return frame;}
@@ -263,31 +258,20 @@ event void TimerSamples.fired() {
 	/*********************************************************************
 	 * END OF 802.15.4 functions
 	 *********************************************************************/	
-	task void sendPacket() {
-		atomic {
-			memcpy(payloadRegion, &sensorValues, m_payloadLen);
-		}
-		
-		if (!uartFull) {
-			
-			uartQueue[uartIn] = &m_frame;
-			uartIn = (uartIn + 1) % UART_QUEUE_LEN;
-
-			if (!uartBusy)
-			{
-				post uartSendTask();
-				uartBusy = TRUE;
-			}
-		}		
+	task void sendPacket() {	
+    	memcpy(payloadRegion, &sensorValues, m_payloadLen);	
+   if (call MCPS_DATA.request  (
+          &m_frame,                         // frame,
+          m_payloadLen,                     // payloadLength,
+          0,                                // msduHandle,
+          TX_OPTIONS_ACK 					// TxOptions,
+          ) != IEEE154_SUCCESS)
+      call Leds.led2Toggle(); //fail!
 	}
 
 	/*********************************************************************
 	 * Multi Channel functions
-	 *********************************************************************/
-	async command const msp430adc12_channel_config_t* AdcConfigure.getConfiguration()
-	{
-		return &config;
-	}
+	 *********************************************************************/	
 
 	task void getData()
 	{
@@ -308,7 +292,7 @@ event void TimerSamples.fired() {
 
 	async event void MultiChannel.dataReady(uint16_t *buf, uint16_t numSamples)
 	{
-			call Leds.led1Toggle();
+		call Leds.led1Toggle();
 		sensorValues.IRVal1 = buf[0];
 		sensorValues.IRVal2 = buf[1];
 		sensorValues.IRVal3 = buf[2];
@@ -317,60 +301,5 @@ event void TimerSamples.fired() {
 	}
 	/*********************************************************************
 	 * END Multi Channel functions
-	 *********************************************************************/
-
-	/*********************************************************************
-	 * Serial functions
-	 *********************************************************************/
-	event void SerialControl.startDone(error_t error) {
-
-		if (error == SUCCESS) {
-			uartFull = FALSE;			
-		}
-	}
-
-	event void SerialControl.stopDone(error_t error) {}
-
-	event void UartSend.sendDone(message_t* msg, error_t error) {
-		//if (error != SUCCESS) {			
-		//} else
-		//atomic
-		if (msg == uartQueue[uartOut])
-		{
-			if (++uartOut >= UART_QUEUE_LEN)
-			uartOut = 0;
-			if (uartFull)
-			uartFull = FALSE;
-		}
-		post uartSendTask();
-	}
-
-	event message_t *UartReceive.receive(message_t *msg,
-			void *payload,
-			uint8_t len) {
-		return msg;
-	}
-
-	task void uartSendTask() {		
-		message_t* msg;
-	
-		atomic {
-			if (uartIn == uartOut && !uartFull) {
-				uartBusy = FALSE;
-				return;
-			}
-		}
-
-		msg = uartQueue[uartOut];
-
-		if (call UartSend.send(AM_BROADCAST_ADDR, uartQueue[uartOut], m_payloadLenSerial ) == SUCCESS) {
-			call Leds.led1Toggle();
-		} else {
-			call Leds.led0Toggle();
-			post uartSendTask();
-		}
-	}
-	/*********************************************************************
-	 * End Serial functions
-	 *********************************************************************/
+	 *********************************************************************/	
 }
