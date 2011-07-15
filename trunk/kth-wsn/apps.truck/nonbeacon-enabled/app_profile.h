@@ -69,7 +69,7 @@ enum {
 	STEERING_NUMBER = 0,
 	UART_QUEUE_LEN = 12,
 	AM_SENSORVALUES = 10, 
-	
+	IR_SAMPLING_PERIOD = 100,
 
 	// serial comm	
 	BAUD_RATE_UBR = 0x006D, // maximum for 12 floats 115200

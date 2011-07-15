@@ -151,7 +151,7 @@ implementation {
 		call MLME_SET.macMaxBE(M_B);
 		call MLME_SET.macMaxFrameRetries(N);
 		call Resource.request();
-		call TimerSamples.startPeriodic(200);
+		call TimerSamples.startPeriodic(IR_SAMPLING_PERIOD);
 		
     	deviceShortAddress.shortAddress = COORDINATOR_ADDRESS;
     	call Frame.setAddressingFields(
