@@ -73,11 +73,11 @@ enum {
 	// serial comm	
 	BAUD_RATE_UBR = 0x006D, // maximum for 12 floats 115200
 	BAUD_RATE_UMCTL = 0x44, // maximum for 12 floats 115200
-	RADIO_CHANNEL = 0x17,
+	RADIO_CHANNEL = 0x1A,
 	PAN_ID = 0x1234,
 	BEACON_ORDER = 15,
 	SUPERFRAME_ORDER = 15,
-	COORDINATOR_ADDRESS = 0x00,
+	COORDINATOR_ADDRESS = 0x01,
 	TX_POWER = 0
 // in dBm
 };

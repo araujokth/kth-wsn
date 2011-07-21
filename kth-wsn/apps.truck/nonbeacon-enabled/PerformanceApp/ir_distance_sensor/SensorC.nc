@@ -37,9 +37,6 @@
  */
 
 #include "app_profile.h"
-
-#include "printf.h"
-
 #include "TKN154_PHY.h"
 #include <Timer.h>
 
