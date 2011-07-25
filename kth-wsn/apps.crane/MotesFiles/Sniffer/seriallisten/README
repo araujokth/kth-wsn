@@ -1,0 +1,18 @@
+@author Aitor Hernandez <aitorhh@kth.se>
+@title README file 
+@version  $Revision: 1.0 Date:  2011/06/15$ 
+
+Description
+-----------------------------------
+
+To compile this application I recommend to replace the seriallisten.c (after previous
+backup) file from this folder to the support/sdk/c/sf that you have in yout TinyOS tree.
+
+This scripts has been used and compile for Linux. And I recommend use it in Linux.
+
+Usage
+-----------------------------------
+To running an store the data, we simply create a output redirection in the terminal 
+as follows:
+
+./seriallisten /dev/ttyUSB0 115200 > /home/kthwsn/workspace/apps.crane/matlab/sf_output/data_
