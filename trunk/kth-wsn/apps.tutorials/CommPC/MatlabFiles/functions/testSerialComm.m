@@ -60,7 +60,7 @@ end
 
 
 function usage
-fprintf('USAGE:\n\twaterTanksSelfTriggered(''init'')\n\twaterTanksSelfTriggered(''startP'')\n\twaterTanksSelfTriggered(''stopP'')\n\twaterTanksSelfTriggered(''disconnectP'')\n\tetc.\n')
+fprintf('USAGE:\n\ttestSerialComm(''init'')\n\ttestSerialComm(''startP'')\n\ttestSerialComm(''stopP'')\n\ttestSerialComm(''disconnectP'')\n\tetc.\n')
 
 % To COMPILE all the motes. We use bash or php scripts to program all the
 % motes at the same time. (It is not mandatory)
