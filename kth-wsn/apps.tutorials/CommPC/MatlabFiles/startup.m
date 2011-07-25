@@ -13,7 +13,7 @@
 
 %[flag, value] = system('ncc -print-tosdir');
 
-projectFolder = '/home/kthwsn/workspace/apps.tutorials/PCcomm/MatlabFiles/';
+projectFolder = '/home/kthwsn/workspace/apps.tutorials/CommPC/MatlabFiles/';
 
 addpath([projectFolder 'gui']);
 addpath([projectFolder 'functions']);

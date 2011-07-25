@@ -55,7 +55,7 @@ II. TestSerialComm
 	
 III. TestHIL
 
-	For this example, we have tried to simulate a Hardware In Loop simulator, where we have a
+	For this example, we have tried to simulate a Hardware In Loop, where we have a
 	sensor and actuator scenario. But we can see them as receiver (actuator, read from PC), and
 	the sender (sensor, write to the PC).
 	
@@ -100,7 +100,11 @@ IV. TestHIL: This applications involves two motes. We consider one mote connecte
 			 to the PC just for sending packet to the PC (port 9002), an ANOTHER mote
 			 connected to receive packets from the PC (port 9003).
 			 
-			 
+V. TestController: This application simulates a scenario where the controller is implemented
+					in the computer, which has more computational capabilites than the
+					mote itself. This scneario a unique mote connected to the PC, which could
+					be considered as a bridge between the process and the PC.
+		 
 See the README of each application for more information.
 
 * MatlabFiles -----------------------------------
