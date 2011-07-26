@@ -34,7 +34,7 @@
  * @version  $Revision: 1.0 Date: 2011/04/19 $ 
  */
 #include <Timer.h>
-#include "TestSerialComm.h"
+#include "app_profile.h"
 
 configuration TestSerialCommAppC {
 }
