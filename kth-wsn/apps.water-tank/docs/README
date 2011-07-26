@@ -1,0 +1,17 @@
+@author Aitor Hernandez <aitorhh@kth.se>
+@author Joao Faria <jfff@kth.se>
+@title README for schematic
+
+DESCRIPTION
+--------------------------------------------------
+Voltage regulator U1 (LP3869 3.3V) provides +3.3V to power the motes
+from +Vs (+12V) given by UPM.
+
+The voltage signed from the sensor (through UPM) is divided by 3 with
+a buffer on the input and another on the output to avoid impedance
+missmatch.
+
+The voltage signed from the D/A mote is fed to the UPM through a
+buffer to avoid impedance missmatch.
+
+The UPM will amplify this signal with gain 5 before applying it to the pump.
