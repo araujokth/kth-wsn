@@ -36,6 +36,9 @@
  * @modified 2011/02/01 
  */
 
+#define NEW_PRINTF_SEMANTICS
+
+
 #include "Msp430Adc12.h"
 #include <Timer.h>
 
@@ -83,11 +86,15 @@ implementation {
 	SensorC.SerialControl -> Serial;
 	SensorC.UartSend -> Serial.AMSend[AM_SENSORVALUES];
 	SensorC.UartReceive -> Serial.Receive[AM_SENSORVALUES];
-	SensorC.UartAMPacket -> Serial;
-	
-	
+	SensorC.UartAMPacket -> Serial;	
 
 	components new Alarm62500hz32VirtualizedC() as  SlotAlarm;
 	SensorC.SlotAlarm -> SlotAlarm;
+	
+	/****************************************
+	 * Printf
+	 *****************************************/
+	components PrintfC;
+	components SerialStartC;
 }
 

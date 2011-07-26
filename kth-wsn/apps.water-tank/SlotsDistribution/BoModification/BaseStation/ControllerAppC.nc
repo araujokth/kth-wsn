@@ -35,6 +35,7 @@
  * @version  $Revision: 1.0 Date: 2010/11/03 $ 
  * @modified 2011/02/01 
  */
+#define NEW_PRINTF_SEMANTICS
 
 configuration ControllerAppC {
 }
@@ -50,8 +51,8 @@ implementation {
 	 *****************************************/
 	components Ieee802154BeaconEnabledC as MAC;
 	ControllerC.IEEE154TxBeaconPayload -> MAC;
-	components new Alarm62500hz32VirtualizedC() as  SlotAlarm, 
-			   new Alarm62500hz32VirtualizedC() as  EndCapPeriod;
+	components new Alarm62500hz32VirtualizedC() as SlotAlarm,
+	new Alarm62500hz32VirtualizedC() as EndCapPeriod;
 
 	ControllerC.SlotAlarm -> SlotAlarm;
 	ControllerC.EndCapPeriod -> EndCapPeriod;
@@ -73,5 +74,10 @@ implementation {
 	ControllerC.UartReceive -> Serial.Receive[AM_ACTUATIONMATRIXMSG];
 	ControllerC.UartAMPacket -> Serial;
 
+	/****************************************
+	 * Printf
+	 *****************************************/
+	components PrintfC;
+	components SerialStartC;
 }
 

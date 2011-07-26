@@ -35,6 +35,8 @@
  * @version  $Revision: 1.0 Date: 2010/11/03 $ 
  * @modified 2011/02/01 
  */
+#define NEW_PRINTF_SEMANTICS
+
 
 configuration ActuatorAppC {
 }
@@ -73,5 +75,11 @@ implementation {
 	components new Msp430GpioC() as ADC1;
 	ADC1 -> HplMsp430GeneralIOC.Port61;
 	ActuatorC.ADC1 -> ADC1;
+	
+	/****************************************
+	 * Printf
+	 *****************************************/
+	components PrintfC;
+	components SerialStartC;
 }
 
