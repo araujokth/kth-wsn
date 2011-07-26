@@ -29,39 +29,39 @@
  *
  */
 /**
- * @author Aziz Khakulov <khakulov@kth.se> 
+ * @author Aziz Khakulov <khakulov@kth.se> * 
  * 
- * @version  $Revision: 1.0 Date: 2011/07/21 $ 
- * @modified 2011/06/07 
+ * @version  $Revision: 1.0 Date: 2011/07/25 $ 
+ * @modified 2011/07/25 
  */
-/*
-* This is an example code showing how the serial communication
-* between the mote and the PC works. It has a timer which fires every second,
-* increments a counter by 1 and sends the counter value to the serial port.
-*/
+ #include "app_profile.h"
 
-#include <Timer.h>
-#include "app_profile.h"
-
-
-configuration TestSerialCommAppC {
+configuration TestAdcC{
 }
 implementation {
+	components TestAdcP as App;
 	components MainC;
-	components LedsC;
-	components TestSerialCommC as App;
+	components LedsC;	
+	components new TimerMilliC();
 	components SerialActiveMessageC as Serial;
-	components new TimerMilliC(); 
 	
-	App.MilliTimer -> TimerMilliC; 
+	// Timers wiring
+	App.MilliTimer -> TimerMilliC;	
+	
 	// Default app wiring
 	App.Boot -> MainC;
 	App.Leds -> LedsC;
 	
-	// Serial interface wiring
-	App.SerialControl -> Serial;
+	
+	// MultiChannel ADC
+	components new Msp430Adc12ClientAutoRVGC() as AutoAdc;
+	App.Resource -> AutoAdc;
+	AutoAdc.AdcConfigure -> App;
+	App.MultiChannel -> AutoAdc.Msp430Adc12MultiChannel;
+	
+	//Serial
+	App.SerialControl -> Serial;  
 	App.UartSend -> Serial;
-	App.Packet -> Serial;
 	App.AMPacket -> Serial;
-
+	App.Packet -> Serial;
 }

@@ -29,68 +29,106 @@
  *
  */
 /**
- * @author Aziz Khakulov <khakulov@kth.se> 
+ * @author Aziz Khakulov <khakulov@kth.se> * 
  * 
- * @version  $Revision: 1.0 Date: 2011/07/21 $ 
- * @modified 2011/06/07 
+ * @version  $Revision: 1.0 Date: 2011/07/257 $ 
+ * @modified 2011/07/25 
  */
-/*
-* This is an example code showing how the serial communication
-* between the mote and the PC works. It has a timer which fires every second,
-* increments a counter by 1 and sends the counter value to the serial port.
-*/
-
 #include <Timer.h>
 #include "app_profile.h"
 #include "Serial.h"
 
-module TestSerialCommC {
+module TestAdcP {
 	uses {
 		interface Boot;
-		interface Leds;
+		interface Leds;		
+		interface Timer<TMilli> as MilliTimer;
+		interface Resource;
+		interface Msp430Adc12MultiChannel as MultiChannel;
 		interface SplitControl as SerialControl;
-		interface AMSend as UartSend[am_id_t id];		
-		interface Packet;
+		interface AMSend as UartSend[am_id_t id];
 		interface AMPacket;
-		interface Timer<TMilli> as MilliTimer; 
+		interface Packet;
 	}
-
+	provides interface AdcConfigure<const msp430adc12_channel_config_t*>;
 }
 implementation {
 	message_t pkt;
-	bool busy = FALSE;	
-	uint16_t counter = 0; 
+	bool busy = FALSE;
+	uint16_t buffer[4];
+	const msp430adc12_channel_config_t config = {
+		INPUT_CHANNEL_A0, REFERENCE_VREFplus_AVss, REFVOLT_LEVEL_1_5,
+		SHT_SOURCE_SMCLK, SHT_CLOCK_DIV_1, SAMPLE_HOLD_64_CYCLES,
+		SAMPCON_SOURCE_SMCLK, SAMPCON_CLOCK_DIV_1
+	};
 	
-	event void Boot.booted() {		
+	event void Boot.booted() {
 		call SerialControl.start();
-		call AMPacket.setSource(&pkt, TOS_NODE_ID);
+		call AMPacket.setSource(&pkt, TOS_NODE_ID);		
+		call Resource.request();	
 	}
+	
+	async command const msp430adc12_channel_config_t* AdcConfigure.getConfiguration()
+	{
+		return &config;
+	}
+	
+	event void MilliTimer.fired() {
+		call Leds.led2Toggle();
+		call MultiChannel.getData();		
+	}
+	
+	event void Resource.granted()
+	{
+		atomic {
+			adc12memctl_t memctl[] = { {INPUT_CHANNEL_A1, REFERENCE_VREFplus_AVss},{INPUT_CHANNEL_A2, REFERENCE_VREFplus_AVss}, {INPUT_CHANNEL_A3, REFERENCE_VREFplus_AVss}};
 
+			if (call MultiChannel.configure(&config, memctl, 3, buffer, 4, 0) != SUCCESS) {
+				call Leds.led0Toggle();
+			}
+		}
+		call MilliTimer.startPeriodic(1000);
+	}
+	
+	task void sendData(){
+		if (busy==FALSE){
+			atomic{	
+				TestAdcMsg* btrpkt = (TestAdcMsg*)(call Packet.getPayload(&pkt, sizeof(TestAdcMsg)));
+				btrpkt->Val1 = buffer[0];
+				btrpkt->Val2 = buffer[1];
+				btrpkt->Val3 = buffer[2];
+				btrpkt->Val4 = buffer[3];
+				call Leds.led1Toggle();
+				if (call UartSend.send[AM_TESTSERIALCOMMMSG](AM_BROADCAST_ADDR, &pkt, sizeof(TestAdcMsg)) == SUCCESS) {	
+					call Leds.led0Toggle();
+					busy = TRUE;
+				}
+			}
+		}
+	}
+	
+	async event void MultiChannel.dataReady(uint16_t *buf, uint16_t numSamples)
+	{	
+		buffer[0] = buf [0];
+		buffer[1] = buf [1];
+		buffer[2] = buf [2];
+		buffer[3] = buf [3];
+		post sendData();
+	}
+	
 	event void SerialControl.startDone(error_t err) {
 		if (err == SUCCESS) {
-		call MilliTimer.startPeriodic(1000);
+			
 		}
 		else {
 			call SerialControl.start();
 		}
 	}
-	event void MilliTimer.fired() {
-		if(busy == FALSE){			
-			TestSerialCommMsg* btrpkt = (TestSerialCommMsg*)(call Packet.getPayload(&pkt, sizeof(TestSerialCommMsg)));			
-			counter++;
-			btrpkt->counter = counter;
-			if (call UartSend.send[AM_TESTSERIALCOMMMSG](AM_BROADCAST_ADDR, &pkt, sizeof(TestSerialCommMsg)) == SUCCESS) {	
-				call Leds.led0Toggle();
-			}
-			busy = TRUE;
-		}
-	}
-	
 	event void SerialControl.stopDone(error_t err) {}
 
 	event void UartSend.sendDone[am_id_t id](message_t* msg, error_t err) {
 		if (&pkt == msg) {
-			busy = FALSE;
+			atomic busy = FALSE;
 		}
 	}
 }

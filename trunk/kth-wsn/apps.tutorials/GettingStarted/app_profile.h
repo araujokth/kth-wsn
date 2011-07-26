@@ -22,4 +22,11 @@ typedef nx_struct TestSerialCommMsg {
 	nx_uint16_t counter;
 } TestSerialCommMsg;
 
+typedef nx_struct TestAdcMsg {
+	nx_uint16_t Val1;
+	nx_uint16_t Val2;
+	nx_uint16_t Val3;
+	nx_uint16_t Val4;
+} TestAdcMsg;
+
 #endif

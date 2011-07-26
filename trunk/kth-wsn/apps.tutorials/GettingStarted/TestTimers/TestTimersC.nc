@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011, KTH Royal Institute of Technology
+ * Copyright (c) 2010, KTH Royal Institute of Technology
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -29,39 +29,26 @@
  *
  */
 /**
- * @author Aziz Khakulov <khakulov@kth.se> 
+ * @author Aziz Khakulov <khakulov@kth.se> * 
  * 
- * @version  $Revision: 1.0 Date: 2011/07/21 $ 
+ * @version  $Revision: 1.0 Date: 2011/06/07 $ 
  * @modified 2011/06/07 
  */
-/*
-* This is an example code showing how the serial communication
-* between the mote and the PC works. It has a timer which fires every second,
-* increments a counter by 1 and sends the counter value to the serial port.
-*/
+ #include "app_profile.h"
 
-#include <Timer.h>
-#include "app_profile.h"
-
-
-configuration TestSerialCommAppC {
+configuration TestTimersC{
 }
 implementation {
+	components TestTimersP as App;
 	components MainC;
-	components LedsC;
-	components TestSerialCommC as App;
-	components SerialActiveMessageC as Serial;
-	components new TimerMilliC(); 
+	components LedsC;	
+	components new TimerMilliC();
 	
-	App.MilliTimer -> TimerMilliC; 
+	// Timers wiring
+	App.MilliTimer -> TimerMilliC;
+	App.MilliTimer2 -> TimerMilliC;	
+	
 	// Default app wiring
 	App.Boot -> MainC;
 	App.Leds -> LedsC;
-	
-	// Serial interface wiring
-	App.SerialControl -> Serial;
-	App.UartSend -> Serial;
-	App.Packet -> Serial;
-	App.AMPacket -> Serial;
-
 }
