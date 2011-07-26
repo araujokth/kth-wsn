@@ -76,9 +76,9 @@ ifneq ($(PLATFORM),)
   endif
   
   
-      include $(TKN154_GTS_MOD_PLATFORM_INCLUDE)
+include $(TKN154_GTS_MOD_PLATFORM_INCLUDE)
   
-    include $(TKN154_GTS_PLATFORM_INCLUDE)
-    include $(TKN154_PLATFORM_INCLUDE)
+include $(TKN154_GTS_PLATFORM_INCLUDE)
+include $(TKN154_PLATFORM_INCLUDE)
   
 endif
