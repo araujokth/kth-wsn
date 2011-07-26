@@ -139,7 +139,6 @@ implementation {
 		m_slotDuration = (uint32_t) m_capDuration / (NUMBER_WT*2+1);
 		m_sfStartRef = 0;
 		
-		
 		//reset all the motes
 		for (i=0; i < NUMBER_WT; i++) actuationMatrix.u[i] = 0;
 
