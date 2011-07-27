@@ -107,8 +107,7 @@ implementation {
 		}
 	}
 	
-	async event void MultiChannel.dataReady(uint16_t *buf, uint16_t numSamples)
-	{	
+	async event void MultiChannel.dataReady(uint16_t *buf, uint16_t numSamples){	
 		buffer[0] = buf [0];
 		buffer[1] = buf [1];
 		buffer[2] = buf [2];
