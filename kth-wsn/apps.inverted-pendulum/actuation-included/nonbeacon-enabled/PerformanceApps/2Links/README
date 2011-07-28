@@ -1,5 +1,22 @@
 @author Aitor Hernandez <aitorhh@kth.se>
 @author Joao Faria <jfff@kth.se>
 @title README file 
-@version  $Revision: 1.0 Date:  $ 
-s
+@version  $Revision: 1.0 Date: 2011/03/14 $ 
+
+DESCRIPTION
+------------------------------------------------
+
+In this folder we find the applications that we need to
+run the wireless inverted pendulum with the nonbeacon-enabled
+mode of the IEEE 802.15.4, and the two links scenarios. In that
+case we have sensos, controller an actuator motes.
+
+Sensors -> Controller -> Actuator
+
+So the controller only computes the control voltage and sends it
+to the actuator.
+
+For more information, read the document "Wireless Inverted
+Pendulum" by Aitor Hernandez, Joao Faria and Jose Araujo.
+It is placed in the folder docs/ of this project. Extra
+information is in the README files of the applications.
