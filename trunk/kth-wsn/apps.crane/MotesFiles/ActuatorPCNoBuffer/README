@@ -1,0 +1,23 @@
+@author Aitor Hernandez <aitorhh@kth.se>
+@title README file 
+@version  $Revision: 1.0 Date: 2011/07/03 $ 
+
+DESCRIPTION
+------------------------------------------------
+
+This is the mote connected to the PC. It receives data from the 
+EDReceiver mote. To run the experiment we need to create a sf on
+this mote, and run LabView.
+
+To program the mote use the following command:
+
+make tmote install,X bsl,/dev/ttyUSBY
+
+where X does not matter, because we fix the ID manually in the
+header file. Y is the port number where the mote is connected.
+
+All the steps are explained on the document "Wireless Crane
+Event-Triggered Control" by Aitor Hernandez, Faisal Altaf and
+Jose Araujo
+
+
