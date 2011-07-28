@@ -1,0 +1,15 @@
+@author Aitor Hernandez <aitorhh@kth.se>
+@title README file 
+@version  $Revision: 1.0 Date: 2011/07/03 $ 
+
+DESCRIPTION
+------------------------------------------------
+This is the mote connected to the EGC board. The EGC will
+transmit data to the mote using UART communication. 
+
+EGC and mote need to be connected with two cables, GND and 
+Data.
+
+An scenario description is explained on the document "Wireless Crane
+Event-Triggered Control" by Aitor Hernandez, Faisal Altaf and
+Jose Araujo

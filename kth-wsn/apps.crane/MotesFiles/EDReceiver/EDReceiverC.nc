@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010, KTH Royal Institute of Technology
+ * Copyright (c) 2011, KTH Royal Institute of Technology
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without

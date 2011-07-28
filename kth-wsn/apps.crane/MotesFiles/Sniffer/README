@@ -1,0 +1,15 @@
+@author Aitor Hernandez <aitorhh@kth.se>
+@title README file 
+@version  $Revision: 1.0 Date: 2011/07/03 $ 
+
+DESCRIPTION
+------------------------------------------------
+The sniffer mote is used to analise the communication performance.
+to use it, we need to program the mote and run the seriallisten program, 
+which is in the folder: seriallisten/
+
+
+All the steps are explained on the document "Wireless Crane
+Event-Triggered Control" by Aitor Hernandez, Faisal Altaf and
+Jose Araujo or in the "Communication between PC and motes" by Aitor
+Hernandez.
