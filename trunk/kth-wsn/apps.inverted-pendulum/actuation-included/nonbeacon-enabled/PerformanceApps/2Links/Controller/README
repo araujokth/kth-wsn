@@ -6,17 +6,16 @@
 DESCRIPTION
 ------------------------------------------------
 
-This mote computes the control output and forward the 
-voltage to the UPM. The computational cost of the
-calculation is high and it only could be done with
-the Zolertia mote which has more capabilites: 
+This mote computes the control output. The computational
+cost of the calculation is high and it only could be done
+with the Zolertia mote which has more capabilites:
 microprocessor and ram memory.
 
 The control implemented has a Kalman filter to estimate
 the samples due to the existent delay and an LQR controller.
 More information regarding the modeling and controller is
-written in the thesis: "Wireless Process Control using IEEE 802.15.4"
- by Aitor Hernandez.
+written in the thesis: "Wireless Process Control using IEEE 802.15.4
+" by Aitor Hernandez.
 
 For more information, read the document "Wireless Inverted
 Pendulum" by Aitor Hernandez, Joao Faria and Jose Araujo.

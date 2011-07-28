@@ -1,4 +1,19 @@
 @author Aitor Hernandez <aitorhh@kth.se>
 @author Joao Faria <jfff@kth.se>
 @title README file 
-@version  $Revision: 1.0 Date:  $ 
+@version  $Revision: 1.0 Date: 2011/03/14 $ 
+
+DESCRIPTION
+------------------------------------------------
+
+The sensor for the motes includes the driver implementation
+to read from the LS7336R SPI counter. The SPI counter is used
+to increase the precision of reading the encoder. 
+
+When the encoder is read, the mote transmits a packet to the 
+controller.
+
+For more information, read the document "Wireless Inverted
+Pendulum" by Aitor Hernandez, Joao Faria and Jose Araujo.
+It is placed in the folder docs/ of this project. Extra
+information is in the README files of the applications.
