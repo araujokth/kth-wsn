@@ -78,7 +78,7 @@ module ControllerC {
 implementation {
 
 	message_t m_frame;
-	EncMsg2SensorsAct *m_sensor;
+	EncMsg2SensorsAct *m_actuator;
 
 	bool m_wasScanSuccessful;
 
@@ -139,9 +139,9 @@ implementation {
 		printfflush();
 #endif
 
-		m_sensor = (EncMsg2SensorsAct*)(call Packet.getPayload(&m_frame,m_payloadLenSend));
-		m_sensor->u = 0;
-		m_sensor->wtId = 0;
+		m_actuator = (EncMsg2SensorsAct*)(call Packet.getPayload(&m_frame,m_payloadLenSend));
+		m_actuator->u = 0;
+		m_actuator->wtId = 0;
 
 		call Leds.led0On();
 		call Leds.led1On();
@@ -191,9 +191,7 @@ implementation {
 	/*********************************************************************
 	 * TDMA functions
 	 *********************************************************************/
-	async event void SlotAlarm.fired() {
-
-	}
+	async event void SlotAlarm.fired() {}
 
 	/*********************************************************************
 	 * 802.15.4 functions
@@ -256,6 +254,7 @@ implementation {
 		ieee154_address_t deviceAddr;
 		SensingMsg *m_device;
 		nx_float K[3], outf;
+		
 		K[0] = -0.6002; //
 		K[1] = -0.0021; //
 		K[2] = -0.1; //
@@ -270,23 +269,23 @@ implementation {
 			call Frame.getSrcAddr(frame, &deviceAddr);
 			atomic {
 				m_device = (SensingMsg*)(call Packet.getPayload(frame,m_payloadLen));
-				m_sensor->wtId = (deviceAddr.shortAddress + 1 )/2;
+				m_actuator->wtId = (deviceAddr.shortAddress + 1 )/2;
 
-				x_int[m_sensor->wtId-1] += ((nx_float) DEFAULT_RATE/1000 *
+				x_int[m_actuator->wtId-1] += ((nx_float) DEFAULT_RATE/1000 *
 						((((nx_float) (m_device->data).tankLevel[0])/WT_CALIBRATION) - *x_ref));
 
 				// 1v in the pump is approx. 273 units in the DAC
 				outf = (273.0 * (((((nx_float) (m_device->data).tankLevel[0] )/WT_CALIBRATION)) * K[0] +
 								((((nx_float) (m_device->data).tankLevel[1] )/WT_CALIBRATION)) * K[1] +
-								x_int[m_sensor->wtId-1] * K[2]));
+								x_int[m_actuator->wtId-1] * K[2]));
 
 				if(outf < 0)outf = 0;
 				else if(outf > 4095) outf = 4095;
 
-				m_sensor->u = (uint16_t) outf;
+				m_actuator->u = (uint16_t) outf;
 
 #if defined(WT_CALIBRATION_PROCESS) || defined(WT_DEBUG)
-				printf("[WT %u - %u] ", m_sensor->wtId, (m_device->performValues).pckTotal);
+				printf("[WT %u - %u] ", m_actuator->wtId, (m_device->performValues).pckTotal);
 				printf("x_ref= ");
 				printfFloat(*x_ref);
 				printf(" cm ; x1=");
@@ -294,13 +293,13 @@ implementation {
 				printf(" cm ; x2=");
 				printfFloat((nx_float) (m_device->data).tankLevel[1]/WT_CALIBRATION);
 				printf(" cm ; xi=");
-				printfFloat(x_int[m_sensor->wtId-1]);
+				printfFloat(x_int[m_actuator->wtId-1]);
 				printf(" cm ; out=");
 				printfFloat((0.0006151*outf + 0.0009710)*6);
 				printf("V \n");
 				printfflush();
 #endif
-				setAddressingFields(m_sensor->wtId*2);
+				setAddressingFields(m_actuator->wtId*2);
 
 				if (call MCPS_DATA.request (
 								&m_frame, // frame,
