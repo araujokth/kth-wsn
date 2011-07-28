@@ -151,6 +151,8 @@ implementation {
 	void printfFloat(float k5);
 	void startResetIntegrals();
 
+	task void sendActuatorPacket();
+	
 	event void Boot.booted() {
 		uint8_t i = 0;
 
