@@ -1,4 +1,4 @@
-rcalc/*
+/*
  * Copyright (c) 2010, KTH Royal Institute of Technology
  * All rights reserved.
  *
