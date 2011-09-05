@@ -72,6 +72,10 @@ implementation {
 	DataPin -> HplMsp430GeneralIOC.Port63;
 	Enc.DataPin -> DataPin;
 	
+	components HplMsp430InterruptC;
+	components new Msp430InterruptC() as PinAIntFalling;
+	PinAIntFalling.HplInterrupt -> HplMsp430InterruptC.Port26;
+	Enc.PinAFallingInt -> PinAIntFalling;
 
 	/****************************************
 	 * 802.15.4

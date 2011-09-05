@@ -49,6 +49,7 @@ uses {
 	interface GeneralIO as ClEnablePin;
 	interface GeneralIO as ClockPin;
 	interface GeneralIO as DataPin;
+	interface GpioInterrupt as PinAFallingInt;
 	interface BusyWait<TMicro,uint16_t>;
 	
 	// For 802.15.4
@@ -79,6 +80,7 @@ implementation {
 	uint8_t bitVal;
 	uint8_t i;
 	uint8_t *payloadRegion;
+	uint16_t ticks;
 	task void sendPacket();
 	ieee154_address_t deviceShortAddress;
 #ifndef TKN154_BEACON_DISABLED
@@ -88,6 +90,7 @@ implementation {
 #endif
 
 	event void Boot.booted() {
+		atomic ticks=0;	
 		sensorValues.ticks = 0;	
 		call PloadPin.makeOutput();
 		call ClEnablePin.makeOutput();
@@ -98,31 +101,35 @@ implementation {
 		call MLME_RESET.request(TRUE);			
 	}
 	
+	async event void PinAFallingInt.fired(){
+		atomic ticks++;	
+	}
+	
 	event void TimerSamples.fired() {		
 		call ClEnablePin.set();
 		call PloadPin.clr();
 		call BusyWait.wait(PULSE_WIDTH);
 		call PloadPin.set();
 		call ClEnablePin.clr();
+		bytesVal = 0;
+		call BusyWait.wait(PULSE_WIDTH);
 		for(i = 0; i < DATA_WIDTH; i++)
     	{
-        bitVal = call DataPin.get();
-
-        /* Set the corresponding bit in bytesVal.
-        */
-        bytesVal |= (bitVal << ((DATA_WIDTH-1) - i));
-
         /* Pulse the Clock (rising edge shifts the next bit).
-        */
+        */        
+        bitVal = call DataPin.get();
+        /* Set the corresponding bit in bytesVal.*/
+        bytesVal |= (bitVal << ((DATA_WIDTH-1) - i)); 
         call ClockPin.set();
         call BusyWait.wait(PULSE_WIDTH);
-        call ClockPin.clr();        
+        call ClockPin.clr();               
     	}
     	post sendPacket();
 	}
 	
 	task void sendPacket() {
-		sensorValues.lineVal = bytesVal;	
+		sensorValues.lineVal = bytesVal;
+		atomic sensorValues.ticks = ticks;	
     	memcpy(payloadRegion, &sensorValues, leng);	
   		if (call MCPS_DATA.request  (
           &m_frame,                         // frame,
@@ -136,19 +143,6 @@ implementation {
 	/*********************************************************************
 	 * I E E E   8 0 2 . 1 5 . 4
 	 *********************************************************************/
-	void setAddressingFields(uint16_t address) {
-		ieee154_address_t deviceShortAddress;
-		deviceShortAddress.shortAddress = address;
-
-		call Frame.setAddressingFields(
-				&m_frame,
-				ADDR_MODE_SHORT_ADDRESS, // SrcAddrMode,
-				ADDR_MODE_SHORT_ADDRESS, // DstAddrMode,
-				PAN_ID, // DstPANId,
-				&deviceShortAddress, // DstAddr,
-				NULL // security
-		);
-	}
 	void startApp()
 	{
 #ifndef TKN154_BEACON_DISABLED
