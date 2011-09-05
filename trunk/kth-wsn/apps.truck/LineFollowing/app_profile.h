@@ -39,7 +39,7 @@
 #define __APP_PROFILE_H
 
 enum {
-	PULSE_WIDTH = 5,
+	PULSE_WIDTH = 1,
 	DATA_WIDTH = 8,
 	SLIDING_WINDOW = 65000,
 	M_0 = 3, // macMinBE
