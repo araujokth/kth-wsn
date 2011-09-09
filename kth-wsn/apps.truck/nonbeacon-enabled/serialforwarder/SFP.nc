@@ -84,7 +84,8 @@ module SFP
 //----------------------------------------	
   event void Boot.booted() {
   	leng = sizeof(SensorValues);  	
-    payloadRegion = call Packet.getPayload(&m_frame, leng);
+  	m_payloadLen = sizeof(SFMsg);
+     payloadRegion = call Packet.getPayload(&m_frame, m_payloadLen);
     call MLME_RESET.request(TRUE);
     call SerialControl.start();
   }
@@ -97,7 +98,14 @@ module SFP
 	event message_t *UartReceive.receive[am_id_t id](message_t *msg,
 						   void *payload,
 						   uint8_t len) {
-    return msg;   
+    message_t *ret = msg;
+	 dest = call UartAMPacket.destination(msg);		
+	    if (len == sizeof(SFMsg)) {		
+	      memcpy(payloadRegion, payload, m_payloadLen);		
+	      post packetSendTask();		
+	      succBlink();		
+	    }			
+	    return ret;  
   	}
 	
 	event void MLME_RESET.confirm(ieee154_status_t status)
@@ -173,7 +181,7 @@ module SFP
                         )
   {
     if (status == IEEE154_SUCCESS) {
-     call Leds.led0Toggle();
+     call Leds.led0Toggle(); 
     }
  
   }
