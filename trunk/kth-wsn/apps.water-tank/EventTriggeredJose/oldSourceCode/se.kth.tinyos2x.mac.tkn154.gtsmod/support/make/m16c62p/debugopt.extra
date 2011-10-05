@@ -1,4 +1,0 @@
-#-*-Makefile-*- vim:syntax=make
-
-OPTFLAGS += -g
-
