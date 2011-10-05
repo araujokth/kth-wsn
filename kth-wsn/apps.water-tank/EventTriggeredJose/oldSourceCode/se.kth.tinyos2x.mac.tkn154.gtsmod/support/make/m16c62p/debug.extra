@@ -1,4 +1,0 @@
-#-*-Makefile-*- vim:syntax=make
-
-OPTFLAGS = -O1 -g -fnesc-no-inline
-
