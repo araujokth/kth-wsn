@@ -1,0 +1,18 @@
+#!/bin/bash
+# @author Aitor Hernandez
+# @title setSelfTriggeredVariables
+# @modified 2011/06/17
+
+#go the the project folder
+cd $1
+shift
+
+# set the variables for the new start network
+sed -e "s/number_water_tanks/$1/" app_sensors_script.h > tmp.h
+sed -e "s/number_et_water_tanks/$2/" tmp.h > tmp2.h
+sed -e "s/number_sensors/$3/" tmp2.h > tmp.h
+sed -e "s/channel_to_use/$4/" tmp.h > tmp2.h
+sed -e "s/pan_id_to_use/$5/" tmp2.h > app_sensors.h
+rm tmp.h tmp2.h
+
+
