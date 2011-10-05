@@ -1,0 +1,12 @@
+fprintf('Got Base Station \n');
+motes.nMotes=2;
+motes.moteList=cell(2,1);
+motes.moteList{1}.reference='MFT4LNK7';
+motes.moteList{1}.port=1;
+motes.moteList{1}.id=0;
+motes.moteList{1}.description='FTDI MTM-CM5000MSP';
+motes.moteList{2}.reference='M4A0M2DR';
+motes.moteList{2}.port=2;
+motes.moteList{2}.id=1;
+motes.moteList{2}.description='Moteiv tmote sky';
+motes.baseStation='MFT4LNK7';

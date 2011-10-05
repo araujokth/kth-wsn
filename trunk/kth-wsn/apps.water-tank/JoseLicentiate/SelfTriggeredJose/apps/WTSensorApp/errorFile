@@ -1,0 +1,79 @@
+mkdir -p build/telosb
+    compiling SensorAppC to a telosb binary
+ncc -o build/telosb/main.exe  -Os -O -DIEEE154_BEACON_TX_DISABLED -DTSCHDEBUG_ENABLED -DIEEE154_ASSOCIATION_DISABLED -DIEEE154_DISASSOCIATION_DISABLED -DIEEE154_PROMISCUOUS_MODE_DISABLED -DIEEE154_COORD_REALIGNMENT_DISABLED -DIEEE154_COORD_BROADCAST_DISABLED  -mdisable-hwmul -fnesc-separator=__ -Wall -Wshadow -Wnesc-all -target=telosb -fnesc-cfile=build/telosb/app.c -board= -DDEFINED_TOS_AM_GROUP=0x22 -I/home/kthwsn/workspace/apps.water-tank/SelfTriggeredJoseLast/apps/WTSensorApp/.. -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf -I/home/kthwsn/workspace/apps.water-tank/SelfTriggeredJoseLast/apps/WTSensorApp/.. -I/home/kthwsn/workspace/apps.water-tank/SelfTriggeredJoseLast/apps/WTSensorApp/../../.. -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154 -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154/dummies -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154/interfaces/public  -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts-mod/tos/lib/mac/tkn154 -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts-mod/tos/lib/mac/tkn154/dummies -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts-mod/tos/lib/mac/tkn154/interfaces/public  -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts/tos/lib/mac/tkn154 -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts/tos/lib/mac/tkn154/dummies -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts/tos/lib/mac/tkn154/interfaces/MCPS -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts/tos/lib/mac/tkn154/interfaces/MLME -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts/tos/lib/mac/tkn154/interfaces/private -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts/tos/lib/mac/tkn154/interfaces/public -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts/tos/lib/debug -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts/tos/lib/interfaces -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/mac/tkn154 -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/mac/tkn154/dummies -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/mac/tkn154/interfaces/MCPS -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/mac/tkn154/interfaces/MLME -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/mac/tkn154/interfaces/private -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/mac/tkn154/interfaces/public -DIDENT_APPNAME=\"SensorAppC\" -DIDENT_USERNAME=\"kthwsn\" -DIDENT_HOSTNAME=\"kthwsn-laptop\" -DIDENT_USERHASH=0x168d80e1L -DIDENT_TIMESTAMP=0x4e843f1cL -DIDENT_UIDHASH=0xd80caf1cL -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts-mod/tos/platforms/telosb/mac/tkn154  -I/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts/tos/platforms/telosb/mac/tkn154  -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/platforms/telosb/mac/tkn154 -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/platforms/telosb/mac/tkn154/timer -I/home/kthwsn/workspace/tinyos-2.x-svn/tos/chips/cc2420_tkn154  SensorAppC.nc -lm 
+In file included from SensorAppC.nc:40:
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/printf.h:44:2: warning: #warning "                                  *************************** PRINTF SEMANTICS HAVE CHANGED! ********************************************* Make sure you now include the following two components in your top level application file: PrintfC and SerialStartC. To supress this warning in the future, #define the variable NEW_PRINTF_SEMANTICS. Take a look at the updated tutorial application under apps/tutorials/printf for an example. ************************************************************************************"
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/chips/msp430/adc12/Msp430Adc12ImplP.nc:68:4: warning: #warning Accessing TimerA for ADC12
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc:53:2: warning: #warning "Warning: MAC timing is not standard compliant!"
+/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts-mod/tos/platforms/telosb/mac/tkn154/Ieee802154BeaconEnabledC.nc:207:2: warning: #warning *** PinDebug Enabled ***
+/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts-mod/tos/lib/mac/tkn154/InactivePeriodP.nc(TKN154BeaconEnabledP.CoordInactivePeriod):69: warning: `IsEndSuperframe.notify' called asynchronously from `RadioToken.transferredFrom'
+/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts-mod/tos/lib/mac/tkn154/InactivePeriodP.nc(TKN154BeaconEnabledP.DeviceInactivePeriod):69: warning: `IsEndSuperframe.notify' called asynchronously from `RadioToken.transferredFrom'
+/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154/CfpTransmitP.nc:478: warning: `MLME_GET.macBeaconOrder' called asynchronously from `RadioToken.transferredFrom'
+/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154/CfpTransmitP.nc:478: warning: `MLME_GET.macSuperframeOrder' called asynchronously from `RadioToken.transferredFrom'
+/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154/CfpTransmitP.nc:447: warning: `GetGtsDeviceDb.get' called asynchronously from `hasStartSlot'
+/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154/CfpTransmitP.nc:502: warning: `GetGtsDeviceDb.get' called asynchronously from `RadioToken.transferredFrom'
+/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154/CfpTransmitP.nc:451: warning: `MLME_GET.macShortAddress' called asynchronously from `hasStartSlot'
+/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts/tos/lib/mac/tkn154/DispatchSlottedCsmaP.nc(TKN154BeaconEnabledP.DeviceCap):221: warning: `MLME_GET.macBeaconOrder' called asynchronously from `RadioToken.transferredFrom'
+/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts/tos/lib/mac/tkn154/DispatchSlottedCsmaP.nc(TKN154BeaconEnabledP.DeviceCap):221: warning: `MLME_GET.macSuperframeOrder' called asynchronously from `RadioToken.transferredFrom'
+/home/kthwsn/workspace/tinyos-2.x-contrib-kth/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154/BeaconSynchronizeP.nc:257: warning: `PinDebug.ADC1toggle' called asynchronously from `trackNextBeacon'
+SensorC.nc:332: warning: `MLME_GET.macBeaconOrder' called asynchronously from `MultiChannel.dataReady'
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:126: warning: `AMSend.send' called asynchronously from `sendNext'
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:122: warning: `Queue.size' called asynchronously from `sendNext'
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:122: warning: `Queue.size' called asynchronously from `sendNext'
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:121: warning: `Packet.getPayload' called asynchronously from `sendNext'
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:121: warning: `Packet.getPayload' called asynchronously from `sendNext'
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:125: warning: `Queue.dequeue' called asynchronously from `sendNext'
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:134: warning: `Queue.empty' called asynchronously from `printfflush'
+SensorC.nc:98: warning: non-atomic accesses to shared variable `wtSensorValuesMsg':
+SensorC.nc:204: warning:   non-atomic write
+SensorC.nc:119: warning: non-atomic accesses to shared variable `x_int':
+SensorC.nc:208: warning:   non-atomic write
+SensorC.nc:99: warning: non-atomic accesses to shared variable `control2MoteMsg':
+SensorC.nc:209: warning:   non-atomic write
+SensorC.nc:146: warning: non-atomic accesses to shared variable `iae':
+SensorC.nc:227: warning:   non-atomic write
+SensorC.nc:241: warning:   non-atomic write
+SensorC.nc:444: warning:   non-atomic write
+SensorC.nc:450: warning:   non-atomic write
+SensorC.nc:112: warning: non-atomic accesses to shared variable `beacon_interval_table':
+SensorC.nc:214: warning:   non-atomic write
+SensorC.nc:122: warning: non-atomic accesses to shared variable `m_state':
+SensorC.nc:222: warning:   non-atomic write
+SensorC.nc:136: warning: non-atomic accesses to shared variable `absoluteTime':
+SensorC.nc:232: warning:   non-atomic write
+SensorC.nc:449: warning:   non-atomic write
+SensorC.nc:454: warning:   non-atomic write
+SensorC.nc:133: warning: non-atomic accesses to shared variable `absoluteTimeCAPSuc':
+SensorC.nc:229: warning:   non-atomic write
+SensorC.nc:530: warning:   non-atomic write
+SensorC.nc:134: warning: non-atomic accesses to shared variable `intersamplingCAPSuc':
+SensorC.nc:230: warning:   non-atomic write
+SensorC.nc:531: warning:   non-atomic write
+SensorC.nc:135: warning: non-atomic accesses to shared variable `absoluteTimeCFPSuc':
+SensorC.nc:231: warning:   non-atomic write
+SensorC.nc:534: warning:   non-atomic write
+SensorC.nc:137: warning: non-atomic accesses to shared variable `intersamplingCFPSuc':
+SensorC.nc:233: warning:   non-atomic write
+SensorC.nc:535: warning:   non-atomic write
+SensorC.nc:141: warning: non-atomic accesses to shared variable `absoluteTimeAllocated':
+SensorC.nc:237: warning:   non-atomic write
+SensorC.nc:459: warning:   non-atomic write
+SensorC.nc:142: warning: non-atomic accesses to shared variable `intersamplingAllocated':
+SensorC.nc:460: warning:   non-atomic write
+SensorC.nc:147: warning: non-atomic accesses to shared variable `numberSamples':
+SensorC.nc:242: warning:   non-atomic write
+SensorC.nc:537: warning:   non-atomic write
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:107: warning: non-atomic accesses to shared variable `state':
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:146: warning:   non-atomic write
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:154: warning:   non-atomic read
+/home/kthwsn/workspace/tinyos-2.x-svn/tos/lib/printf/PrintfP.nc:155: warning:   non-atomic write
+SensorC.nc: In function `SensorC__printfValues':
+SensorC.nc:184: warning: too many arguments for format
+SensorC.nc:185: warning: too many arguments for format
+SensorC.nc: In function `SensorC__MLME_BEACON_NOTIFY__indication':
+SensorC.nc:419: warning: unused variable `beaconOrder'
+    compiled SensorAppC to build/telosb/main.exe
+           45212 bytes in ROM
+            2705 bytes in RAM
+msp430-objcopy --output-target=ihex build/telosb/main.exe build/telosb/main.ihex
+    writing TOS image
