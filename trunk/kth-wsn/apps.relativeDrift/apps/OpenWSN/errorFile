@@ -1,0 +1,171 @@
+mkdir -p build/telosb
+    compiling OpenWSNWiring to a telosb binary
+ncc -o build/telosb/main.exe  -Os -O -DTSCHDEBUG_ENABLED -DPRINTF_BUFFER_SIZE=1000 -mdisable-hwmul -fnesc-separator=__ -Wall -Wshadow -Wnesc-all -target=telosb -fnesc-cfile=build/telosb/app.c -board= -DDEFINED_TOS_AM_GROUP=0x22 -I/home/david/workspace/tsch-project/tos/interfaces -I/home/david/workspace/tsch-project/tos/lib/debug  -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift/tos/lib/printf -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/interfaces -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/07-App/appDATA/Device -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02b-RES/nres -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02b-RES/ures -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02b-RES/neighbors -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/cellusage -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E -DENABLE_SPI0_DMA  -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/01-PHY/cc2420/ -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/01-PHY/cc2420/control/ -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/01-PHY/cc2420/interfaces/ -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/01-PHY/cc2420/packet/ -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/01-PHY/cc2420/receive/ -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/01-PHY/cc2420/spi/ -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/01-PHY/cc2420/cc2420driver/ -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/01-PHY/cc2420/transmit/ -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/cross-layers/idmanager -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/cross-layers/openqueue -I /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/cross-layers/packetfunctions -DIDENT_APPNAME=\"OpenWSNWiring\" -DIDENT_USERNAME=\"david\" -DIDENT_HOSTNAME=\"david-desktop\" -DIDENT_USERHASH=0x419262f1L -DIDENT_TIMESTAMP=0x4ee096f0L -DIDENT_UIDHASH=0xf3d4c2afL  OpenWSNWiring.nc -lm 
+In file included from /home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/07-App/appDATA/Device/appDATADevC.nc:1,
+                 from OpenWSNWiring.nc:15:
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/OpenWSN.h:12: warning: decimal constant is so large that it is unsigned
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift/tos/chips/msp430/usart/Msp430Spi0C.nc:62:2: warning: #warning "Enabling SPI DMA on USART0"
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:191: warning: `PinDebug.ADC0toggle' called asynchronously from `SlotAlarm.fired'
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:207: warning: `IDManager.setDAGRoot' called asynchronously from `SlotAlarm.fired'
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/01-PHY/cc2420/control/CC2420ControlP.nc:225: warning: `PinDebug.ADC1toggle' called asynchronously from `syncConfig'
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/01-PHY/cc2420/control/CC2420ControlP.nc:211: warning: `PinDebug.ADC2toggle' called asynchronously from `CC2420Config.setChannel'
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:856: warning: `CriticalTimeTimer.getNow' called asynchronously from `RadioReceive.receive'
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:534: warning: `CriticalTimeTimer.getNow' called asynchronously from `RadioControl.receivedNothing'
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:535: warning: `CriticalTime.sendCriticalTime' called asynchronously from `RadioControl.receivedNothing'
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift/tos/lib/printf/PrintfP.nc:147: warning: `Queue.empty' called asynchronously from `printfflush'
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift/tos/lib/printf/PrintfP.nc:134: warning: `Packet.getPayload' called asynchronously from `sendNext'
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift/tos/lib/printf/PrintfP.nc:134: warning: `Packet.getPayload' called asynchronously from `sendNext'
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift/tos/lib/printf/PrintfP.nc:135: warning: `Queue.size' called asynchronously from `sendNext'
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift/tos/lib/printf/PrintfP.nc:135: warning: `Queue.size' called asynchronously from `sendNext'
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift/tos/lib/printf/PrintfP.nc:138: warning: `Queue.dequeue' called asynchronously from `sendNext'
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift/tos/lib/printf/PrintfP.nc:139: warning: `AMSend.send' called asynchronously from `sendNext'
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:66: warning: non-atomic accesses to shared variable `numADV':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:780: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:786: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:801: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:801: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:818: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:68: warning: non-atomic accesses to shared variable `numSlotsInSynchStatus':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:119: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:67: warning: non-atomic accesses to shared variable `numPrepareReceiveFailed':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:118: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:82: warning: non-atomic accesses to shared variable `drift':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:121: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:75: warning: non-atomic accesses to shared variable `timestampX1':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:783: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:789: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:789: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:796: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:804: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:804: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:829: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:73: warning: non-atomic accesses to shared variable `timestampY1':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:783: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:789: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:789: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:797: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:804: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:804: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:830: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:76: warning: non-atomic accesses to shared variable `timestampX2':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:787: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:789: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:789: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:790: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:790: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:791: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:796: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:802: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:804: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:804: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:805: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:805: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:819: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:829: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:74: warning: non-atomic accesses to shared variable `timestampY2':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:788: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:789: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:789: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:790: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:790: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:791: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:797: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:803: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:804: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:804: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:805: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:805: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:819: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:830: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:83: warning: non-atomic accesses to shared variable `a_drift':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:789: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:790: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:792: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:792: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:806: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:806: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:831: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:85: warning: non-atomic accesses to shared variable `b_offset':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:790: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:793: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:793: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:807: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:807: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:832: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:92: warning: non-atomic accesses to shared variable `counterNumADVtoResynchronize':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:801: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:818: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:84: warning: non-atomic accesses to shared variable `a_currentDrift':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:804: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:805: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:806: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:806: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:820: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:820: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:831: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:86: warning: non-atomic accesses to shared variable `b_currentOffset':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:805: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:807: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:807: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:821: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:821: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:832: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:89: warning: non-atomic accesses to shared variable `tmp1':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:806: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:808: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:809: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:822: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:822: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:831: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:90: warning: non-atomic accesses to shared variable `tmp2':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:807: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:808: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:809: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:823: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:823: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:832: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:87: warning: non-atomic accesses to shared variable `Tr1_resynchTime':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:808: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:810: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:812: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:812: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:824: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:824: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:88: warning: non-atomic accesses to shared variable `Tr2_resynchTime':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:809: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:810: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:814: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:814: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:825: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:825: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:81: warning: non-atomic accesses to shared variable `Tr_resynchTime':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:812: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:814: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:816: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:816: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:817: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:826: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:91: warning: non-atomic accesses to shared variable `numADVtoResynchronize':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:817: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:818: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:818: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift/tos/lib/printf/PrintfP.nc:107: warning: non-atomic accesses to shared variable `state':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift/tos/lib/printf/PrintfP.nc:114: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift/tos/lib/printf/PrintfP.nc:159: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift/tos/lib/printf/PrintfP.nc:177: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift/tos/lib/printf/PrintfP.nc:178: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc: In function `IEEE802154EP__SlotAlarm__fired':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:190: warning: unused variable `tmpDrift'
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc: In function `IEEE802154EP__RadioReceive__receive':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:664: warning: unused variable `temp_packetACK'
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:665: warning: unused variable `temp_error'
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc: In function `IEEE802154EP__resynchronize':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:906: warning: unused variable `timeParent'
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift/tos/chips/msp430/dma/HplMsp430DmaInterrupt.nc: In function `IDManagerP__taskHandleRoot__runTask':
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/cross-layers/idmanager/IDManagerP.nc:70: warning: `number_bytes_from_input_buffer' might be used uninitialized in this function
+/home/david/workspace/tinyos-2.x_tsch_relativeDrift//apps/OpenWSN/cross-layers/idmanager/IDManagerP.nc:71: warning: `input_buffer' might be used uninitialized in this function
+    compiled OpenWSNWiring to build/telosb/main.exe
+           33018 bytes in ROM
+            6412 bytes in RAM
+msp430-objcopy --output-target=ihex build/telosb/main.exe build/telosb/main.ihex
+    writing TOS image
