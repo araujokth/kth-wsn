@@ -1,0 +1,7 @@
+#!/bin/bash
+#compile and flash gina
+
+cd /opt/tinyos-2.1.0/apps/OpenWSN/01-PHY/rf231/
+make gina20
+cd build/gina20
+msp430-gdb -x /opt/tinyos-2.1.0/apps/OpenWSN/01-PHY/rf231/gdb
