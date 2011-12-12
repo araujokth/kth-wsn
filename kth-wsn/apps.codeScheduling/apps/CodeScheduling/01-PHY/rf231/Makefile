@@ -1,0 +1,8 @@
+COMPONENT=wiring
+
+CFLAGS += -I $(TOSROOT)/apps/OpenWSN/01-PHY/rf231/
+CFLAGS += -I $(TOSROOT)/apps/OpenWSN/01-PHY/rf231/01-PHY/
+CFLAGS += -I $(TOSROOT)/apps/OpenWSN/01-PHY/rf231/01-PHY/spi
+CFLAGS += -I $(TOSROOT)/apps/OpenWSN/01-PHY/rf231/01-PHY/interrupt
+CFLAGS += -I $(TOSROOT)/apps/OpenWSN/01-PHY/rf231/02-MAC/
+include $(MAKERULES)

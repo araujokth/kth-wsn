@@ -1,0 +1,4 @@
+monitor reset
+erase
+load main.ihex
+cont
