@@ -1,0 +1,35 @@
+mkdir -p build/telosb
+    compiling OpenWSNWiring to a telosb binary
+ncc -o build/telosb/main.exe  -Os -O -DTSCHDEBUG_ENABLED -DPRINTF_BUFFER_SIZE=1000 -mdisable-hwmul -fnesc-separator=__ -Wall -Wshadow -Wnesc-all -target=telosb -fnesc-cfile=build/telosb/app.c -board= -DDEFINED_TOS_AM_GROUP=0x22 -I/home/david/workspace/tsch-project/tos/interfaces -I/home/david/workspace/tsch-project/tos/lib/debug  -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br/tos/lib/printf -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/interfaces -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/07-App/appDATA/Device -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02b-RES/nres -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02b-RES/ures -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02b-RES/neighbors -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/cellusage -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E -DENABLE_SPI0_DMA  -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/01-PHY/cc2420/ -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/01-PHY/cc2420/control/ -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/01-PHY/cc2420/interfaces/ -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/01-PHY/cc2420/packet/ -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/01-PHY/cc2420/receive/ -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/01-PHY/cc2420/spi/ -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/01-PHY/cc2420/cc2420driver/ -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/01-PHY/cc2420/transmit/ -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/cross-layers/idmanager -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/cross-layers/openqueue -I /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/cross-layers/packetfunctions -DIDENT_APPNAME=\"OpenWSNWiring\" -DIDENT_USERNAME=\"david\" -DIDENT_HOSTNAME=\"david-desktop\" -DIDENT_USERHASH=0x419262f1L -DIDENT_TIMESTAMP=0x4df71cd9L -DIDENT_UIDHASH=0x8f756550L  OpenWSNWiring.nc -lm 
+In file included from /home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/07-App/appDATA/Device/appDATADevC.nc:1,
+                 from OpenWSNWiring.nc:15:
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/LATIN.h:12: warning: decimal constant is so large that it is unsigned
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br/tos/chips/msp430/usart/Msp430Spi0C.nc:62:2: warning: #warning "Enabling SPI DMA on USART0"
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:179: warning: `IDManager.setDAGRoot' called asynchronously from `SlotAlarm.fired'
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:215: warning: `PinDebug.ADC0toggle' called asynchronously from `SlotAlarm.fired'
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:218: warning: `PinDebug.ADC1toggle' called asynchronously from `SlotAlarm.fired'
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:767: warning: `CriticalTimeTimer.getNow' called asynchronously from `RadioReceive.receive'
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:499: warning: `CriticalTimeTimer.getNow' called asynchronously from `RadioControl.receivedNothing'
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:500: warning: `CriticalTime.sendCriticalTime' called asynchronously from `RadioControl.receivedNothing'
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:744: warning: `CriticalTime.syncDone' called asynchronously from `RadioReceive.receive'
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:64: warning: non-atomic accesses to shared variable `numADV':
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:743: warning:   non-atomic read
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:66: warning: non-atomic accesses to shared variable `numSlotsInSynchStatus':
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:91: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:65: warning: non-atomic accesses to shared variable `numPrepareReceiveFailed':
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:90: warning:   non-atomic write
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc: In function `IEEE802154EP__RadioReceive__receive':
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:627: warning: unused variable `temp_packetACK'
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:628: warning: unused variable `temp_error'
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc: In function `IEEE802154EP__resynchronize':
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/02a-MAC/IEEE802154E/IEEE802154EP.nc:805: warning: unused variable `timeParent'
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br/tos/chips/msp430/dma/HplMsp430DmaInterrupt.nc: In function `IDManagerP__taskHandleRoot__runTask':
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/cross-layers/idmanager/IDManagerP.nc:70: warning: `number_bytes_from_input_buffer' might be used uninitialized in this function
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/cross-layers/idmanager/IDManagerP.nc:71: warning: `input_buffer' might be used uninitialized in this function
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br/tos/chips/msp430/dma/HplMsp430DmaInterrupt.nc: In function `IDManagerP__taskHandleBridge__runTask':
+/home/david/workspace/tinyos-2.x_tsch_criticalTime_br//apps/OpenWSN/cross-layers/idmanager/IDManagerP.nc:35: warning: `number_bytes_from_input_buffer' might be used uninitialized in this function
+    compiled OpenWSNWiring to build/telosb/main.exe
+           28942 bytes in ROM
+            6332 bytes in RAM
+msp430-objcopy --output-target=ihex build/telosb/main.exe build/telosb/main.ihex
+    writing TOS image
