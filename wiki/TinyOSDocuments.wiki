@@ -12,4 +12,3 @@ Main titles of the page contents are
   
   * *Installing TinyOS on Ubuntu/Windows*
   * *How to make programs; Examples and tutorials*
-  * Automatic links to other wiki pages
