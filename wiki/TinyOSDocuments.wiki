@@ -1,5 +1,5 @@
 #summary Documentation of TinyOS.
-#labels TinyOS,Ubuntu,Windows
+#labels Phase-Deploy,TinyOS,Windows,Ubuntu
 
 = Introduction =
 
