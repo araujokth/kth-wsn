@@ -1,0 +1,15 @@
+
+
+The main Labview file is "WT_main.vi"
+
+Matlab Files
+
+controller.m      Controll algorithum is implemented here.
+mathscript.m      m file that will be import on mathscript node
+TimmingGraph.m    To show timming graph. Will be used in TimmingGraph subvi
+
+
+Mote files 
+/Water Tank Project/Version  1/tinyos-contrib/kth/tkn154-gts-mod/apps/beacon-enabled/WT_6_modified  
+
+Note in this version beaconpayload is not supported
