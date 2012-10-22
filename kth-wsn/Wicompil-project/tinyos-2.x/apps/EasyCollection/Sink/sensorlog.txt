@@ -1,0 +1,297 @@
+mkdir -p build/telosb
+    compiling EasyCollectionAppC to a telosb binary
+ncc -o build/telosb/main.exe  -Os -DIEEE154_SCAN_DISABLED -DIEEE154_BEACON_SYNC_DISABLED -DPRINTF_BUFFER_SIZE=512 -fnesc-separator=__ -Wall -Wshadow -Wnesc-all -target=telosb -fnesc-cfile=build/telosb/app.c -board= -DDEFINED_TOS_AM_GROUP=0x22 -I/home/anser/local/src/tinyos-2.x/apps/EasyCollection/Sink/.. -I/home/anser/local/src/tinyos-2.x/tos/lib/printf -I/home/anser/local/src/tinyos-2.x/tos/lib/net -I/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma -I/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma -DIDENT_APPNAME=\"EasyCollectionA\" -DIDENT_USERNAME=\"anser\" -DIDENT_HOSTNAME=\"ubuntu\" -DIDENT_USERHASH=0xc485bf87L -DIDENT_TIMESTAMP=0x50801e5fL -DIDENT_UIDHASH=0x995fd838L -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154-sink -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154-sink/dummies -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154-sink/interfaces/public  -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod/tos/lib/mac/tkn154-sink -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod/tos/lib/mac/tkn154-sink/dummies -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod/tos/lib/mac/tkn154-sink/interfaces/public  -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod/tos/platforms/telosb/mac/tkn154  -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/dummies -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/interfaces/MCPS -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/interfaces/MLME -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/interfaces/private -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/interfaces/public -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/debug -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/interfaces -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/platforms/telosb/mac/tkn154  -I/home/anser/local/src/tinyos-2.x/tos/lib/mac/tkn154 -I/home/anser/local/src/tinyos-2.x/tos/lib/mac/tkn154/dummies -I/home/anser/local/src/tinyos-2.x/tos/lib/mac/tkn154/interfaces/MCPS -I/home/anser/local/src/tinyos-2.x/tos/lib/mac/tkn154/interfaces/MLME -I/home/anser/local/src/tinyos-2.x/tos/lib/mac/tkn154/interfaces/private -I/home/anser/local/src/tinyos-2.x/tos/lib/mac/tkn154/interfaces/public -I/home/anser/local/src/tinyos-2.x/tos/lib/mac/tkn154 -I/home/anser/local/src/tinyos-2.x/tos/lib/mac/tkn154/dummies -I/home/anser/local/src/tinyos-2.x/tos/lib/mac/tkn154/interfaces/MCPS -I/home/anser/local/src/tinyos-2.x/tos/lib/mac/tkn154/interfaces/MLME -I/home/anser/local/src/tinyos-2.x/tos/lib/mac/tkn154/interfaces/private -I/home/anser/local/src/tinyos-2.x/tos/lib/mac/tkn154/interfaces/public -I/home/anser/local/src/tinyos-2.x/tos/platforms/telosb/mac/tkn154 -I/home/anser/local/src/tinyos-2.x/tos/platforms/telosb/mac/tkn154/timer -I/home/anser/local/src/tinyos-2.x/tos/chips/cc2420_tkn154 -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154 -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154/dummies -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154/interfaces/public -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod/tos/lib/mac/tkn154 -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod/tos/lib/mac/tkn154/dummies -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod/tos/lib/mac/tkn154/interfaces/public -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod/tos/platforms/telosb/mac/tkn154  -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154 -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154/dummies -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154/interfaces/MCPS -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154/interfaces/MLME -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154/interfaces/private -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154/interfaces/public -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/debug -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/interfaces -I/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/platforms/telosb/mac/tkn154  -DIEEE154_ASSOCIATION_DISABLED -DIEEE154_DISASSOCIATION_DISABLED -DIEEE154_PROMISCUOUS_MODE_DISABLED -DIEEE154_COORD_REALIGNMENT_DISABLED -DIEEE154_COORD_BROADCAST_DISABLED -I/home/anser/local/src/tinyos-2.x/tos/lib/mac/tkn154 -I/home/anser/local/src/tinyos-2.x/tos/lib/mac/tkn154/dummies -I/home/anser/local/src/tinyos-2.x/tos/lib/mac/tkn154/interfaces/MCPS -I/home/anser/local/src/tinyos-2.x/tos/lib/mac/tkn154/interfaces/MLME -I/home/anser/local/src/tinyos-2.x/tos/lib/mac/tkn154/interfaces/private -I/home/anser/local/src/tinyos-2.x/tos/lib/mac/tkn154/interfaces/public -I/home/anser/local/src/tinyos-2.x/tos/platforms/telosb/mac/tkn154 -I/home/anser/local/src/tinyos-2.x/tos/platforms/telosb/mac/tkn154/timer -I/home/anser/local/src/tinyos-2.x/tos/chips/cc2420_tkn154  EasyCollectionAppC.nc -lm 
+In file included from EasyCollectionAppC.nc:3:
+EColl.h:15: warning: decimal constant is so large that it is unsigned
+In file included from /home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/ActiveMessageC.nc:74,
+                 from EasyCollectionAppC.nc:11:
+In component `TKN154ActiveMessageP':
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/TKN154ActiveMessageP.nc: In function `setEmptyGtsDescriptor':
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/TKN154ActiveMessageP.nc:368: warning: declaration of `GTSdb' shadows global declaration
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/TKN154ActiveMessageP.nc:147: warning: location of shadowed declaration
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/TKN154ActiveMessageP.nc: In function `setDefaultGtsDescriptor':
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/TKN154ActiveMessageP.nc:376: warning: declaration of `GTSdb' shadows global declaration
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/TKN154ActiveMessageP.nc:147: warning: location of shadowed declaration
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/TKN154ActiveMessageP.nc: In function `HasTimeSlot.setSchedule':
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/TKN154ActiveMessageP.nc:699: warning: declaration of `GTSdb' shadows global declaration
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/TKN154ActiveMessageP.nc:147: warning: location of shadowed declaration
+In file included from /home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod/tos/lib/mac/tkn154-sink/TKN154BeaconEnabledP.nc:129,
+                 from /home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod/tos/platforms/telosb/mac/tkn154/Ieee802154BeaconEnabledC.nc:90,
+                 from /home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/ActiveMessageC.nc:95,
+                 from EasyCollectionAppC.nc:11:
+In component `DataP':
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/DataP.nc: In function `MCPS_DATA.request':
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/DataP.nc:159: warning: declaration of `mhr' shadows previous local
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/DataP.nc:101: warning: location of shadowed declaration
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/DataP.nc:205: warning: decimal constant is so large that it is unsigned
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154-sink/CfpTransmitP.nc:428:4: warning: multi-line comment
+/home/anser/local/src/tinyos-2.x/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc:53:2: warning: #warning "Warning: MAC timing is not standard compliant!"
+In file included from /home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpP.nc:111,
+                 from /home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CollectionC.nc:69,
+                 from EasyCollectionAppC.nc:12:
+In component `CtpForwardingEngineP':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc: In function `aggpacketComplete':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:748: warning: declaration of `payload_aggtemp' shadows global declaration
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:259: warning: location of shadowed declaration
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:749: warning: declaration of `payload_aggtemp_init' shadows global declaration
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:260: warning: location of shadowed declaration
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:760: warning: declaration of `dest' shadows global declaration
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:221: warning: location of shadowed declaration
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:762: warning: passing argument 1 of `CtpInfo.getEtx' from incompatible pointer type
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:763: warning: passing argument 1 of `CtpInfo.getBestNeighborID' from incompatible pointer type
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:764: warning: passing argument 1 of `CtpInfo.getBestNeighborEtx' from incompatible pointer type
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc: In function `SubSend.sendDone':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:876: warning: declaration of `dest' shadows global declaration
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:221: warning: location of shadowed declaration
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:878: warning: passing argument 1 of `CtpInfo.getEtx' from incompatible pointer type
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:879: warning: passing argument 1 of `CtpInfo.getBestNeighborID' from incompatible pointer type
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:880: warning: passing argument 1 of `CtpInfo.getBestNeighborEtx' from incompatible pointer type
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:946: warning: comparison between pointer and integer
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:986: warning: passing argument 1 of `CtpInfo.getEtx' from incompatible pointer type
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc: In function `forward':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:1109: warning: passing argument 1 of `CtpInfo.getBestNeighborID' from incompatible pointer type
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:1150: warning: comparison between pointer and integer
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc: In function `SubReceive.receive':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:1202: warning: declaration of `dest' shadows global declaration
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:221: warning: location of shadowed declaration
+In file included from /home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpP.nc:146,
+                 from /home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CollectionC.nc:69,
+                 from EasyCollectionAppC.nc:12:
+In component `LinkEstimatorP':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc: At top level:
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:144: warning: missing braces around initializer
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:144: warning: (near initialization for `hop_nodes[0][0]')
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc: In function `processReceivedMessage':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:1070: warning: declaration of `i' shadows previous local
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:989: warning: location of shadowed declaration
+In file included from /home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpP.nc:154,
+                 from /home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CollectionC.nc:69,
+                 from EasyCollectionAppC.nc:12:
+In component `CtpRoutingEngineP':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc: At top level:
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc:175: warning: decimal constant is so large that it is unsigned
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc: In function `updateRouteTask.runTask':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc:514: warning: decimal constant is so large that it is unsigned
+/home/anser/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12ImplP.nc:68:4: warning: #warning Accessing TimerA for ADC12
+In C file:
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod/tos/lib/mac/tkn154-sink/InactivePeriodP.nc: At top level:
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod/tos/lib/mac/tkn154-sink/InactivePeriodP.nc(TKN154BeaconEnabledP.CoordInactivePeriod):69: warning: `IsEndSuperframe.notify' called asynchronously from `RadioToken.transferredFrom'
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod/tos/lib/mac/tkn154-sink/InactivePeriodP.nc(TKN154BeaconEnabledP.DeviceInactivePeriod):69: warning: `IsEndSuperframe.notify' called asynchronously from `RadioToken.transferredFrom'
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154-sink/CfpTransmitP.nc:565: warning: `MLME_GET.macBeaconOrder' called asynchronously from `RadioToken.transferredFrom'
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154-sink/CfpTransmitP.nc:565: warning: `MLME_GET.macSuperframeOrder' called asynchronously from `RadioToken.transferredFrom'
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154-sink/CfpTransmitP.nc:498: warning: `GetGtsCoordinatorDb.get' called asynchronously from `hasStartSlot'
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154-sink/CfpTransmitP.nc:588: warning: `GetGtsCoordinatorDb.get' called asynchronously from `RadioToken.transferredFrom'
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154-sink/CfpTransmitP.nc:495: warning: `PinDebug.ADC0toggle' called asynchronously from `hasStartSlot'
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod-all/tos/lib/mac/tkn154-sink/CfpTransmitP.nc:504: warning: `Frame.getDstAddrTxFrame' called asynchronously from `hasStartSlot'
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/DispatchSlottedCsmaP.nc(TKN154BeaconEnabledP.CoordCap):223: warning: `MLME_GET.macBeaconOrder' called asynchronously from `RadioToken.transferredFrom'
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/DispatchSlottedCsmaP.nc(TKN154BeaconEnabledP.CoordCap):223: warning: `MLME_GET.macSuperframeOrder' called asynchronously from `RadioToken.transferredFrom'
+/home/anser/local/src/tinyos-2.x/tos/lib/printf/PrintfP.nc:134: warning: `Queue.empty' called asynchronously from `printfflush'
+/home/anser/local/src/tinyos-2.x/tos/lib/printf/PrintfP.nc:121: warning: `Packet.getPayload' called asynchronously from `sendNext'
+/home/anser/local/src/tinyos-2.x/tos/lib/printf/PrintfP.nc:121: warning: `Packet.getPayload' called asynchronously from `sendNext'
+/home/anser/local/src/tinyos-2.x/tos/lib/printf/PrintfP.nc:122: warning: `Queue.size' called asynchronously from `sendNext'
+/home/anser/local/src/tinyos-2.x/tos/lib/printf/PrintfP.nc:122: warning: `Queue.size' called asynchronously from `sendNext'
+/home/anser/local/src/tinyos-2.x/tos/lib/printf/PrintfP.nc:125: warning: `Queue.dequeue' called asynchronously from `sendNext'
+/home/anser/local/src/tinyos-2.x/tos/lib/printf/PrintfP.nc:126: warning: `AMSend.send' called asynchronously from `sendNext'
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts-mod/tos/lib/mac/tkn154-sink/BeaconTransmitP.nc:543: warning: `PinDebug.ADC1toggle' called asynchronously from `BeaconTx.transmitDone'
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):253: warning: `BeaconTimer.startOneShot' called asynchronously from `chooseAdvertiseTime'
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:206: warning: `SubPacket.getPayload' called asynchronously from `getModHeader'
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:206: warning: `SubPacket.getPayload' called asynchronously from `getModHeader'
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:680: warning: `AMSend.send' called asynchronously from `Capisrunning.Caphasstarted'
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:675: warning: `SubPacket.payloadLength' called asynchronously from `Capisrunning.Caphasstarted'
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):433: warning: `SubPacket.payloadLength' called asynchronously from `Capisrunning.Caphasstarted'
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):434: warning: `UnicastNameFreeRouting.nextHop' called asynchronously from `Capisrunning.Caphasstarted'
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):435: warning: `SubSend.send' called asynchronously from `Capisrunning.Caphasstarted'
+EasyCollectionC.nc:324: warning: `UartSend.send' called asynchronously from `MultiChannel.dataReady'
+/home/anser/local/src/tinyos-2.x/tos/lib/printf/PrintfP.nc:107: warning: non-atomic accesses to shared variable `state':
+/home/anser/local/src/tinyos-2.x/tos/lib/printf/PrintfP.nc:146: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/printf/PrintfP.nc:154: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/printf/PrintfP.nc:155: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):158: warning: non-atomic accesses to shared variable `cansend':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):804: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):1194: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):181: warning: non-atomic accesses to shared variable `canReTX':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):996: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):194: warning: non-atomic accesses to shared variable `forwardingState':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1506: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1506: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1509: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1512: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1512: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):243: warning: non-atomic accesses to shared variable `currentInterval':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):248: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):257: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):270: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):973: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):1204: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):244: warning: non-atomic accesses to shared variable `t':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):248: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):249: warning:   non-atomic r/w
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):250: warning:   non-atomic r/w
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):250: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):253: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):271: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):245: warning: non-atomic accesses to shared variable `tHasPassed':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):251: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):272: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):821: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):169: warning: non-atomic accesses to shared variable `reset_trickle_timer':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):974: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):1205: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):161: warning: non-atomic accesses to shared variable `beacons_not_posted':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc(CtpP.Router):826: warning:   non-atomic r/w
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):237: warning: non-atomic accesses to shared variable `re_tries':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):817: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):835: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):983: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):998: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1001: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1001: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1006: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1008: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1015: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1024: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1048: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1071: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):207: warning: non-atomic accesses to shared variable `hasReTxData':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):823: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):960: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):976: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1011: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1019: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1044: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1069: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1156: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):220: warning: non-atomic accesses to shared variable `payloadLen':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):629: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):702: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1404: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1406: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):221: warning: non-atomic accesses to shared variable `dest':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):630: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):702: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1405: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc(CtpP.Forwarder):1406: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:125: warning: non-atomic accesses to shared variable `mod_beacon_to_post':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:865: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:874: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:932: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:941: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:957: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:128: warning: non-atomic accesses to shared variable `nb_sending':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:901: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:952: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:179: warning: non-atomic accesses to shared variable `mod_hdr':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:649: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:650: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:878: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:879: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:1100: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:1101: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:1103: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:1179: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:138: warning: non-atomic accesses to shared variable `no_of_messages':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:647: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:876: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:1135: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:126: warning: non-atomic accesses to shared variable `last_sent_beacon':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:900: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:926: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:940: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:951: warning:   non-atomic read
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:956: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:121: warning: non-atomic accesses to shared variable `current_parent':
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:864: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:873: warning:   non-atomic write
+EasyCollectionC.nc:45: warning: non-atomic accesses to shared variable `Act_active':
+EasyCollectionC.nc:139: warning:   non-atomic write
+EasyCollectionC.nc:77: warning: non-atomic accesses to shared variable `x1_p':
+EasyCollectionC.nc:130: warning:   non-atomic write
+EasyCollectionC.nc:78: warning: non-atomic accesses to shared variable `x2_p':
+EasyCollectionC.nc:131: warning:   non-atomic write
+EasyCollectionC.nc:102: warning: non-atomic accesses to shared variable `data_to_SF':
+EasyCollectionC.nc:149: warning:   non-atomic write
+EasyCollectionC.nc:79: warning: non-atomic accesses to shared variable `u_p':
+EasyCollectionC.nc:132: warning:   non-atomic write
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:144:1: warning: missing braces around initialiser
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:144:1: warning: (near initialisation for ‘LinkEstimatorP__hop_nodes[0]’)
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/TKN154ActiveMessageP.nc: In function ‘TKN154ActiveMessageP__setDefaultGtsDescriptor’:
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/TKN154ActiveMessageP.nc:375:11: warning: unused variable ‘i’
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/DataP.nc: In function ‘DataP__MCPS_DATA__request’:
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/DataP.nc:159:24: warning: declaration of ‘mhr’ shadows a previous local
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/DataP.nc:101:12: warning: shadowed declaration is here
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/TKN154ActiveMessageP.nc: In function ‘TKN154ActiveMessageP__HasTimeSlot__setSchedule’:
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/TKN154ActiveMessageP.nc:697:8: warning: unused variable ‘cango’
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/TKN154ActiveMessageP.nc:696:12: warning: unused variable ‘Nodes’
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/TKN154ActiveMessageP.nc:695:11: warning: unused variable ‘k’
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/TKN154ActiveMessageP.nc:695:11: warning: unused variable ‘j’
+/home/anser/local/src/tinyos-2.x/tinyos-2.x-contrib/kth/tkn154-gts/tos/lib/mac/tkn154-sink/TKN154ActiveMessageP.nc:695:11: warning: unused variable ‘i’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc: In function ‘CtpForwardingEngineP__0__SubReceive__receive’:
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:1199:12: warning: unused variable ‘gradient’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:1198:8: warning: unused variable ‘duplicate’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc: In function ‘CtpRoutingEngineP__0__BeaconReceive__receive’:
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpRoutingEngineP.nc:848:12: warning: unused variable ‘pathEtx’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc: In function ‘LinkEstimatorP__processReceivedMessage’:
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:1070:21: warning: declaration of ‘i’ shadows a previous local
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:989:11: warning: shadowed declaration is here
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc: In function ‘CtpForwardingEngineP__0__SubSend__sendDone’:
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:878:21: warning: passing argument 1 of ‘CtpForwardingEngineP__0__CtpInfo__getEtx’ from incompatible pointer type
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpInfo.nc:64:41: note: expected ‘uint16_t *’ but argument is of type ‘uint16_t **’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:879:21: warning: passing argument 1 of ‘CtpForwardingEngineP__0__CtpInfo__getBestNeighborID’ from incompatible pointer type
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpInfo.nc:70:41: note: expected ‘am_addr_t *’ but argument is of type ‘am_addr_t **’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:880:21: warning: passing argument 1 of ‘CtpForwardingEngineP__0__CtpInfo__getBestNeighborEtx’ from incompatible pointer type
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpInfo.nc:77:41: note: expected ‘uint16_t *’ but argument is of type ‘uint16_t **’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:946:34: warning: comparison between pointer and integer
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:986:33: warning: passing argument 1 of ‘CtpForwardingEngineP__0__CtpInfo__getEtx’ from incompatible pointer type
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpInfo.nc:64:41: note: expected ‘uint16_t *’ but argument is of type ‘uint16_t **’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:998:19: warning: format ‘%i’ expects type ‘int’, but argument 5 has type ‘uint16_t *’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:998:19: warning: format ‘%i’ expects type ‘int’, but argument 6 has type ‘am_addr_t *’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:998:19: warning: format ‘%i’ expects type ‘int’, but argument 7 has type ‘uint16_t *’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:1008:23: warning: format ‘%i’ expects type ‘int’, but argument 5 has type ‘uint16_t *’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:1008:23: warning: format ‘%i’ expects type ‘int’, but argument 6 has type ‘am_addr_t *’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:1008:23: warning: format ‘%i’ expects type ‘int’, but argument 7 has type ‘uint16_t *’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc: In function ‘CtpForwardingEngineP__0__aggpacketComplete’:
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:762:21: warning: passing argument 1 of ‘CtpForwardingEngineP__0__CtpInfo__getEtx’ from incompatible pointer type
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpInfo.nc:64:41: note: expected ‘uint16_t *’ but argument is of type ‘uint16_t **’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:763:21: warning: passing argument 1 of ‘CtpForwardingEngineP__0__CtpInfo__getBestNeighborID’ from incompatible pointer type
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpInfo.nc:70:41: note: expected ‘am_addr_t *’ but argument is of type ‘am_addr_t **’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:764:21: warning: passing argument 1 of ‘CtpForwardingEngineP__0__CtpInfo__getBestNeighborEtx’ from incompatible pointer type
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpInfo.nc:77:41: note: expected ‘uint16_t *’ but argument is of type ‘uint16_t **’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:817:15: warning: format ‘%i’ expects type ‘int’, but argument 5 has type ‘uint16_t *’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:817:15: warning: format ‘%i’ expects type ‘int’, but argument 6 has type ‘am_addr_t *’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:817:15: warning: format ‘%i’ expects type ‘int’, but argument 7 has type ‘uint16_t *’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:835:15: warning: format ‘%i’ expects type ‘int’, but argument 5 has type ‘uint16_t *’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:835:15: warning: format ‘%i’ expects type ‘int’, but argument 6 has type ‘am_addr_t *’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:835:15: warning: format ‘%i’ expects type ‘int’, but argument 7 has type ‘uint16_t *’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc: In function ‘LinkEstimatorP__clear_schedule’:
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:1216:11: warning: unused variable ‘j’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc: In function ‘LinkEstimatorP__LinkEstimator__canTxMB’:
+/home/anser/local/src/tinyos-2.x/tos/lib/net/le_tdma/LinkEstimatorP.nc:857:11: warning: unused variable ‘payloadLen’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc: In function ‘CtpForwardingEngineP__0__forward’:
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:1109:21: warning: passing argument 1 of ‘CtpForwardingEngineP__0__CtpInfo__getBestNeighborID’ from incompatible pointer type
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpInfo.nc:70:41: note: expected ‘am_addr_t *’ but argument is of type ‘am_addr_t **’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:1150:38: warning: comparison between pointer and integer
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:1104:12: warning: unused variable ‘time_hl’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:1104:12: warning: unused variable ‘sqn’
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:1104:12: warning: unused variable ‘org’
+EasyCollectionC.nc: In function ‘CtpForwardingEngineP__0__SubReceive__receive’:
+/home/anser/local/src/tinyos-2.x/tos/lib/net/ctp_tdma/CtpForwardingEngineP.nc:1361:1: warning: control reaches end of non-void function
+    compiled EasyCollectionAppC to build/telosb/main.exe
+           48110 bytes in ROM
+            7258 bytes in RAM
+msp430-objcopy --output-target=ihex build/telosb/main.exe build/telosb/main.ihex
+    writing TOS image
+tos-set-symbols --objcopy msp430-objcopy --objdump msp430-objdump --target ihex build/telosb/main.ihex build/telosb/main.ihex.out-1 TOS_NODE_ID=1 ActiveMessageAddressC__addr=1
+Could not find symbol ActiveMessageAddressC__addr in build/telosb/main.exe, ignoring symbol.
+    installing telosb binary using bsl
+tos-bsl --telosb -c /dev/ttyUSB1 -r -e -I -p build/telosb/main.ihex.out-1
+MSP430 Bootstrap Loader Version: 1.39-goodfet-8
+Mass Erase...
+Transmit default password ...
+Invoking BSL...
+Transmit default password ...
+Current bootstrap loader version: 1.61 (Device ID: f16c)
+Changing baudrate to 38400 ...
+Program ...
+48142 bytes programmed.
+Reset device ...
+rm -f build/telosb/main.exe.out-1 build/telosb/main.ihex.out-1 
