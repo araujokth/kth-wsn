@@ -1,0 +1,25 @@
+export TOSROOT="/opt/tinyos-2.x"
+export TOSDIR="$TOSROOT/tos"
+export APP="/opt/tinyos-2.x/apps"
+export TOS="/opt/tinyos-2.x/tos"
+#
+export CLASSPATH=".;C:/cygwin/opt/tinyos-2.x/support/sdk/java"
+export CLASSPATH="$CLASSPATH;C:\cygwin\opt\tinyos-2.x\support\sdk\java\tinyos.jar;."
+#
+export MAKERULES="$TOSROOT/support/make/Makerules"
+#
+# export PATH=$TOSROOT/support/sdk/c:$PATH
+export PATH="/opt/msp430/bin:/opt/jflashmm:$PATH"
+# export PYTHONPATH=.:$TOSROOT/support/sdk/python:$PYTHONPATH
+#
+# export MOTECOM=serial@COM3:telosb
+#
+#
+#
+#
+#
+# export CLASSPATH=$TOSROOT/support/sdk/java/tinyos.jar:.
+# export CLASSPATH="C:/cygwin/opt/tinyos-2.x/support/sdk/java"
+# export CLASSPATH="\$CLASSPATH;C:/cygwin/opt/tinyos-2.x/support/sdk/java/tinyos.jar"
+#
+#export PATH="/cygdrive/C/Program Files/Java/jdk1.7.0_09/bin/":$PATH
