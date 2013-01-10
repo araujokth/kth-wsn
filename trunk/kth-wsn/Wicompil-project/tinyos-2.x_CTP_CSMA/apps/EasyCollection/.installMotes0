@@ -1,0 +1,91 @@
+#! /bin/bash
+
+# make this script executable through: $ chmod 700 .installMotes
+# to run this script: $ ./.installMotes
+
+# find out the port name of each mote with a specified serial number
+for f in /sys/bus/usb/drivers/usb/*-*
+do
+    if [ -f "$f/serial" ];
+    then
+	portname=$(basename $f/*:1.0/ttyUSB*)
+	if grep "MFTFIZD3" "$f/serial" # Relay - mote 3
+	then
+	    Rmote3port=$portname
+	elif grep "M4AP7GUY" "$f/serial" # Relay - mote 9 
+	then
+	    Rmote9port=$portname
+	elif grep "MFTFIY99" "$f/serial" # Relay - mote 8
+	then
+	    Rmote8port=$portname
+	elif grep "MFTFJ1CU" "$f/serial" # Relay - mote 2
+	then
+	    Rmote2port=$portname
+	elif grep "XBS5GZPR" "$f/serial" # Sensor - mote 10
+	then
+	    Smote10port=$portname
+	elif grep "MFT4LNK3" "$f/serial" # Actuator - mote 1
+	then
+	    Amote1port=$portname
+	elif grep "MFTFL7BL" "$f/serial" # Relay - mote 5
+	then
+	    Rmote5port=$portname
+	elif grep "MFTFL8TF" "$f/serial" # Relay - mote 7
+	then
+	    Rmote7port=$portname
+	elif grep "MFTFL9B1" "$f/serial" # Relay - mote 6
+	then
+	    Rmote6port=$portname
+	elif grep "XBS0LABO" "$f/serial" # Relay - mote 4
+	then
+	    Rmote4port=$portname
+	else
+	    echo "not found"
+	fi
+    fi
+done
+
+# specify the path to the application
+cd ~/local/src/tinyos-2.x/apps/EasyCollection/
+
+cd Originator/ && rm *.txt
+echo "install sensor mote10 on $Smote10port"
+make telosb install.10 bsl,/dev/$Smote10port &>sensorlog.txt
+
+echo "sensor mote installed"
+
+cd ../Relay && rm *.txt
+echo "install relay mote2 on $Rmote2port"
+make telosb install.2 bsl,/dev/$Rmote2port &>mote2log.txt
+
+echo "install relay mote3 on $Rmote3port"
+make telosb install.3 bsl,/dev/$Rmote3port &>mote3log.txt
+
+echo "install relay mote4 on $Rmote4port"
+make telosb install.4 bsl,/dev/$Rmote4port &>mote4log.txt
+
+echo "install relay mote5 on $Rmote5port"
+make telosb install.5 bsl,/dev/$Rmote5port &>mote5log.txt
+
+echo "install relay mote6 on $Rmote6port"
+make telosb install.6 bsl,/dev/$Rmote6port &>mote6log.txt
+
+echo "install relay mote7 on $Rmote7port"
+make telosb install.7 bsl,/dev/$Rmote7port &>mote7log.txt
+
+echo "install relay mote8 on $Rmote8port"
+make telosb install.8 bsl,/dev/$Rmote8port &>mote8log.txt
+
+echo "install relay mote9 on $Rmote9port"
+make telosb install.9 bsl,/dev/$Rmote9port &>mote9log.txt
+
+echo "all relay motes are installed"
+
+cd ../Sink && rm *.txt
+echo "install actuator mote1 on $Amote1port"
+make telosb install.1 bsl,/dev/$Amote1port &>bslog.txt
+
+echo "sensor, actuator and all relay motes are installed"
+# installation of more motes
+
+exit
