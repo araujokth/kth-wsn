@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>nesc</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+		<nature>nescdt.nescdtNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>apps</name>
+			<type>2</type>
+			<location>/home/ziyang/local/src/tinyos-2.x/apps</location>
+		</link>
+		<link>
+			<name>tinyos-2.x-contrib</name>
+			<type>2</type>
+			<location>/home/ziyang/local/src/tinyos-2.x/tinyos-2.x-contrib</location>
+		</link>
+		<link>
+			<name>tos</name>
+			<type>2</type>
+			<location>/home/ziyang/local/src/tinyos-2.x/tos</location>
+		</link>
+	</linkedResources>
+</projectDescription>
