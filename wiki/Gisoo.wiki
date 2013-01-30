@@ -1,5 +1,6 @@
 #summary One-sentence summary of this page.
-This document explains the integration procedure of Cooja and Simulink together. This integration will create a new virtual test bed for Wireless Networked Control Systems.
+#labels Cooja,Simulin,WirelessNetworkedControlSystems,WNCS,Testbed,Skymote,Simulation
+This document explains the integration procedure of Cooja and Simulink together. This integration will create a new virtual test bed for Wireless Networked Control Systems (WNCS).
 = Introduction =
 
 Add your content here.
