@@ -25,7 +25,7 @@ enum {
 //Not broadcast, just 2 try
   BROADCAST_DESTINATION = 0x01,
 
-  RADIO_CHANNEL = 0x16,
+  RADIO_CHANNEL = 26,
   PAN_ID = 0x1234,
 
   BEACON_ORDER = 15,
